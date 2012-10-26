@@ -53,4 +53,12 @@ public class Sensor {
 			gfx.drawLine(p.x + 2, p.y + 2, p.x + offsetX, p.y + offsetY);
 		}*/
 	}
+	
+	public boolean inRange(Point p2){
+		return (p2.x>=p.x-53 &&p2.x<=p.x+53) && (p2.y>=p.y-53 &&p2.y<p.y+53);
+	}
+	
+	public Point getPoint(){
+		return p;
+	}
 }
