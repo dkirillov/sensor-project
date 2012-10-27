@@ -20,14 +20,14 @@ public class SensorBoard extends JPanel {
 		graphics.fillRect(1,1,598,438);
 
 		//Just testing if all neighbours are discovered
-		graphics.setColor(Color.GREEN);
+		graphics.setColor(Color.RED);
 		for(int x = 0;x<sensors.length;x++){
 			int start_x = sensors[x].getPoint().x+2;
 			int start_y = sensors[x].getPoint().y+2;
 			for(int y = 0;y<test.get(x).size();y++){
 				if(!test.get(x).get(y).isConnected()){continue;}
 				int end_x = sensors[test.get(x).get(y).getNeighbour_num()].getPoint().x+2;
-				int end_y = sensors[test.get(x).get(y).getNeighbour_num()].getPoint().x+2;
+				int end_y = sensors[test.get(x).get(y).getNeighbour_num()].getPoint().y+2;
 				//System.out.println("start_x: "+start_x+" start_y: "+start_y);
 				graphics.drawLine(start_x, start_y, end_x, end_y);
 			}
