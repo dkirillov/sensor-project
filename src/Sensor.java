@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Sensor {
@@ -8,12 +10,18 @@ public class Sensor {
 	private int currenct_sector;
 	private Point p;
 	private int wait_time;
+	private int max_wait_time;
 	private Color c; // Delete later.
+	//Maybe do a matrix like described in algorithms, facebook example...
+	List <Neighbour> neighbours;
 
 	public Sensor(int x, int y) {
+		neighbours = new ArrayList<Neighbour>();
 		sectors = (new Random().nextInt(9)) + 3;
+		//max_wait_time = (new Random().nextInt(990)) + 10;
+		max_wait_time = 100;
 		currenct_sector = new Random().nextInt(sectors);
-		wait_time = 1000;
+		wait_time = 1;
 		p = new Point(x, y);
 		// p = new Point(200,200);
 		c = new Color(new Random().nextInt(255), new Random().nextInt(255),
@@ -27,7 +35,7 @@ public class Sensor {
 			// currenct_sector+" sectors: " + sectors);
 			currenct_sector += currenct_sector >= sectors - 1 ? ((sectors - 1) * -1)
 					: 1;
-			wait_time = 100;
+			wait_time = max_wait_time;
 		}
 	}
 
@@ -92,5 +100,12 @@ public class Sensor {
 	}
 	public Point getPoint() {
 		return p;
+	}
+	public List<Neighbour> getNeighbours(){
+		return neighbours;
+	}
+	
+	public void addNeighbour(Neighbour n){
+		neighbours.add(n);	
 	}	
 }
