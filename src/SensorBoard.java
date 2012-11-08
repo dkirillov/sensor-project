@@ -39,6 +39,9 @@ public class SensorBoard extends JPanel {
 		}
 		
 		Graphics2D g2 = (Graphics2D) gfx;
+		if (g2 == null){
+			Debug.debug("Graphics are null");
+		}
 		g2.drawImage(buffer, 0, 0, null);
 	}
 }

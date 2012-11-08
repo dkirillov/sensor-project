@@ -5,6 +5,7 @@ public class MainThread {
 	private boolean keepRunning = true;
 	WindowClass wC;
 	private Sensor[] sensors;
+	int speed = 10;
 
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
@@ -70,7 +71,7 @@ public class MainThread {
 				}
 			}
 		}
-		wC.sB.draw(wC.getContentPane().getGraphics(), sensors);
+		wC.sB.draw(wC.sB.getGraphics(), sensors);
 	}
 
 	public void run() {
@@ -79,6 +80,7 @@ public class MainThread {
 			public void run() {
 				while (keepRunning) {
 					update();
+					delay(speed);
 				}
 			}
 
@@ -87,5 +89,14 @@ public class MainThread {
 
 	public void stop() {
 		keepRunning = false;
+	}
+	
+	public void delay(int speed){
+		try {
+			Thread.sleep(speed);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
