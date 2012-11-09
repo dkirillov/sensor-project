@@ -54,7 +54,7 @@ public class MainThread {
 			int n_size = neighbour_list.size();
 			for (int y=0;y<n_size;y++){
 				Neighbour n = neighbour_list.get(y);
-				if(n.isConnected()||sensors[x].currenctSector()!=n.getSector()){continue;}
+				if(n.isConnected()||sensors[x].currentSector()!=n.getSector()){continue;}
 				
 				List<Neighbour> neighbours_n_list = sensors[n.getNeighbour_num()].getNeighbours();
 				int n_n_size = neighbours_n_list.size();
@@ -63,7 +63,7 @@ public class MainThread {
 					
 					Neighbour n_n = neighbours_n_list.get(z);
 					
-					if(n_n.getSector()==sensors[n.getNeighbour_num()].currenctSector()){
+					if(n_n.getSector()==sensors[n.getNeighbour_num()].currentSector()){
 						//Duplicate connection pair!
 						n.connect();
 						n_n.connect();
@@ -71,10 +71,10 @@ public class MainThread {
 				}
 			}
 		}
-		wC.sB.draw(wC.sB.getGraphics(), sensors);
+		wC.drawOnBoard(sensors);
 	}
 
-	public void run() {
+	public void start() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

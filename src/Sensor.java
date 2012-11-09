@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Sensor {
 	private int sectors;
-	private int currenct_sector;
+	private int current_sector;
 	private Point p;
 	private int wait_time;
 	private int max_wait_time;
@@ -20,7 +20,7 @@ public class Sensor {
 		sectors = (new Random().nextInt(9)) + 3;
 		//max_wait_time = (new Random().nextInt(990)) + 10;
 		max_wait_time = 100;
-		currenct_sector = new Random().nextInt(sectors);
+		current_sector = new Random().nextInt(sectors);
 		wait_time = 1;
 		p = new Point(x, y);
 		// p = new Point(200,200);
@@ -33,7 +33,7 @@ public class Sensor {
 		if (wait_time == 0) {
 			// System.out.println("currenct_sector: " +
 			// currenct_sector+" sectors: " + sectors);
-			currenct_sector += currenct_sector >= sectors - 1 ? ((sectors - 1) * -1)
+			current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1)
 					: 1;
 			wait_time = max_wait_time;
 		}
@@ -43,7 +43,7 @@ public class Sensor {
 		int multi_deg = (360) / sectors;
 
 		gfx.setColor(c);
-		gfx.fillArc(p.x - 55, p.y - 55, 115, 115, multi_deg * currenct_sector,
+		gfx.fillArc(p.x - 55, p.y - 55, 115, 115, multi_deg * current_sector,
 				multi_deg);
 
 		gfx.setColor(Color.BLACK);
@@ -51,7 +51,7 @@ public class Sensor {
 		gfx.setColor(new Color(0, 0, 0, 25));
 		gfx.drawOval(p.x - 55, p.y - 55, 115, 115);
 		gfx.setColor(Color.BLACK);
-		gfx.drawString(currenct_sector + "/" + sectors, p.x, p.y);
+		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 
 		/*
 		 * double multi_rad = (Math.PI * 2) / sectors; gfx.setColor(Color.RED);
@@ -95,8 +95,8 @@ public class Sensor {
 
 		return s;
 	}
-	public int currenctSector(){
-		return currenct_sector;
+	public int currentSector(){
+		return current_sector;
 	}
 	public Point getPoint() {
 		return p;

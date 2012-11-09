@@ -8,9 +8,9 @@ import javax.swing.JFrame;
 
 public class WindowClass extends JFrame {
 
-	SensorBoard sB;
-	MainThread mT;
-	SpeedDialog sd;
+	private SensorBoard sB;
+	private MainThread mT;
+	private SpeedDialog sd;
 
 	public WindowClass() {
 		setLayout(null);
@@ -33,12 +33,16 @@ public class WindowClass extends JFrame {
 		sd = new SpeedDialog(mT);
 		getContentPane().add(sd, BorderLayout.NORTH);
 		setVisible(true);
-		mT.run();
+		mT.start();
 		
 		
 
 	}
 
+	public void drawOnBoard(Sensor[] sensors){
+		sB.draw(getContentPane().getGraphics(), sensors);
+	}
+	
 	public static void main(String args[]) {
 		new WindowClass();
 	}
