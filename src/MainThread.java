@@ -1,22 +1,37 @@
+/**
+ * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
+ */
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A class representing the main thread of the program. 
+ * Contains the loop that keeps the sensors 'running'.
+ */
 public class MainThread {
-	private boolean keepRunning = true;
-	WindowClass wC;
-	private Sensor[] sensors;
-	int speed = 10;
+	private boolean keepRunning = true;		//Boolean to keep the thread running, setting it to false will stop the thread.
+	WindowClass wC;							//The window class which needs this thread.
+	private Sensor[] sensors;				//All the sensors.
+	int speed = 10;							//Used to sleeping.
 
+	/**
+	 * Constructor, initializes the sensors, then records the neighbours.
+	 * @param wC The window class which will be drawn on.
+	 */
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
+		//Assign random amount of sensors, for now its up to 5, minimum of 2.
 		int numSensors = new Random().nextInt(3)+2;
 		sensors = new Sensor[numSensors];
 		
+		//Places the first sensor at a random point within the panel's size.
 		int x_c = new Random().nextInt(370) + 115;
 		int y_c = new Random().nextInt(170) + 115;
 		for (int x = 0; x < sensors.length; x++) {
+			//Each new sensor will lay in range of the previous sensor.
 			x_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
 			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
+			//Checking that it's not out of bound.
 			if(x_c+58>=485||x_c-58<0){
 				x_c += (x_c-58<0)?58-x_c:(485-(x_c+58)); 
 			}
@@ -28,22 +43,28 @@ public class MainThread {
 		record_neighbours();
 	}
 
+	/**
+	 * Goes through all the sensors and figures out their neighbours (sensors in range).
+	 * 
+	 * This method will be replaced/unused, since there's a better way of doing it.
+	 * For instance when sensors are being initialized. 
+	 */
 	private void record_neighbours(){
 		//There should be a smarter way...
 		for (int x = 0;x<sensors.length;x++){
 			for(int y = 0;y<sensors.length;y++){
 				if(x==y){ continue;	}			
 				if (sensors[x].inRange(sensors[y].getPoint())){
-					int s = sensors[x].inSector(sensors[y].getPoint());
-					//System.out.println("Sector: "+s);
-					//System.out.println("Sectors: "+sensors[x].sectors+"\n");
-					//Neighbour					
+					int s = sensors[x].inSector(sensors[y].getPoint());			
 					sensors[x].addNeighbour(new Neighbour(s,y));
 				}
 			} 
 		}
 	}
 	
+	/**
+	 * Updates all the sensors, and check if neighbours are connected.
+	 */
 	public void update() {
 		for (int x = 0; x < sensors.length; x++) {
 			sensors[x].update();
@@ -74,7 +95,11 @@ public class MainThread {
 		wC.drawOnBoard(sensors);
 	}
 
+	/**
+	 * Starts the thread, runs it.
+	 */
 	public void start() {
+		keepRunning = true;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -87,10 +112,17 @@ public class MainThread {
 		}).run();
 	}
 
+	/**
+	 * Stops the thread.
+	 */
 	public void stop() {
 		keepRunning = false;
 	}
 	
+	/**
+	 * Delays/sleeps the thread.
+	 * @param speed The number of miliseconds to sleep.
+	 */
 	public void delay(int speed){
 		try {
 			Thread.sleep(speed);
