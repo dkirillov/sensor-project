@@ -21,16 +21,18 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		//Assign random amount of sensors, for now its up to 5, minimum of 2.
-		int numSensors = new Random().nextInt(3)+2;
+		int numSensors = new Random().nextInt(8)+2;
 		sensors = new Sensor[numSensors];
 		
 		//Places the first sensor at a random point within the panel's size.
 		int x_c = new Random().nextInt(370) + 115;
 		int y_c = new Random().nextInt(170) + 115;
-		for (int x = 0; x < sensors.length; x++) {
+		sensors[0] = new Sensor(x_c, y_c);
+		
+		for (int x = 1; x < sensors.length; x++) {
 			//Each new sensor will lay in range of the previous sensor.
-			x_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
-			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
+			x_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(47)+5));
+			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(47)+5));
 			//Checking that it's not out of bound.
 			if(x_c+58>=485||x_c-58<0){
 				x_c += (x_c-58<0)?58-x_c:(485-(x_c+58)); 
@@ -39,26 +41,21 @@ public class MainThread {
 				y_c += (y_c-58<0)?58-y_c:(285-(y_c+58)); 				
 			}
 			sensors[x] = new Sensor(x_c, y_c);
+			record_neighbours(x);
 		}
-		record_neighbours();
 	}
 
 	/**
-	 * Goes through all the sensors and figures out their neighbours (sensors in range).
-	 * 
-	 * This method will be replaced/unused, since there's a better way of doing it.
-	 * For instance when sensors are being initialized. 
+	 * Goes up to the current sensor being initialized and updates the neighbours.
 	 */
-	private void record_neighbours(){
-		//There should be a smarter way...
-		for (int x = 0;x<sensors.length;x++){
-			for(int y = 0;y<sensors.length;y++){
-				if(x==y){ continue;	}			
-				if (sensors[x].inRange(sensors[y].getPoint())){
-					int s = sensors[x].inSector(sensors[y].getPoint());			
-					sensors[x].addNeighbour(new Neighbour(s,y));
-				}
-			} 
+	private void record_neighbours(int n){
+		for (int x = 0; x < n; x++) {
+			if (sensors[x].inRange(sensors[n].getPoint())) {
+				int s = sensors[x].inSector(sensors[n].getPoint());
+				sensors[x].addNeighbour(new Neighbour(s, n));
+				s = sensors[n].inSector(sensors[x].getPoint());
+				sensors[n].addNeighbour(new Neighbour(s,x));
+			}
 		}
 	}
 	

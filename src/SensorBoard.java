@@ -34,14 +34,16 @@ public class SensorBoard extends JPanel {
 		graphics.fillRect(1,1,598,438);
 
 		//Draws red lines when the sensors are connected.
-		graphics.setColor(Color.RED);
+		//Otherwise draws gray lines for sensors that can connect.
 		for(int x = 0;x<sensors.length;x++){
 			int start_x = sensors[x].getPoint().x+2;
 			int start_y = sensors[x].getPoint().y+2;
 			List<Neighbour> neighbours = sensors[x].getNeighbours();
 			int size = neighbours.size();
 			for(int y = 0;y<size;y++){
-				if(!neighbours.get(y).isConnected()){continue;}
+				if(neighbours.get(y).isConnected()){graphics.setColor(Color.RED);}
+				else{graphics.setColor(Color.GRAY);}
+				
 				int end_x = sensors[neighbours.get(y).getNeighbour_num()].getPoint().x+2;
 				int end_y = sensors[neighbours.get(y).getNeighbour_num()].getPoint().y+2;
 				graphics.drawLine(start_x, start_y, end_x, end_y);
