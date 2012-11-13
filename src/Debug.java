@@ -1,6 +1,7 @@
-/**
- * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
- */
+
+
+
+
 import java.util.HashMap;
 
 
@@ -11,6 +12,9 @@ import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+
+
+
 
 public class Debug {
 	static String[] disable = {"bc","blockdetect"};

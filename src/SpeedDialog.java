@@ -1,6 +1,5 @@
-/**
- * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
- */
+
+
 import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,6 +18,8 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+
 
 public class SpeedDialog extends JPanel{
 	JSlider sensorSpeed;
