@@ -63,6 +63,12 @@ public class MainThread {
 	 * Updates all the sensors, and check if neighbours are connected.
 	 */
 	public void update() {
+		
+		Debug.setDebug(true);
+		RSRMAlgorithm rSRMA = new RSRMAlgorithm();
+		RotationAlgorithm rA = rSRMA;
+		rA.run();
+		
 		for (int x = 0; x < sensors.length; x++) {
 			sensors[x].update();
 		}
