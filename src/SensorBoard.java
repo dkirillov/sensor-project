@@ -24,7 +24,8 @@ public class SensorBoard extends JPanel {
 	 * Uses buffering while drawing.
 	 * @param sensors An array of sensors to draw.
 	 */
-	public void draw(Sensor[] sensors, Sensor testSensor1,Sensor testSensor2,Sensor testSensor3){
+	public void draw(Sensor[] sensors, int totalNeighbours){
+		int connectNeighbours = 0;		//DELETE LATER
 		//Image used for buffering.
 		BufferedImage buffer = new BufferedImage(598, 438, BufferedImage.TYPE_INT_RGB);
 		//Graphics from the image to draw on.
@@ -41,8 +42,13 @@ public class SensorBoard extends JPanel {
 			List<Neighbour> neighbours = sensors[x].getNeighbours();
 			int size = neighbours.size();
 			for(int y = 0;y<size;y++){
-				if(neighbours.get(y).isConnected()){graphics.setColor(Color.RED);}
-				else{graphics.setColor(Color.GRAY);}
+				if(neighbours.get(y).isConnected()){
+					graphics.setColor(Color.RED);
+					connectNeighbours++;
+				}else{
+					Color c = new Color(127,127,127,50);
+					graphics.setColor(c);
+				}
 				
 				int end_x = sensors[neighbours.get(y).getNeighbour_num()].getPoint().x+2;
 				int end_y = sensors[neighbours.get(y).getNeighbour_num()].getPoint().y+2;
@@ -54,9 +60,11 @@ public class SensorBoard extends JPanel {
 		for(int x = 0 ;x <sensors.length;x++){
 			sensors[x].draw(graphics);
 		}
-		testSensor3.draw(graphics);
-		testSensor2.draw(graphics);
-		testSensor1.draw(graphics);
+		
+		graphics.setColor(Color.BLACK);
+		connectNeighbours/=2;
+		graphics.drawString("Neighbours connected: "+connectNeighbours+"/"+totalNeighbours, 400, 426);
+		
 		
 		//Gets the graphics of this JPanel to draw the buffered image on.
 		Graphics2D g2 = (Graphics2D) this.getGraphics();

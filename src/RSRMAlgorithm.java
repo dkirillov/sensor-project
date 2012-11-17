@@ -5,9 +5,11 @@ public class RSRMAlgorithm extends RSRMAGeneral{
 
 	public RSRMAlgorithm(Sensor s) {
 		super(s);
+		k = sensor.getSectors();
+		d = sensor.getSectors();
 	}
 
-	public void run() {
+	/*public void run() {
 		while(keepRunning){
 			boolean selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
 			Debug.debug("Running RSRMAlgorithm.");
@@ -20,5 +22,6 @@ public class RSRMAlgorithm extends RSRMAGeneral{
 				mech0(k,k);
 			}
 		}
-	}
+		Debug.debug("RSRMAlgorithm ended.");
+	}*/
 }

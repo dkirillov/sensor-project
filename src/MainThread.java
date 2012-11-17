@@ -12,10 +12,9 @@ public class MainThread {
 	private boolean keepRunning = true;		//Boolean to keep the thread running, setting it to false will stop the thread.
 	WindowClass wC;							//The window class which needs this thread.
 	private Sensor[] sensors;				//All the sensors.
-	int speed = 10;							//Used to sleeping.
-	Sensor testSensor1;    //DELETE ME
-	Sensor testSensor2;    //DELETE ME
-	Sensor testSensor3;    //DELETE ME
+	private RotationAlgorithm[] algoThreads;
+	int speed = 100;							//Used to sleeping.
+	private int totalNeighbours;	//DELETE LATER.
 
 	/**
 	 * Constructor, initializes the sensors, then records the neighbours.
@@ -24,15 +23,17 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		//Assign random amount of sensors, for now its up to 5, minimum of 2.
-		int numSensors = new Random().nextInt(3)+2;
+		int numSensors = 400;// new Random().nextInt(398)+2;
 		sensors = new Sensor[numSensors];
+		algoThreads = new RotationAlgorithm[numSensors];
 		
 		//Places the first sensor at a random point within the panel's size.
 		int x_c = new Random().nextInt(370) + 115;
 		int y_c = new Random().nextInt(170) + 115;
 		sensors[0] = new Sensor(x_c, y_c);
-		
-		for (int x = 1; x < sensors.length; x++) {
+
+		Debug.setDebug(true);
+		for (int x = 0; x < sensors.length; x++) {
 			//Each new sensor will lay in range of the previous sensor.
 			x_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(47)+5));
 			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(47)+5));
@@ -44,34 +45,25 @@ public class MainThread {
 				y_c += (y_c-58<0)?58-y_c:(285-(y_c+58)); 				
 			}
 			sensors[x] = new Sensor(x_c, y_c);
+			
+			int ranAlgo = new Random(System.currentTimeMillis()).nextInt(300);
+			if(ranAlgo >= 0 && ranAlgo <= 99){
+				algoThreads[x]  = new RSRMAlgorithm(sensors[x]);			
+			}else if (ranAlgo >= 100 && ranAlgo <= 299){
+				algoThreads[x] = new RSRMAlgorithmPrime(sensors[x]);	
+			}else {
+				algoThreads[x] = new ARAlgorithm(sensors[x]);
+			}
+			Debug.debug("ranAlgo: "+ranAlgo);
 			record_neighbours(x);
 		}
 		
-		testSensor1 = new Sensor(115,115);
-		testSensor2 = new Sensor(153,153);
-		testSensor3 = new Sensor(153,77);
-		Debug.setDebug(true);
-		
-		RSRMAlgorithm rSRMA1 = new RSRMAlgorithm(testSensor1);
-		RotationAlgorithm rA1 = rSRMA1;
-		Thread t1 = new Thread(rA1);
-		rSRMA1.setThread(t1);
-		t1.start();
-		
-		
-		RSRMAlgorithmPrime rSRMA2 = new RSRMAlgorithmPrime(testSensor2);
-		RotationAlgorithm rA2 = rSRMA2;
-		Thread t2 = new Thread(rA2);
-		rSRMA2.setThread(t2);
-		t2.start();
-		
-		ARAlgorithm rSRMA3 = new ARAlgorithm(testSensor3);
-		RotationAlgorithm rA3 = rSRMA3;
-		Thread t3 = new Thread(rA3);
-		rSRMA3.setThread(t3);
-		t3.start();
-		//rA.stop();
-	
+		for (int x = 0; x < algoThreads.length; x++) {
+			Thread temp = new Thread(algoThreads[x]);
+			algoThreads[x].setThread(temp);
+			temp.start();
+		}
+
 	}
 
 	/**
@@ -80,6 +72,7 @@ public class MainThread {
 	private void record_neighbours(int n){
 		for (int x = 0; x < n; x++) {
 			if (sensors[x].inRange(sensors[n].getPoint())) {
+				totalNeighbours++;
 				int s = sensors[x].inSector(sensors[n].getPoint());
 				sensors[x].addNeighbour(new Neighbour(s, n));
 				s = sensors[n].inSector(sensors[x].getPoint());
@@ -92,10 +85,6 @@ public class MainThread {
 	 * Updates all the sensors, and check if neighbours are connected.
 	 */
 	public void update() {
-		
-		for (int x = 0; x < sensors.length; x++) {
-			sensors[x].update();
-		}
 		//Unfortunately, the loop above updates all the sensors, the loop below checks if connected...
 		for (int x = 0; x < sensors.length; x++) {
 			List<Neighbour> neighbour_list = sensors[x].getNeighbours();
@@ -119,7 +108,7 @@ public class MainThread {
 				}
 			}
 		}
-		wC.drawOnBoard(sensors,testSensor1,testSensor2,testSensor3);
+		wC.drawOnBoard(sensors,totalNeighbours);
 	}
 
 	/**
@@ -131,8 +120,9 @@ public class MainThread {
 			@Override
 			public void run() {
 				while (keepRunning) {
+					RotationAlgorithm.setSleepTime(speed);
 					update();
-					delay(speed);
+					//delay(speed);
 				}
 			}
 
@@ -144,6 +134,9 @@ public class MainThread {
 	 */
 	public void stop() {
 		keepRunning = false;
+		for (int x = 0; x < algoThreads.length; x++) {
+			algoThreads[x].stop();
+		}
 	}
 	
 	/**

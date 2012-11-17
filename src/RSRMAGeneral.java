@@ -1,12 +1,27 @@
+import java.util.Random;
+
 
 public class RSRMAGeneral extends RotationAlgorithm{
-
+	protected int d;
+	protected int k;
 	public RSRMAGeneral(Sensor s) {
 		super(s);
 	}
 
 	public void run(){
-		//Keep blank
+		while(keepRunning){
+			boolean selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
+			Debug.debug("Running RSRMA. d:"+d+" k: "+k+(d==k?"":" -=Prime=-"));
+			int k = sensor.getSectors();
+			if(selectBit){
+				//Mech1
+				mech1(k,d);
+			}else{
+				//Mech0
+				mech0(k,d);
+			}
+		}
+		Debug.debug("RSRMA d:"+d+" k: "+k+" ended.");
 	}
 
 	public void mech0(int k, int d){

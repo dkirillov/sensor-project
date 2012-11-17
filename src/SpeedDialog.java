@@ -25,7 +25,7 @@ public class SpeedDialog extends JPanel{
 	JTextField sSpeed;
 	int speed;
 	int lower = 0;
-	int upper = 25;
+	int upper = 100;
 	MainThread game;
 	JFrame frame;
 	
@@ -41,7 +41,7 @@ public class SpeedDialog extends JPanel{
 		setLayout(layout);
 		setLocation(frame.getX()+frame.getWidth(),frame.getY());
 		
-		speed = 25 -game.speed;
+		speed = upper -game.speed;
 		
 		//x label
 		constraints.gridx = 0; constraints.gridy = 0;
@@ -79,7 +79,7 @@ public class SpeedDialog extends JPanel{
 				sSpeed.setText(String.valueOf(source.getValue()));
 				if (!source.getValueIsAdjusting()){
 					speed = source.getValue();
-					game.speed = 25-speed;
+					game.speed = upper-speed;
 				}
 			}
 		});

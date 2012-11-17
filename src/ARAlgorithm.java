@@ -12,8 +12,8 @@ public class ARAlgorithm extends RotationAlgorithm {
 	}
 
 	public void run() {
+		Debug.debug("Running ARAlgorithm.");
 		while(keepRunning){
-			Debug.debug("Running ARAlgorithm.");
 			for (int i = 0; i<=d-1; i++){
 				//Send message to neighbor(s);
 				//Listen for messages from neighbor(s) (if any);
@@ -22,5 +22,6 @@ public class ARAlgorithm extends RotationAlgorithm {
 			//Rotate antenna beam one sector counter-clockwise;
 			sensor.update(true);
 		}
+		Debug.debug("ARAlgorithm ended.");
 	}
 }

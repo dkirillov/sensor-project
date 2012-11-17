@@ -1,9 +1,10 @@
 
 public abstract class RotationAlgorithm implements Runnable{
-	boolean keepRunning = true;		//Keeps it running.
-	int d;							//The delay, d, as talked about in the assignment.
-	Thread thread;
-	Sensor sensor;
+	protected boolean keepRunning = true;		//Keeps it running.
+	protected int d;							//The delay, d, as talked about in the assignment.
+	protected Thread thread;
+	protected Sensor sensor;
+	private static int sleep_time;
 	public RotationAlgorithm(Sensor s){
 		sensor = s;
 	}
@@ -15,11 +16,15 @@ public abstract class RotationAlgorithm implements Runnable{
 		keepRunning  = false;
 	}	
 	
+	public static void setSleepTime(int x){
+		sleep_time = x;
+	}
+	
 	@SuppressWarnings({ "static-access" })
 	protected void sleep(){
 		try {
 			//OH GOD DOES THIS LOOK WRONG...
-			thread.sleep(100);
+			thread.sleep(sleep_time);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
