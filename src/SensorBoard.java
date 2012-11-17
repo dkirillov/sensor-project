@@ -24,7 +24,7 @@ public class SensorBoard extends JPanel {
 	 * Uses buffering while drawing.
 	 * @param sensors An array of sensors to draw.
 	 */
-	public void draw(Sensor[] sensors){
+	public void draw(Sensor[] sensors, Sensor testSensor1,Sensor testSensor2,Sensor testSensor3){
 		//Image used for buffering.
 		BufferedImage buffer = new BufferedImage(598, 438, BufferedImage.TYPE_INT_RGB);
 		//Graphics from the image to draw on.
@@ -54,6 +54,9 @@ public class SensorBoard extends JPanel {
 		for(int x = 0 ;x <sensors.length;x++){
 			sensors[x].draw(graphics);
 		}
+		testSensor3.draw(graphics);
+		testSensor2.draw(graphics);
+		testSensor1.draw(graphics);
 		
 		//Gets the graphics of this JPanel to draw the buffered image on.
 		Graphics2D g2 = (Graphics2D) this.getGraphics();

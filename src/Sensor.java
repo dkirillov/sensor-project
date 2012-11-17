@@ -55,6 +55,12 @@ public class Sensor {
 			wait_time = max_wait_time;
 		}
 	}
+	public void update(boolean override) {
+		if (override) {
+			current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1) : 1;
+			wait_time = max_wait_time;
+		}
+	}
 
 	/**
 	 * Draws the sensor.
@@ -139,6 +145,14 @@ public class Sensor {
 	 */
 	public Point getPoint() {
 		return p;
+	}
+	
+	/**
+	 * Returns the number of sectors that the sensor has.
+	 * @return The number of sectors that the sensor has.
+	 */
+	public int getSectors() {
+		return sectors;
 	}
 	
 	/**

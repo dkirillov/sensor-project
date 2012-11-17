@@ -51,8 +51,8 @@ public class WindowClass extends JFrame {
 	 * Draws the given array of sensors on the sensor board.
 	 * @param sensors The array of sensors to draw.
 	 */
-	public void drawOnBoard(Sensor[] sensors){
-		sB.draw(sensors);
+	public void drawOnBoard(Sensor[] sensors,Sensor testSensor1,Sensor testSensor2,Sensor testSensor3){
+		sB.draw(sensors,testSensor1,testSensor2,testSensor3);
 	}
 
 	public static void main(String args[]) {

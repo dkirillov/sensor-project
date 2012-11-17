@@ -3,19 +3,22 @@ import java.util.Random;
 
 public class RSRMAlgorithm extends RSRMAGeneral{
 
+	public RSRMAlgorithm(Sensor s) {
+		super(s);
+	}
+
 	public void run() {
 		while(keepRunning){
 			boolean selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
-			Debug.debug("Just checking in RSRMAlgorithm.");
+			Debug.debug("Running RSRMAlgorithm.");
+			int k = sensor.getSectors();
 			if(selectBit){
 				//Mech1
-				//Should be k,k
-				mech1(0,0);
+				mech1(k,k);
 			}else{
 				//Mech0
-				mech0(0,0);
+				mech0(k,k);
 			}
-			Debug.debug("");
 		}
 	}
 }

@@ -13,6 +13,9 @@ public class MainThread {
 	WindowClass wC;							//The window class which needs this thread.
 	private Sensor[] sensors;				//All the sensors.
 	int speed = 10;							//Used to sleeping.
+	Sensor testSensor1;    //DELETE ME
+	Sensor testSensor2;    //DELETE ME
+	Sensor testSensor3;    //DELETE ME
 
 	/**
 	 * Constructor, initializes the sensors, then records the neighbours.
@@ -21,7 +24,7 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		//Assign random amount of sensors, for now its up to 5, minimum of 2.
-		int numSensors = new Random().nextInt(8)+2;
+		int numSensors = new Random().nextInt(3)+2;
 		sensors = new Sensor[numSensors];
 		
 		//Places the first sensor at a random point within the panel's size.
@@ -43,6 +46,32 @@ public class MainThread {
 			sensors[x] = new Sensor(x_c, y_c);
 			record_neighbours(x);
 		}
+		
+		testSensor1 = new Sensor(115,115);
+		testSensor2 = new Sensor(153,153);
+		testSensor3 = new Sensor(153,77);
+		Debug.setDebug(true);
+		
+		RSRMAlgorithm rSRMA1 = new RSRMAlgorithm(testSensor1);
+		RotationAlgorithm rA1 = rSRMA1;
+		Thread t1 = new Thread(rA1);
+		rSRMA1.setThread(t1);
+		t1.start();
+		
+		
+		RSRMAlgorithmPrime rSRMA2 = new RSRMAlgorithmPrime(testSensor2);
+		RotationAlgorithm rA2 = rSRMA2;
+		Thread t2 = new Thread(rA2);
+		rSRMA2.setThread(t2);
+		t2.start();
+		
+		ARAlgorithm rSRMA3 = new ARAlgorithm(testSensor3);
+		RotationAlgorithm rA3 = rSRMA3;
+		Thread t3 = new Thread(rA3);
+		rSRMA3.setThread(t3);
+		t3.start();
+		//rA.stop();
+	
 	}
 
 	/**
@@ -63,11 +92,6 @@ public class MainThread {
 	 * Updates all the sensors, and check if neighbours are connected.
 	 */
 	public void update() {
-		
-		Debug.setDebug(true);
-		RSRMAlgorithm rSRMA = new RSRMAlgorithm();
-		RotationAlgorithm rA = rSRMA;
-		rA.run();
 		
 		for (int x = 0; x < sensors.length; x++) {
 			sensors[x].update();
@@ -95,7 +119,7 @@ public class MainThread {
 				}
 			}
 		}
-		wC.drawOnBoard(sensors);
+		wC.drawOnBoard(sensors,testSensor1,testSensor2,testSensor3);
 	}
 
 	/**
@@ -112,7 +136,7 @@ public class MainThread {
 				}
 			}
 
-		}).run();
+		}).start();
 	}
 
 	/**
