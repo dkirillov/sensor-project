@@ -11,11 +11,13 @@ public class Sensor {
 	private Point p;
 	private int wait_time;
 	private int max_wait_time;
+	private int radius;
 	private Color c; // Delete later.
 	//Maybe do a matrix like described in algorithms, facebook example...
 	List <Neighbour> neighbours;
 
-	public Sensor(int x, int y) {
+	public Sensor(int x, int y, int radius) {
+		this.radius = radius;
 		neighbours = new ArrayList<Neighbour>();
 		sectors = (new Random().nextInt(9)) + 3;
 		//max_wait_time = (new Random().nextInt(990)) + 10;
@@ -43,13 +45,13 @@ public class Sensor {
 		int multi_deg = (360) / sectors;
 
 		gfx.setColor(c);
-		gfx.fillArc(p.x - 55, p.y - 55, 115, 115, multi_deg * currenct_sector,
+		gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * currenct_sector,
 				multi_deg);
 
 		gfx.setColor(Color.BLACK);
-		gfx.fillOval(p.x, p.y, 5, 5);
+		gfx.fillOval(p.x-2, p.y-2, 4, 4);
 		gfx.setColor(new Color(0, 0, 0, 25));
-		gfx.drawOval(p.x - 55, p.y - 55, 115, 115);
+		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
 		gfx.setColor(Color.BLACK);
 		gfx.drawString(currenct_sector + "/" + sectors, p.x, p.y);
 
@@ -67,8 +69,8 @@ public class Sensor {
 	}
 
 	public boolean inRange(Point p2) {
-		return (p2.x >= p.x - 53 && p2.x <= p.x + 53)
-				&& (p2.y >= p.y - 53 && p2.y < p.y + 53);
+		return (p2.x >= p.x - radius && p2.x <= p.x + radius)
+				&& (p2.y >= p.y - radius && p2.y < p.y + radius);
 	}
 
 	public int inSector(Point p2) {

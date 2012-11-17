@@ -20,6 +20,7 @@ public class WindowClass extends JFrame implements ActionListener{
 	SensorBoard sB;
 	MainThread mT;
 	SpeedDialog sd;
+	RangeDialog rd;
 	JButton play, newgame;
 	JTextField numSensors;
 	JLabel message;
@@ -48,7 +49,11 @@ public class WindowClass extends JFrame implements ActionListener{
 		setVisible(true);
 		mT = new MainThread(this);
 		sd = new SpeedDialog(mT);
-		getContentPane().add(sd, BorderLayout.NORTH);
+		rd = new RangeDialog(mT);
+		JPanel panel = new JPanel();
+		panel.add(sd);
+		panel.add(rd);
+		getContentPane().add(panel, BorderLayout.NORTH);
 		mT.run();
 	}
 	

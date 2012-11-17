@@ -8,6 +8,7 @@ public class MainThread {
 	private Sensor[] sensors;
 	int speed = 10;
 	int numSensors = 3;
+	public int range = 50;
 
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
@@ -16,7 +17,6 @@ public class MainThread {
 
 	private void initialize(){
 		sensors = new Sensor[Integer.parseInt(wC.numSensors.getText())];
-
 		int x_c = new Random().nextInt(370) + 115;
 		int y_c = new Random().nextInt(170) + 115;
 		for (int x = 0; x < sensors.length; x++) {
@@ -28,7 +28,7 @@ public class MainThread {
 			if(y_c-58<0||y_c+58>=285){
 				y_c += (y_c-58<0)?58-y_c:(285-(y_c+58)); 				
 			}
-			sensors[x] = new Sensor(x_c, y_c);
+			sensors[x] = new Sensor(x_c, y_c, range);
 		}
 		record_neighbours();
 	}
