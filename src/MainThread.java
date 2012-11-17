@@ -23,7 +23,7 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		//Assign random amount of sensors, for now its up to 5, minimum of 2.
-		int numSensors = 400;// new Random().nextInt(398)+2;
+		int numSensors = new Random().nextInt(8)+2;
 		sensors = new Sensor[numSensors];
 		algoThreads = new RotationAlgorithm[numSensors];
 		
