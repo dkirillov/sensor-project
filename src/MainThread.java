@@ -8,29 +8,43 @@ public class MainThread {
 	private Sensor[] sensors;
 	int speed = 10;
 	int numSensors = 3;
+	int round = 0;
+	int possibleConnections = 0;
+	int currentConnections = 0;
 	public int range = 50;
+	int width = 600;
+	int height = 440;
+	
 
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
-		initialize();
+		restart = true;
 	}
 
 	private void initialize(){
+		round = 0;
+		possibleConnections = 0;
+		currentConnections = 0;
 		sensors = new Sensor[Integer.parseInt(wC.numSensors.getText())];
-		int x_c = new Random().nextInt(370) + 115;
-		int y_c = new Random().nextInt(170) + 115;
+		int x_c = new Random().nextInt(width - 2*range) + range;
+		int y_c = new Random().nextInt(height - 2*range) + range;
 		for (int x = 0; x < sensors.length; x++) {
-			x_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
-			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(52));
-			if(x_c+58>=485||x_c-58<0){
-				x_c += (x_c-58<0)?58-x_c:(485-(x_c+58)); 
+			int value = ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(range));
+			x_c += value;
+			//ensure it is in the proper range, pythagorean again
+			value = (int) Math.sqrt(range*range - value*value); 
+			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(value));
+			if(x_c+range>=width||x_c-range<0){
+				x_c += (x_c-range<0)?range-x_c:(width-(x_c+range)); 
 			}
-			if(y_c-58<0||y_c+58>=285){
-				y_c += (y_c-58<0)?58-y_c:(285-(y_c+58)); 				
+			if(y_c-range<0||y_c+range>=height){
+				y_c += (y_c-range<0)?range-y_c:(height-(y_c+range)); 				
 			}
 			sensors[x] = new Sensor(x_c, y_c, range);
 		}
 		record_neighbours();
+		wC.output("There are " + possibleConnections+" possible connections.\n");
+
 	}
 
 	private void record_neighbours(){
@@ -44,12 +58,22 @@ public class MainThread {
 					//System.out.println("Sectors: "+sensors[x].sectors+"\n");
 					//Neighbour					
 					sensors[x].addNeighbour(new Neighbour(s,y));
+					possibleConnections ++;
 				}
 			} 
 		}
+		//since every possible connection is recorded twice, 
+		//divide by 2 to get the true value. Also do a quick
+		//sanity check
+		if (possibleConnections%2 ==1){
+			new Exception("possible connections should be even").printStackTrace();
+		}
+		possibleConnections/=2;
 	}
 
 	public void update() {
+		round ++;
+		int connections = 0;
 		for (int x = 0; x < sensors.length; x++) {
 			sensors[x].update();
 		}
@@ -72,11 +96,21 @@ public class MainThread {
 						//Duplicate connection pair!
 						n.connect();
 						n_n.connect();
+						currentConnections++;
+						connections ++;
+						//wC.output(""+n.getNeighbour_num()+" connected with "+n_n.getNeighbour_num()+
+						//		" at round "+round+"\n");
+						//wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n");
 					}
 				}
 			}
 		}
+		if (connections>0){
+			wC.output(""+connections+ " connections made in round "+round+"\n");
+			wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n\n");
+		}
 		wC.sB.draw(wC.sB.getGraphics(), sensors);
+
 	}
 
 	public void run() {

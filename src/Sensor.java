@@ -46,7 +46,7 @@ public class Sensor {
 
 		gfx.setColor(c);
 		gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * currenct_sector,
-				multi_deg);
+	 			multi_deg);
 
 		gfx.setColor(Color.BLACK);
 		gfx.fillOval(p.x-2, p.y-2, 4, 4);
@@ -69,8 +69,11 @@ public class Sensor {
 	}
 
 	public boolean inRange(Point p2) {
-		return (p2.x >= p.x - radius && p2.x <= p.x + radius)
-				&& (p2.y >= p.y - radius && p2.y < p.y + radius);
+		//return (p2.x >= p.x - radius && p2.x <= p.x + radius)
+			//	&& (p2.y >= p.y - radius && p2.y < p.y + radius);
+		//pythagorean theorem, or euclidean distance (same formula)
+		//to calculate range, ie c^2 = a^2 + b^2
+		return Math.pow(radius,2)>=(Math.pow((p2.x-p.x),2) + Math.pow((p2.y-p.y),2));
 	}
 
 	public int inSector(Point p2) {

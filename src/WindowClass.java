@@ -21,7 +21,8 @@ public class WindowClass extends JFrame implements ActionListener{
 	MainThread mT;
 	SpeedDialog sd;
 	RangeDialog rd;
-	JButton play, newgame;
+	OutputDialog od;
+	JButton play, newgame, clear;
 	JTextField numSensors;
 	JLabel message;
 	boolean restart = false;
@@ -50,10 +51,12 @@ public class WindowClass extends JFrame implements ActionListener{
 		mT = new MainThread(this);
 		sd = new SpeedDialog(mT);
 		rd = new RangeDialog(mT);
+
 		JPanel panel = new JPanel();
 		panel.add(sd);
 		panel.add(rd);
 		getContentPane().add(panel, BorderLayout.NORTH);
+		od = new OutputDialog(this);
 		mT.run();
 	}
 	
@@ -65,9 +68,13 @@ public class WindowClass extends JFrame implements ActionListener{
 		newgame = new JButton("New");
 		newgame.setActionCommand("newgame");
 		newgame.addActionListener(this);
+		clear = new JButton("Clear Output");
+		clear.setActionCommand("clear");
+		clear.addActionListener(this);
 		JPanel innerpanel = new JPanel();
 		innerpanel.add(play);
 		innerpanel.add(newgame);
+		innerpanel.add(clear);
 		panel.add(innerpanel, BorderLayout.SOUTH);
 		JPanel centerpanel = new JPanel();
 		centerpanel.setLayout(new GridLayout(0,2));
@@ -97,9 +104,15 @@ public class WindowClass extends JFrame implements ActionListener{
 		}else if (e.getActionCommand().equals("newgame")){
 			mT.setKeepRunning(false);
 			mT.restart = true;
-			play.setText("Play");
+			play.setText("Start");
+		}else if (e.getActionCommand().equals("clear")){
+			od.setText("");
 		}
 
+	}
+	
+	public void output(String message){
+		od.append(message);
 	}
 
 
