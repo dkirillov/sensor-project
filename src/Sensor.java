@@ -12,14 +12,14 @@ import java.util.Random;
  * Represents the sensor itself.
  */
 public class Sensor {
+	public final int SensorId;			//The ID of this sensor
 	private int sectors;				//The number of sectors it has.
 	private int current_sector;			//The current sector it's on.
 	private Point p;					//The position/location of the sensor.
-	private int wait_time;				//The wait 'time' (thread ticks) before the sensor goes to the next sector, this decrements each time the thread calls on update.
-	private int max_wait_time;			//The random wait time, used to reset the variable above when it hits 0.
 	private Color c; 					//The literal color of the sensor, it's sector/beam color.
-	//Maybe do a matrix like described in algorithms, facebook example...
-	List <Neighbour> neighbours;		//All it's neighbours, other sensors the fall in range.
+	private int radius;
+	
+	ArrayList<ArrayList<Neighbour>> neighboursInASector;		//All it's neighbours, in sectors.
 
 	/**
 	 * Constructor, initializes everything.
@@ -32,13 +32,17 @@ public class Sensor {
 	 * @param x
 	 * @param y
 	 */
-	public Sensor(int x, int y) {
-		neighbours = new ArrayList<Neighbour>();
+	public Sensor(int id, int x, int y, int radius) {
+		SensorId = id;
+		this.radius = radius;
 		sectors = (new Random().nextInt(9)) + 3;
-		//max_wait_time = (new Random().nextInt(990)) + 10;
-		max_wait_time = 100; 	//For now it's not random...
+		
+		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
+		for (int i = 0; i < sectors; i++) {
+			neighboursInASector.add(new ArrayList<Neighbour>());
+		}
+		
 		current_sector = new Random().nextInt(sectors);
-		wait_time = 1;
 		p = new Point(x, y);
 		c = new Color(new Random().nextInt(255), new Random().nextInt(255),
 				new Random().nextInt(255), 50);
@@ -49,17 +53,9 @@ public class Sensor {
 	 * Switches the sector that it's on if the wait time is up.
 	 */
 	public void update() {
-		wait_time--;
-		if (wait_time == 0) {
-			current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1) : 1;
-			wait_time = max_wait_time;
-		}
-	}
-	public void update(boolean override) {
-		if (override) {
-			current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1) : 1;
-			wait_time = max_wait_time;
-		}
+		setNeighboursFacing(false);
+		current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1) : 1;
+		setNeighboursFacing(true);
 	}
 
 	/**
@@ -70,15 +66,14 @@ public class Sensor {
 		int multi_deg = (360) / sectors;	//The angle of the sensor's beam, in degrees.
 
 		gfx.setColor(c);
-		gfx.fillArc(p.x - 55, p.y - 55, 115, 115, multi_deg * current_sector, multi_deg);
+		gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * current_sector, multi_deg);
 
 		gfx.setColor(Color.BLACK);
-		gfx.fillOval(p.x, p.y, 5, 5);
+		gfx.fillOval(p.x-2, p.y-2, 4, 4);
 		gfx.setColor(new Color(0, 0, 0, 25));
-		gfx.drawOval(p.x - 55, p.y - 55, 115, 115);
 		
-		//This was for visual debugging... but not sure if it looks good with our without.
-		gfx.setColor(Color.BLACK);		
+		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
+		gfx.setColor(Color.BLACK);
 		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 
 		/*
@@ -100,8 +95,7 @@ public class Sensor {
 	 * @return True of the point lays in range, false if otherwise.
 	 */
 	public boolean inRange(Point p2) {
-		return (p2.x >= p.x - 53 && p2.x <= p.x + 53)
-				&& (p2.y >= p.y - 53 && p2.y < p.y + 53);
+		return Math.pow(radius,2)>=(Math.pow((p2.x-p.x),2) + Math.pow((p2.y-p.y),2));
 	}
 
 	/**
@@ -160,14 +154,21 @@ public class Sensor {
 	 * @return A list of neighbours.
 	 */
 	public List<Neighbour> getNeighbours(){
-		return neighbours;
+		return neighboursInASector.get(current_sector);
 	}
 	
 	/**
 	 * Adds a neighbour to the list.
 	 * @param n The neighbour to add to the list.
 	 */
-	public void addNeighbour(Neighbour n){
-		neighbours.add(n);	
-	}	
+	public void addNeighbour(Neighbour n, Sensor peer){
+		int sectorForNeighbour = inSector(peer.getPoint());
+		neighboursInASector.get(sectorForNeighbour).add(n);
+	}
+	
+	protected void setNeighboursFacing(boolean facing) {
+		for (Neighbour n : getNeighbours()) {
+			n.setFacingForSensor(SensorId, facing);
+		}
+	}
 }

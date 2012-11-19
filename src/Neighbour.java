@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 /**
  * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
  */
@@ -9,47 +11,55 @@
  * The two are connected when they have had their sectors face each other at least once.
  */
 public class Neighbour {
-	private int sector;					//The sector which the neighbour lays on.
-	private int neighbour_num;			//The neighbour's number, relative to the list stored in the MainThread.
-	private boolean connected;			//True if the sensor and the neighbour have 'connected'. False otherwise.
+	protected final Sensor _sensor1;
+	protected final Sensor _sensor2;
+	protected boolean _sensor1Facing;
+	protected boolean _sensor2Facing;
+	protected boolean _connected;			//True if the sensor and the neighbour have 'connected'. False otherwise.
 
-	/**
-	 * Constructor, initializes everything.
-	 * @param s The sector which the neighbour lays on.
-	 * @param n_n The neighbour's number, relative to the list in the MainThread.
+	/**\
+	 * Constructor, initalizes everything
+	 * @param sensor1Id Id of the first sensor
+	 * @param sensor2Id Id of the second sensor
 	 */
-	public Neighbour (int s, int n_n){
-		this.sector = s;
-		this.neighbour_num = n_n;
-		connected = false;
+	public Neighbour (Sensor sensor1, Sensor sensor2){
+		_sensor1 = sensor1;
+		_sensor2 = sensor2;
+		_sensor1Facing = false;
+		_sensor2Facing = false;
+		_connected = false;
 	}
 	
 	/**
-	 * Gets the sector which the neighbour lays on.
-	 * @return The sector which the neighbour lays on.
+	 * For a given sensor Id, set if that sensor is facing for this neighbour
+	 * @param sensorId The sensor that is facing this neighbour
+	 * @param facing If the sensor is facing this neighbour
+	 * @throws IllegalArgumentException thrown if this neighbour is not related to the sensorId input
 	 */
-	public int getSector() {
-		return sector;
-	}
-	/**
-	 * Gets the neighbour's number.
-	 * @return Neighbour's number.
-	 */
-	public int getNeighbour_num() {
-		return neighbour_num;
+	public void setFacingForSensor(int sensorId, boolean facing) 
+		throws IllegalArgumentException {
+		if (sensorId == _sensor1.SensorId) {
+			_sensor1Facing = facing;
+		}
+		else if (sensorId == _sensor2.SensorId) {
+			_sensor2Facing = facing;
+		}
+		else {
+			throw new IllegalArgumentException("Sensor with ID: " + sensorId + " cannot modify this Neighbour.");
+		}
+		if (!_connected) {
+			_connected = _sensor1Facing && _sensor2Facing;
+		}
 	}
 	
-	/**
-	 * 'Connect' the sensor and the neighour.
-	 */
-	public void connect(){
-		connected = true;
-	}
 	/**
 	 * Check if the sensor and the neighbour are connected.
 	 * @return True if the sensor and the neighbour are connected, false otherwise. 
 	 */
 	public boolean isConnected(){
-		return connected;
+		return _connected;
 	}
+	
+	public Point getSensor1Pos() { return _sensor1.getPoint(); }
+	public Point getSensor2Pos() { return _sensor2.getPoint(); }
 }

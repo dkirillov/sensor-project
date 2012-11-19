@@ -20,7 +20,7 @@ public class ARAlgorithm extends RotationAlgorithm {
 				sleep();
 			}
 			//Rotate antenna beam one sector counter-clockwise;
-			sensor.update(true);
+			sensor.update();
 		}
 		Debug.debug("ARAlgorithm ended.");
 	}

@@ -10,19 +10,19 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class SpeedDialog extends JPanel{
+public class RangeDialog extends JPanel{
 
-	private static final long serialVersionUID = 7132858914782235474L;
+	private static final long serialVersionUID = -6091239265498976732L;
 	
-	JSlider sensorSpeed;
-	JTextField sSpeed;
-	int speed;
-	int lower = 0;
-	int upper = 100;
+	JSlider sensorRange;
+	JTextField sRange;
+	int range;
+	int lower = 10;
+	int upper = 250;
 	MainThread game;
 	JFrame frame;
 	
-	public SpeedDialog(final MainThread game){
+	public RangeDialog(final MainThread game){
 		//super(game.frame);
 		this.frame = game.wC;
 		this.game = game;
@@ -34,7 +34,7 @@ public class SpeedDialog extends JPanel{
 		setLayout(layout);
 		setLocation(frame.getX()+frame.getWidth(),frame.getY());
 		
-		speed = upper -game.speed;
+		range = game.range;
 		
 		//x label
 		constraints.gridx = 0; constraints.gridy = 0;
@@ -42,37 +42,37 @@ public class SpeedDialog extends JPanel{
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1; constraints.weighty = 1;
 		constraints.insets = new Insets(5, 10, 0, 0);
-		JLabel label = new JLabel("Sensor speed ("+lower+" - "+ upper+  ")  :");
+		JLabel label = new JLabel("Sensor range ("+lower+" - "+ upper+  ")  :");
 		layout.setConstraints(label, constraints);
 		add(label);
 
 		//x position
-		sensorSpeed = new JSlider(JSlider.HORIZONTAL, lower, upper,speed);
+		sensorRange = new JSlider(JSlider.HORIZONTAL, lower, upper,range);
 		constraints.gridx = 1; constraints.gridy = 1;
 		constraints.gridwidth = 2;
 		constraints.insets = new Insets(5, 5, 0, 10);
-		layout.setConstraints(sensorSpeed, constraints);
-		add(sensorSpeed);
+		layout.setConstraints(sensorRange, constraints);
+		add(sensorRange);
 
 		//x text
-		sSpeed = new JTextField(5);
-		sSpeed.setText(String.valueOf(sensorSpeed.getValue()));
-		sSpeed.setEditable(false);
+		sRange = new JTextField(5);
+		sRange.setText(String.valueOf(sensorRange.getValue()));
+		sRange.setEditable(false);
 		constraints.gridx=0; constraints.gridy = 1;
 		constraints.gridwidth = 1;
 		constraints.insets = new Insets(5, 10, 0, 0);
-		layout.setConstraints(sSpeed, constraints);
-		add(sSpeed);
+		layout.setConstraints(sRange, constraints);
+		add(sRange);
 
 	
 		
-		sensorSpeed.addChangeListener(new ChangeListener() {
+		sensorRange.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
-				sSpeed.setText(String.valueOf(source.getValue()));
+				sRange.setText(String.valueOf(source.getValue()));
 				if (!source.getValueIsAdjusting()){
-					speed = source.getValue();
-					game.speed = upper-speed;
+					range = source.getValue();
+					game.range = range;
 				}
 			}
 		});

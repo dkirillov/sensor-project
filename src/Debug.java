@@ -1,8 +1,4 @@
-/**
- * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
- */
 import java.util.HashMap;
-
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -36,7 +32,6 @@ public class Debug {
 				try {
 					doc.insertString(doc.getLength(), message+"\n", null);
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else{
@@ -52,7 +47,6 @@ public class Debug {
 				try {
 					doc.insertString(doc.getLength(), Character.toString(c), null);
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else{
@@ -79,6 +73,8 @@ public class Debug {
 	}
 	
 	private static class DebugFrame extends JFrame{
+		
+		private static final long serialVersionUID = 7930187426916348611L;
 		
 		JTextArea output;
 		public DebugFrame(String name){

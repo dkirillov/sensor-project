@@ -34,7 +34,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 				//OH GOD DOES THIS LOOK WRONG...
 				sleep();
 				//Rotate antenna one sector.
-				sensor.update(true);
+				sensor.update();
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 				sleep();
 			}
 			//Rotate antenna one sector.
-			sensor.update(true);
+			sensor.update();
 		}
 	}
 }
