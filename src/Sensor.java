@@ -19,6 +19,7 @@ public class Sensor {
 	private int wait_time;				//The wait 'time' (thread ticks) before the sensor goes to the next sector, this decrements each time the thread calls on update.
 	private int max_wait_time;			//The random wait time, used to reset the variable above when it hits 0.
 	private Color c; 					//The literal color of the sensor, it's sector/beam color.
+	private int radius;
 	
 	ArrayList<ArrayList<Neighbour>> neighboursInASector;		//All it's neighbours, in sectors.
 
@@ -33,8 +34,9 @@ public class Sensor {
 	 * @param x
 	 * @param y
 	 */
-	public Sensor(int id, int x, int y) {
+	public Sensor(int id, int x, int y, int radius) {
 		SensorId = id;
+		this.radius = radius;
 		sectors = (new Random().nextInt(9)) + 3;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
@@ -76,15 +78,14 @@ public class Sensor {
 		int multi_deg = (360) / sectors;	//The angle of the sensor's beam, in degrees.
 
 		gfx.setColor(c);
-		gfx.fillArc(p.x - 55, p.y - 55, 115, 115, multi_deg * current_sector, multi_deg);
+		gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * current_sector, multi_deg);
 
 		gfx.setColor(Color.BLACK);
-		gfx.fillOval(p.x, p.y, 5, 5);
+		gfx.fillOval(p.x-2, p.y-2, 4, 4);
 		gfx.setColor(new Color(0, 0, 0, 25));
-		gfx.drawOval(p.x - 55, p.y - 55, 115, 115);
 		
-		//This was for visual debugging... but not sure if it looks good with our without.
-		gfx.setColor(Color.BLACK);		
+		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
+		gfx.setColor(Color.BLACK);
 		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 
 		/*
@@ -106,8 +107,7 @@ public class Sensor {
 	 * @return True of the point lays in range, false if otherwise.
 	 */
 	public boolean inRange(Point p2) {
-		return (p2.x >= p.x - 53 && p2.x <= p.x + 53)
-				&& (p2.y >= p.y - 53 && p2.y < p.y + 53);
+		return Math.pow(radius,2)>=(Math.pow((p2.x-p.x),2) + Math.pow((p2.y-p.y),2));
 	}
 
 	/**

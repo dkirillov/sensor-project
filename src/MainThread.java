@@ -6,7 +6,7 @@ public class MainThread {
 	boolean restart = false;
 	WindowClass wC;
 	private Sensor[] sensors;
-	protected Vector<Neighbour> neighbours = new Vector<Neighbour>();
+	protected Vector<Neighbour> neighbours;
 	int speed = 10;
 	int numSensors = 3;
 	int round = 0;
@@ -27,6 +27,7 @@ public class MainThread {
 		possibleConnections = 0;
 		currentConnections = 0;
 		sensors = new Sensor[Integer.parseInt(wC.numSensors.getText())];
+		neighbours = new Vector<Neighbour>();
 		int x_c = new Random().nextInt(width - 2*range) + range;
 		int y_c = new Random().nextInt(height - 2*range) + range;
 		for (int x = 0; x < sensors.length; x++) {
@@ -41,7 +42,7 @@ public class MainThread {
 			if(y_c-range<0||y_c+range>=height){
 				y_c += (y_c-range<0)?range-y_c:(height-(y_c+range)); 				
 			}
-			sensors[x] = new Sensor(x_c, y_c, range);
+			sensors[x] = new Sensor(x, x_c, y_c, range);
 			record_neighbours(x);
 		}
 		wC.output("There are " + possibleConnections+" possible connections.\n");
@@ -117,7 +118,7 @@ public class MainThread {
 				}
 			}
 		}*/
-		if (connections>0){
+		if ((connections - currentConnections)>0){
 			wC.output(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
 			wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n\n");
