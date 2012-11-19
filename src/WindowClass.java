@@ -7,9 +7,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -49,6 +54,7 @@ public class WindowClass extends JFrame implements ActionListener{
 		
 
 		add(buttonPanel(), BorderLayout.SOUTH);
+		makeMenu();
 		setVisible(true);
 		mT = new MainThread(this);
 		sd = new SpeedDialog(mT);
@@ -60,6 +66,44 @@ public class WindowClass extends JFrame implements ActionListener{
 		getContentPane().add(panel, BorderLayout.NORTH);
 		od = new OutputDialog(this);
 		mT.run();
+	}
+	
+	public void makeMenu(){
+		JMenuBar mb = new JMenuBar();
+		JMenu menu = new JMenu("Algorithm");
+		JRadioButtonMenuItem h1 = new JRadioButtonMenuItem("ARA");
+		JRadioButtonMenuItem h2 = new JRadioButtonMenuItem("RSRMA");
+		JRadioButtonMenuItem h3 = new JRadioButtonMenuItem("RSRMA'");
+		h1.setSelected(true);
+		ButtonGroup g = new ButtonGroup();
+		g.add(h1);
+		g.add(h2);
+		g.add(h3);
+		menu.add(h1);
+		menu.add(h2);
+		menu.add(h3);
+		mb.add(menu);
+		h1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}		
+		});
+		h2.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}		
+		});
+		h3.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}		
+		});
+		
+		mb.add(menu);
+		setJMenuBar(mb);
 	}
 	
 	public JPanel buttonPanel(){
