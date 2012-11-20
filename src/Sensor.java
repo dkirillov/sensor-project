@@ -35,7 +35,7 @@ public class Sensor {
 	public Sensor(int id, int x, int y, int radius) {
 		SensorId = id;
 		this.radius = radius;
-		sectors = (new Random().nextInt(9)) + 3;
+		sectors = (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
 		for (int i = 0; i < sectors; i++) {

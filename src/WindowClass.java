@@ -8,7 +8,6 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;

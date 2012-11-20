@@ -3,25 +3,25 @@ import java.util.Random;
 
 
 public class ARAlgorithm extends RotationAlgorithm {
-	private int d;
 
 	public ARAlgorithm(Sensor s) {
 		super(s);
 		//Better prime?
 		d = BigInteger.probablePrime(3, new Random(System.currentTimeMillis())).intValue();
+		outer_loop = 0;
 	}
 
-	public void run() {
-		Debug.debug("Running ARAlgorithm.");
-		while(keepRunning){
-			for (int i = 0; i<=d-1; i++){
-				//Send message to neighbor(s);
-				//Listen for messages from neighbor(s) (if any);
-				sleep();
-			}
-			//Rotate antenna beam one sector counter-clockwise;
+	public void update() {
+		// Send message to neighbor(s);
+		// Listen for messages from neighbor(s) (if any);
+		
+		if (outer_loop == 0){
+			// Rotate antenna beam one sector counter-clockwise;
 			sensor.update();
+			outer_loop = d;
 		}
-		Debug.debug("ARAlgorithm ended.");
+		outer_loop--;
+		Debug.debug("Running ARAlgorithm.");
+	
 	}
 }

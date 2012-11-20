@@ -2,54 +2,52 @@ import java.util.Random;
 
 
 public class RSRMAGeneral extends RotationAlgorithm{
-	protected int d;
-	protected int k;
+	private boolean selectBit;
 	public RSRMAGeneral(Sensor s) {
 		super(s);
+		outer_loop = 0;
+		inner_loop = 0;
 	}
 
-	public void run(){
-		while(keepRunning){
-			boolean selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
-			Debug.debug("Running RSRMA. d:"+d+" k: "+k+(d==k?"":" -=Prime=-"));
-			int k = sensor.getSectors();
-			if(selectBit){
-				//Mech1
-				mech1(k,d);
-			}else{
-				//Mech0
-				mech0(k,d);
-			}
+	public void update(){
+		Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
+		if (outer_loop == 0){
+			selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
 		}
-		Debug.debug("RSRMA d:"+d+" k: "+k+" ended.");
+		if (selectBit) {
+			// Mech1
+			mech1(k, d);
+		} else {
+			// Mech0
+			mech0(k, d);
+		}
+		outer_loop--;
 	}
 
 	public void mech0(int k, int d){
-		Debug.debug("Doing Mech0");	
-		for(int j = 1; j <= d; j++){
-			for(int i = 0; i <= k-1 ; i++){
-				//Send message to neighbor(s) in sector i;
-				//Listen for messages from neighbor(s) (if any) in sector i;
-				//Basically set our neighbours to facing. THIS SHOULD DELAY THE THING.
-				//OH GOD DOES THIS LOOK WRONG...
-				sleep();
-				//Rotate antenna one sector.
-				sensor.update();
-			}
+		Debug.debug("Doing Mech0");
+		if (outer_loop == 0){
+			outer_loop = d*k; // It's not k-1 simply because the way the loop is arranged, if it was k-1  it would be actually k-2.
 		}
+		// Send message to neighbor(s) in sector i;
+		// Listen for messages from neighbor(s) (if any) in sector i;
+		// Basically set our neighbours to facing. THIS SHOULD DELAY THE THING.
+
+		// Rotate antenna one sector.
+		sensor.update();
 	}
 	public void mech1(int k, int d){
 		Debug.debug("Doing Mech1");		
-		for(int j = 1; j <= k-1; j++){
-			for(int i = 0; i <= d ; i++){
-				//Send message to neighbor(s) in sector i;
-				//Listen for messages from neighbor(s) (if any) in sector i;
-				//Basically set our neighbours to facing. THIS SHOULD DELAY THE THING.
-				//OH GOD DOES THIS LOOK WRONG...
-				sleep();
-			}
+		if (outer_loop == 0){outer_loop = k*(d-1);}
+		
+		//Send message to neighbor(s) in sector i;
+		//Listen for messages from neighbor(s) (if any) in sector i;
+		//Basically set our neighbours to facing. THIS SHOULD DELAY THE THING.
+		if(inner_loop == 0){
 			//Rotate antenna one sector.
-			sensor.update();
+			sensor.update();			
 		}
+		if (inner_loop == 0){inner_loop = d-1;}		
+		inner_loop--;		
 	}
 }

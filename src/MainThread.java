@@ -17,6 +17,10 @@ public class MainThread {
 	public int range = 50;
 	int width = 600;
 	int height = 440;
+	long startTime;
+	long endTime;
+	boolean firstTime;
+	boolean resetTime;
 	
 
 	public MainThread(WindowClass wC) {
@@ -49,10 +53,10 @@ public class MainThread {
 
 			sensors[x] = new Sensor(x, x_c, y_c, range);
 
-			int ranAlgo = new Random(System.currentTimeMillis()).nextInt(300);
+			int ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
 			if(ranAlgo >= 0 && ranAlgo <= 99){
 				algoThreads[x]  = new RSRMAlgorithm(sensors[x]);			
-			}else if (ranAlgo >= 100 && ranAlgo <= 299){
+			}else if (ranAlgo >= 100 && ranAlgo <= 199){
 				algoThreads[x] = new RSRMAlgorithmPrime(sensors[x]);	
 			}else {
 				algoThreads[x] = new ARAlgorithm(sensors[x]);
@@ -61,13 +65,8 @@ public class MainThread {
 
 			record_neighbours(x);
 		}
-	
-		for (int x = 0; x < algoThreads.length; x++) {
-			Thread temp = new Thread(algoThreads[x]);
-			algoThreads[x].setThread(temp);
-			temp.start();
-		}
-	
+		firstTime = true;
+		resetTime = true;
 		wC.output("There are " + possibleConnections+" possible connections.\n");
 	}
 
@@ -84,11 +83,16 @@ public class MainThread {
 	}
 
 	public void update() {
-		round ++;
+		if(firstTime){
+			startTime = System.currentTimeMillis();
+			wC.output("Start time: "+startTime+"\n");
+			firstTime = false;
+		}
+		round ++; //This is now a more accurate representation.
 		int connections = 0;
-		/*for (int x = 0; x < sensors.length; x++) {
-			sensors[x].update();
-		}*/
+		for (int x = 0; x < algoThreads.length; x++) {
+			algoThreads[x].update();
+		}
 		for (Neighbour n : neighbours) {
 			if (n.isConnected()) connections++;
 		}
@@ -96,6 +100,12 @@ public class MainThread {
 			wC.output(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
 			wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n\n");
+		}
+		if (resetTime&&possibleConnections-currentConnections == 0){
+			endTime = System.currentTimeMillis();
+			wC.output("End time: "+endTime+"\n");
+			wC.output("Ran for: "+(endTime-startTime)+"ms\n");	
+			resetTime = false;
 		}
 		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 	}
@@ -107,11 +117,9 @@ public class MainThread {
 			public void run() {
 				while (true){
 					while (isKeepRunning()) {
-						RotationAlgorithm.setSleepTime(speed);
+						delay(speed);
 						update();
 					}
-					//delay(100);
-					Debug.debug("here");
 					if (restart){
 						initialize();
 						restart = false;
