@@ -35,7 +35,7 @@ public class WindowClass extends JFrame implements ActionListener{
 
 	public WindowClass() {
 		setLayout(null);
-		setSize(800, 640);
+		setSize(SensorBoard.BOARD_WIDTH+45, SensorBoard.BOARD_HEIGHT+190);
 		setMinimumSize(getSize());
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -46,7 +46,7 @@ public class WindowClass extends JFrame implements ActionListener{
 		});
 
 		sB = new SensorBoard();
-		sB.setSize(600, 440);
+		sB.setSize(SensorBoard.BOARD_WIDTH, SensorBoard.BOARD_HEIGHT);
 		sB.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(sB);

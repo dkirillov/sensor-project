@@ -11,17 +11,19 @@ import javax.swing.JPanel;
 public class SensorBoard extends JPanel {
 
 	private static final long serialVersionUID = 3850197110638244786L;
+	public static final int BOARD_WIDTH = 550;
+	public static final int BOARD_HEIGHT = 550;
 
 	public SensorBoard(){
 		setVisible(true);
 	}
 
 	public void draw(Graphics gfx, Sensor[] sensors, Vector<Neighbour> neighbours){
-		BufferedImage buffer = new BufferedImage(598, 438, BufferedImage.TYPE_INT_RGB);
+		BufferedImage buffer = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
 		Graphics graphics = buffer.getGraphics();
 		
 		graphics.setColor(Color.WHITE);
-		graphics.fillRect(1,1,598,438);
+		graphics.fillRect(1,1,BOARD_WIDTH,BOARD_HEIGHT);
 
 		//Just testing if all neighbours are discovered
 		graphics.setColor(Color.RED);

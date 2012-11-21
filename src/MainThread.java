@@ -15,8 +15,6 @@ public class MainThread {
 	int possibleConnections = 0;
 	int currentConnections = 0;
 	public int range = 50;
-	int width = 600;
-	int height = 440;
 	long startTime;
 	long endTime;
 	boolean firstTime;
@@ -26,6 +24,7 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		restart = true;
+//		Debug.setDebug(true);
 	}
 
 	private void initialize(){
@@ -36,22 +35,23 @@ public class MainThread {
 		sensors = new Sensor[numSensors];
 		algoThreads = new RotationAlgorithm[numSensors];
 		neighbours = new Vector<Neighbour>();
-		int x_c = new Random().nextInt(width - 2*range) + range;
-		int y_c = new Random().nextInt(height - 2*range) + range;
+		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH - 2*range) + range;
+		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT - 2*range) + range;
+		int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
 		for (int x = 0; x < sensors.length; x++) {
 			int value = ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(range));
 			x_c += value;
 			//ensure it is in the proper range, pythagorean again
 			value = (int) Math.sqrt(range*range - value*value); 
 			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(value));
-			if(x_c+range>=width||x_c-range<0){
-				x_c += (x_c-range<0)?range-x_c:(width-(x_c+range)); 
+			if(x_c+range>=SensorBoard.BOARD_WIDTH||x_c-range<0){
+				x_c += (x_c-range<0)?range-x_c:(SensorBoard.BOARD_WIDTH-(x_c+range)); 
 			}
-			if(y_c-range<0||y_c+range>=height){
-				y_c += (y_c-range<0)?range-y_c:(height-(y_c+range)); 				
+			if(y_c-range<0||y_c+range>=SensorBoard.BOARD_HEIGHT){
+				y_c += (y_c-range<0)?range-y_c:(SensorBoard.BOARD_WIDTH-(y_c+range)); 				
 			}
 
-			sensors[x] = new Sensor(x, x_c, y_c, range);
+			sensors[x] = new Sensor(x, x_c, y_c, range,k);
 
 			int ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
 			if(ranAlgo >= 0 && ranAlgo <= 99){
@@ -117,8 +117,16 @@ public class MainThread {
 			public void run() {
 				while (true){
 					while (isKeepRunning()) {
-						delay(speed);
+						float start = System.currentTimeMillis();
+						//delay(speed);						
 						update();
+						float end = System.currentTimeMillis();
+						if((end-start)<speed){
+							//Under 2000ms, sleep the difference.
+							//This 2000ms should be changed to something on the slider...
+							Debug.debug("Sleeping: "+(speed-(end-start)));
+							delay((int)(speed-(end-start)));
+						}
 					}
 					if (restart){
 						initialize();

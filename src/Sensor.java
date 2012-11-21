@@ -32,10 +32,10 @@ public class Sensor {
 	 * @param x
 	 * @param y
 	 */
-	public Sensor(int id, int x, int y, int radius) {
+	public Sensor(int id, int x, int y, int radius,int k) {
 		SensorId = id;
 		this.radius = radius;
-		sectors = (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
+		sectors = k;//= (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
 		for (int i = 0; i < sectors; i++) {
