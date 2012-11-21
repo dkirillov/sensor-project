@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -8,7 +10,9 @@ public class MainThread {
 	WindowClass wC;
 	private Sensor[] sensors;
 	protected Vector<Neighbour> neighbours;
-	private RotationAlgorithm[] algoThreads;
+	//private RotationAlgorithm[] algoThreads;
+	private List<RotationAlgorithm> runningAlgoThreads;
+	private List<RotationAlgorithm> stoppedAlgoThreads;		//Do we even need this?
 	int speed = 10;
 	int numSensors = 3;
 	int round = 0;
@@ -33,7 +37,8 @@ public class MainThread {
 		currentConnections = 0;
 		numSensors = Integer.parseInt(wC.numSensors.getText());
 		sensors = new Sensor[numSensors];
-		algoThreads = new RotationAlgorithm[numSensors];
+		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
+		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
 		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH - 2*range) + range;
 		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT - 2*range) + range;
@@ -55,11 +60,11 @@ public class MainThread {
 
 			int ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
 			if(ranAlgo >= 0 && ranAlgo <= 99){
-				algoThreads[x]  = new RSRMAlgorithm(sensors[x]);			
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));			
 			}else if (ranAlgo >= 100 && ranAlgo <= 199){
-				algoThreads[x] = new RSRMAlgorithmPrime(sensors[x]);	
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
 			}else {
-				algoThreads[x] = new ARAlgorithm(sensors[x]);
+				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
 			}
 			Debug.debug("ranAlgo: "+ranAlgo);
 
@@ -90,8 +95,15 @@ public class MainThread {
 		}
 		round ++; //This is now a more accurate representation.
 		int connections = 0;
-		for (int x = 0; x < algoThreads.length; x++) {
-			algoThreads[x].update();
+		int size = runningAlgoThreads.size();
+		for (int x = 0; x < size; x++) {
+			runningAlgoThreads.get(x).update();
+			if(!runningAlgoThreads.get(x).hasRemainingNeighbours()){
+				stoppedAlgoThreads.add(runningAlgoThreads.get(x));
+				runningAlgoThreads.remove(x);
+				size--;
+				x--;
+			}
 		}
 		for (Neighbour n : neighbours) {
 			if (n.isConnected()) connections++;
@@ -140,9 +152,6 @@ public class MainThread {
 
 	public void stop() {
 		setKeepRunning(false);
-		for (int x = 0; x < algoThreads.length; x++) {
-			algoThreads[x].stop();
-		}
 	}
 
 

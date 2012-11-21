@@ -75,18 +75,6 @@ public class Sensor {
 		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
 		gfx.setColor(Color.BLACK);
 		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
-
-		/*
-		 * double multi_rad = (Math.PI * 2) / sectors; gfx.setColor(Color.RED);
-		 * for (int x = 0; x < sectors; x++) { int offsetX = (int)
-		 * (Math.cos(multi_rad * x) * 60); int offsetY = (int)
-		 * (Math.sin(multi_rad * x) * 60); System.out.println("x: " + x);
-		 * System.out.println("sectors: " + sectors);
-		 * System.out.println("multiples: " + multi_rad);
-		 * System.out.println("offsetX: " + offsetX + "\noffsetY: " + offsetY +
-		 * "\n"); gfx.drawLine(p.x + 2, p.y + 2, p.x + offsetX, p.y + offsetY);
-		 * }
-		 */
 	}
 
 	/**
@@ -170,5 +158,9 @@ public class Sensor {
 		for (Neighbour n : getNeighbours()) {
 			n.setFacingForSensor(SensorId, facing);
 		}
+	}
+	//This could change to a boolean, doesn't matter.
+	public int getRemainingNeighbours(){
+		return 1;
 	}
 }
