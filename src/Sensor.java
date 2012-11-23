@@ -13,7 +13,8 @@ import java.util.Random;
  */
 public class Sensor {
 	public final int SensorId;			//The ID of this sensor
-	private int sectors;				//The number of sectors it has.
+	private int sectors;				//The number of sectors (k) it has.
+	private int delay;					//The delay (d) that will be used for algorithms, prime number.
 	private int current_sector;			//The current sector it's on.
 	private Point p;					//The position/location of the sensor.
 	private Color c; 					//The literal color of the sensor, it's sector/beam color.
@@ -44,8 +45,8 @@ public class Sensor {
 		
 		current_sector = new Random().nextInt(sectors);
 		p = new Point(x, y);
-		c = new Color(new Random().nextInt(255), new Random().nextInt(255),
-				new Random().nextInt(255), 50);
+		//c = new Color(new Random().nextInt(255), new Random().nextInt(255),
+		//		new Random().nextInt(255), 50);
 	}
 
 	/**
@@ -159,6 +160,28 @@ public class Sensor {
 			n.setFacingForSensor(SensorId, facing);
 		}
 	}
+	/**
+	 * Gets the delay of a sensor, this is the 'd' in the algorithms, and is a prime number.
+	 * This is also the 'colour' of the sensor/node, both graph theory wise and literally.
+	 * @return The delay of a sensor.
+	 */
+	public int getDelay() {
+		return delay;
+	}
+
+	/**
+	 * Sets the delay/colour ('d') of the sensor.
+	 * @param d The new delay.
+	 */
+	public void setDelay(int d) {
+		delay = d;
+		
+		//The 100 is just to make the colours pretty, could be some other number...
+		Random r = new Random(delay+100);
+		c = new Color(r.nextInt(255), r.nextInt(255),r.nextInt(255), 50);
+	}
+	
+	
 	//This could change to a boolean, doesn't matter.
 	public int getRemainingNeighbours(){
 		return 1;

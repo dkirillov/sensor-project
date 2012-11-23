@@ -1,13 +1,8 @@
-import java.math.BigInteger;
-import java.util.Random;
-
-
 public class ARAlgorithm extends RotationAlgorithm {
 
 	public ARAlgorithm(Sensor s) {
 		super(s);
-		//Better prime?
-		d = BigInteger.probablePrime(3, new Random(System.currentTimeMillis())).intValue();
+		d = sensor.getDelay();
 		outer_loop = 0;
 	}
 
