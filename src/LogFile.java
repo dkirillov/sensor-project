@@ -15,13 +15,14 @@ public class LogFile {
 		
 	}
 	
-	public void open(String algo, int sensors){
+	public void open(String algo, int sensors, int k){
 		logged ++;
 		try{
 			// Create file 
-			FileWriter fstream = new FileWriter("log"+algo+sensors+".txt");
+			String fs = System.getProperty("file.separator");
+			FileWriter fstream = new FileWriter("logfiles"+fs+"logk="+k+"n="+sensors+algo+".txt");
 			logOut = new BufferedWriter(fstream);
-			fstream = new FileWriter("stat"+algo+sensors+".txt");
+			fstream = new FileWriter("logfiles"+fs+"statk="+k+"n="+sensors+algo+".txt");
 			statOut = new BufferedWriter(fstream);
 			open = true;
 		}catch (Exception e){//Catch exception if any
