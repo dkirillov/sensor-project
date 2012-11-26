@@ -39,7 +39,7 @@ public class MainThread {
 			727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811,
 			821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887,
 			907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991,
-			997);	
+			997);
 	int width = 600;
 	int height = 440;
 	LogFile log;
@@ -66,7 +66,6 @@ public class MainThread {
 		
 		Random random = new Random();
 		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
-		int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
 		int xPlace = SensorBoard.BOARD_WIDTH/2;
 		int yPlace = SensorBoard.BOARD_HEIGHT/2;
 		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
@@ -86,16 +85,7 @@ public class MainThread {
 			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
 		}
 		
-		//record_neighbours(0);
-		
-		int ranAlgo = new Random(System.currentTimeMillis()).nextInt(300);
-		if(ranAlgo >= 0 && ranAlgo <= 99){
-			runningAlgoThreads.add(new RSRMAlgorithm(sensors[0]));			
-		}else if (ranAlgo >= 100 && ranAlgo <= 199){
-			runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[0]));	
-		}else {
-			runningAlgoThreads.add(new ARAlgorithm(sensors[0]));
-		}
+		Debug.debug("Created sensor " + 0);
 		
 		for (int x = 1; x < sensors.length; x++) {
 			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
@@ -111,31 +101,31 @@ public class MainThread {
 				yValue = (int) (radiusRange * (Math.sin(radianValue)));
 				validPlacements.add(new PlacementPoint(choice.x + xValue, choice.y + yValue, radianValue));
 			}
-			
-			//record_neighbours(x);
-
+			Debug.debug("Created sensor " + x);
+		}
+		
+		for (int i = 0; i < sensors.length; i++) {
+			record_neighbours(i);
+		}
+		
+		for (int i = 0; i < sensors.length; i++) {
 			String algo = "ARA";
 			switch (algorithm){
 			case ARA:
-				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
+				runningAlgoThreads.add(new ARAlgorithm(sensors[i]));
 				break;
 			case RSRMA:
-				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));	
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[i]));	
 				algo = "RSRMA";
 				break;
 			case RSRMAP:
-				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[i]));	
 				algo = "RSRMA\'";
 				break;	
 			}
 			log.open(algo, numSensors);
 
-			Debug.debug("ranAlgo: "+algorithm);
-
-		}
-		
-		for (int i = 0; i < sensors.length; i++) {
-			record_neighbours(i);
+			Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
 		
 		firstTime = true;
@@ -173,7 +163,7 @@ public class MainThread {
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
 
 		sensors[n].setDelay(primeNumbers.get(0));
-		Debug.debug("Delay: "+sensors[n].getDelay());
+		Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
 
 	public void update() {

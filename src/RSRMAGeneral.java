@@ -1,6 +1,3 @@
-import java.util.Random;
-
-
 public class RSRMAGeneral extends RotationAlgorithm{
 	private boolean selectBit;
 	public RSRMAGeneral(Sensor s) {
@@ -12,7 +9,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	public void update(){
 		Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
 		if (outer_loop == 0){
-			selectBit = (new Random(System.currentTimeMillis())).nextBoolean();
+			selectBit = (Math.random() < 0.5);
 		}
 		if (selectBit) {
 			// Mech1

@@ -89,7 +89,8 @@ public class Sensor {
 		else {
 			gfx.setColor(Color.green);
 		}
-		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
+		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
+		gfx.drawString("" + delay, p.x, p.y);
 	}
 
 	/**
