@@ -175,7 +175,7 @@ public class MainThread {
 			setKeepRunning(false);
 			log.close();
 		}
-		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		//wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 	}
 
 	public void run() {
