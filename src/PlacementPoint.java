@@ -3,14 +3,12 @@ public class PlacementPoint {
 
 	public int x;
 	public int y;
-	public int originalX;
-	public int originalY;
+	public double radianFacing;
 	
-	public PlacementPoint(int x, int y, int originalX, int originalY) {
+	public PlacementPoint(int x, int y, double radianFacing) {
 		this.x = x;
 		this.y = y;
-		this.originalX = originalX;
-		this.originalY = originalY;
+		this.radianFacing = radianFacing;
 	}
 	
 }

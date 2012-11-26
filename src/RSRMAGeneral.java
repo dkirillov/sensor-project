@@ -38,7 +38,9 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	}
 	public void mech1(int k, int d){
 		Debug.debug("Doing Mech1");		
-		if (outer_loop == 0){outer_loop = k*(d-1);}
+		if (outer_loop == 0) {
+			outer_loop = k*(d-1);
+		}
 		
 		//Send message to neighbor(s) in sector i;
 		//Listen for messages from neighbor(s) (if any) in sector i;

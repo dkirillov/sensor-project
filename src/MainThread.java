@@ -55,25 +55,30 @@ public class MainThread {
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
-		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH - 2*range) + range;
-		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT - 2*range) + range;
-		int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
 		
 		Random random = new Random();
 		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
+		int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
 		int xPlace = SensorBoard.BOARD_WIDTH/2;
 		int yPlace = SensorBoard.BOARD_HEIGHT/2;
 		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
+		
 		int radiusRange = (int) (range * 0.9);
-		int newXDiff = (int)(radiusRange * 0.707);
-		int newYDiff = (int) (radiusRange * 0.707);
+		double startingRadian = (2 * Math.PI) * (random.nextInt(361) / 360);
+		int numberOfPoints = random.nextInt(6) + 3;	// 3 to 8
+		double radianIncrement = (2 * Math.PI) / numberOfPoints;
 		
-		validPlacements.add(new PlacementPoint(xPlace + newXDiff, yPlace + newYDiff, xPlace, yPlace));
-		validPlacements.add(new PlacementPoint(xPlace - newXDiff, yPlace + newYDiff, xPlace, yPlace));
-		validPlacements.add(new PlacementPoint(xPlace - newXDiff, yPlace - newYDiff, xPlace, yPlace));
-		validPlacements.add(new PlacementPoint(xPlace + newXDiff, yPlace - newYDiff, xPlace, yPlace));
+		double radianValue;
+		int xValue;
+		int yValue;
+		for (int i = 0; i < numberOfPoints; i++) {
+			radianValue = startingRadian + (radianIncrement * i);
+			xValue = (int) (radiusRange * (Math.cos(radianValue)));
+			yValue = (int) (radiusRange * (Math.sin(radianValue)));
+			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
+		}
 		
-		record_neighbours(0);
+		//record_neighbours(0);
 		
 		int ranAlgo = new Random(System.currentTimeMillis()).nextInt(300);
 		if(ranAlgo >= 0 && ranAlgo <= 99){
@@ -89,13 +94,17 @@ public class MainThread {
 			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
 			//Get placements
 				//find opposite point
-			int xDiff = choice.x - choice.originalX;
-			int yDiff = choice.y - choice.originalY;
-			validPlacements.add(new PlacementPoint(choice.originalX + (2 * xDiff), choice.originalY + (2 * yDiff), choice.x, choice.y));
-			validPlacements.add(new PlacementPoint(choice.originalX, choice.originalY + (2 * yDiff), choice.x, choice.y));
-			validPlacements.add(new PlacementPoint(choice.originalX + (2 * xDiff), choice.originalY, choice.x, choice.y));
+			numberOfPoints = random.nextInt(4) + 2;	// 2 to 5
+			radianIncrement = Math.PI / (numberOfPoints + 1); //For n points, there are n + 1 spaces
 			
-			record_neighbours(x);
+			for (int i = 1; i < numberOfPoints + 1; i++) {
+				radianValue = (choice.radianFacing - (Math.PI / 2)) + (radianIncrement * i);
+				xValue = (int) (radiusRange * (Math.cos(radianValue)));
+				yValue = (int) (radiusRange * (Math.sin(radianValue)));
+				validPlacements.add(new PlacementPoint(choice.x + xValue, choice.y + yValue, radianValue));
+			}
+			
+			//record_neighbours(x);
 			
 			ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
 			if(ranAlgo >= 0 && ranAlgo <= 99){
@@ -107,36 +116,14 @@ public class MainThread {
 			}
 		}
 		
-		/*for (int x = 0; x < sensors.length; x++) {
-			int value = ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(range));
-			x_c += value;
-			//ensure it is in the proper range, pythagorean again
-			value = (int) Math.sqrt(range*range - value*value); 
-			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(value));
-			if(x_c+range>=SensorBoard.BOARD_WIDTH||x_c-range<0){
-				x_c += (x_c-range<0)?range-x_c:(SensorBoard.BOARD_WIDTH-(x_c+range)); 
-			}
-			if(y_c-range<0||y_c+range>=SensorBoard.BOARD_HEIGHT){
-				y_c += (y_c-range<0)?range-y_c:(SensorBoard.BOARD_WIDTH-(y_c+range)); 				
-			}
-
-			sensors[x] = new Sensor(x, x_c, y_c, range,k);
-
-			record_neighbours(x);
-			
-			int ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
-			if(ranAlgo >= 0 && ranAlgo <= 99){
-				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));			
-			}else if (ranAlgo >= 100 && ranAlgo <= 199){
-				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
-			}else {
-				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
-			}
-		}*/
+		for (int i = 0; i < sensors.length; i++) {
+			record_neighbours(i);
+		}
 		
 		firstTime = true;
 		resetTime = true;
-		wC.output("There "+(possibleConnections<=1?"is":"are")+" " + possibleConnections+" possible connection"+(possibleConnections<=1?"":"s")+".\n");
+		wC.output("There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
+				+ (possibleConnections<=1?"":"s") + ".\n");
 		wC.output("There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n");
 	}
 
@@ -147,7 +134,7 @@ public class MainThread {
 			if (sensors[x].inRange(sensors[n].getPoint())) {
 				Neighbour newNeighbour = new Neighbour(sensors[x], sensors[n]);
 				neighbours.add(newNeighbour);
-				Debug.debug("Delay: "+sensors[x].getDelay());
+				//Debug.debug("Delay: "+sensors[x].getDelay());
 				primeNumbers.remove(new Integer(sensors[x].getDelay()));
 				numC++;
 				sensors[x].addNeighbour(newNeighbour, sensors[n]);
@@ -158,6 +145,7 @@ public class MainThread {
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
 		
 		sensors[n].setDelay(primeNumbers.get(0));
+		Debug.debug("Delay: "+sensors[n].getDelay());
 	}
 
 	public void update() {
