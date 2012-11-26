@@ -97,7 +97,7 @@ public class MainThread {
 				algo = "RSRMA\'";
 				break;	
 			}
-			log.open(algo, numSensors);
+			log.open(algo, numSensors,k);
 
 			Debug.debug("ranAlgo: "+algorithm);
 
