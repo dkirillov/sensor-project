@@ -123,7 +123,7 @@ public class MainThread {
 				algo = "RSRMA\'";
 				break;	
 			}
-			log.open(algo, numSensors,k);
+			log.open(algo, numSensors, k);
 
 			Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
