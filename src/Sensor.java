@@ -83,7 +83,12 @@ public class Sensor {
 		gfx.setColor(new Color(0, 0, 0, 50));
 		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
 		
-		gfx.setColor(Color.BLACK);
+		if (neighboursToConnect != 0) {
+			gfx.setColor(Color.BLACK);
+		}
+		else {
+			gfx.setColor(Color.green);
+		}
 		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 	}
 
