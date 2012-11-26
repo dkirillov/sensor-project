@@ -1,5 +1,5 @@
-There are 2 possible connections.
-There are 2 colours.
-1 connections made in round 7
-1 connections made in round 10
-Finished in 10 rounds
+There are 3 possible connections.
+There are 3 colours.
+1 connections made in round 4
+2 connections made in round 13
+Finished in 13 rounds
