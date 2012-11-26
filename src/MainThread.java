@@ -63,15 +63,15 @@ public class MainThread {
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
-		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH - 2*range) + range;
-		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT - 2*range) + range;
+		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH -range);
+		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT -range);
 		//int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
 		for (int x = 0; x < sensors.length; x++) {
-			int value = ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(range/2)+range/2));
+			int value = ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(range)));
 			x_c += value;
 			//ensure it is in the proper range, pythagorean again
 			value = (int) Math.sqrt(range*range - value*value); 
-			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(value/2))+value/2);
+			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(value)));
 			if(x_c+range>=SensorBoard.BOARD_WIDTH||x_c-range<0){
 				x_c += (x_c-range<0)?range-x_c:(SensorBoard.BOARD_WIDTH-(x_c+range)); 
 			}
