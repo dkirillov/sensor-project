@@ -39,7 +39,7 @@ public class MainThread {
 			727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811,
 			821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887,
 			907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991,
-			997);	
+			997);
 	int width = 600;
 	int height = 440;
 	LogFile log;
@@ -63,55 +63,84 @@ public class MainThread {
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
-		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH -range);
-		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT -range);
-		//int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
-		for (int x = 0; x < sensors.length; x++) {
-			int value = ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(range)));
-			x_c += value;
-			//ensure it is in the proper range, pythagorean again
-			value = (int) Math.sqrt(range*range - value*value); 
-			y_c += ((new Random().nextBoolean() ? 1 : (-1)) * (new Random().nextInt(value)));
-			if(x_c+range>=SensorBoard.BOARD_WIDTH||x_c-range<0){
-				x_c += (x_c-range<0)?range-x_c:(SensorBoard.BOARD_WIDTH-(x_c+range)); 
+		
+		Random random = new Random();
+		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
+		int xPlace = SensorBoard.BOARD_WIDTH/2;
+		int yPlace = SensorBoard.BOARD_HEIGHT/2;
+		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
+		
+		int radiusRange = (int) (range * 0.9);
+		double startingRadian = (2 * Math.PI) * (random.nextInt(361) / 360);
+		int numberOfPoints = random.nextInt(6) + 3;	// 3 to 8
+		double radianIncrement = (2 * Math.PI) / numberOfPoints;
+		
+		double radianValue;
+		int xValue;
+		int yValue;
+		for (int i = 0; i < numberOfPoints; i++) {
+			radianValue = startingRadian + (radianIncrement * i);
+			xValue = (int) (radiusRange * (Math.cos(radianValue)));
+			yValue = (int) (radiusRange * (Math.sin(radianValue)));
+			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
+		}
+		
+		Debug.debug("Created sensor " + 0);
+		
+		for (int x = 1; x < sensors.length; x++) {
+			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
+			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
+			//Get placements
+				//find opposite point
+			numberOfPoints = random.nextInt(4) + 2;	// 2 to 5
+			radianIncrement = Math.PI / (numberOfPoints + 1); //For n points, there are n + 1 spaces
+			
+			for (int i = 1; i < numberOfPoints + 1; i++) {
+				radianValue = (choice.radianFacing - (Math.PI / 2)) + (radianIncrement * i);
+				xValue = (int) (radiusRange * (Math.cos(radianValue)));
+				yValue = (int) (radiusRange * (Math.sin(radianValue)));
+				validPlacements.add(new PlacementPoint(choice.x + xValue, choice.y + yValue, radianValue));
 			}
-			if(y_c-range<0||y_c+range>=SensorBoard.BOARD_HEIGHT){
-				y_c += (y_c-range<0)?range-y_c:(SensorBoard.BOARD_WIDTH-(y_c+range)); 				
-			}
-
-			sensors[x] = new Sensor(x, x_c, y_c, range,k);
-
-			record_neighbours(x);
-
+			Debug.debug("Created sensor " + x);
+		}
+		
+		for (int i = 0; i < sensors.length; i++) {
+			record_neighbours(i);
+		}
+		
+		for (int i = 0; i < sensors.length; i++) {
 			String algo = "ARA";
 			switch (algorithm){
 			case ARA:
-				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
+				runningAlgoThreads.add(new ARAlgorithm(sensors[i]));
 				break;
 			case RSRMA:
-				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));	
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[i]));	
 				algo = "RSRMA";
 				break;
 			case RSRMAP:
-				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[i]));	
 				algo = "RSRMA\'";
 				break;	
 			}
 			log.open(algo, numSensors,k);
 
-			Debug.debug("ranAlgo: "+algorithm);
-
+			Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
+		
 		firstTime = true;
 		resetTime = true;
-		wC.output("There "+(possibleConnections<=1?"is":"are")+" " + possibleConnections+" possible connection"+(possibleConnections<=1?"":"s")+".\n");
-		log.logWrite("There "+(possibleConnections<=1?"is":"are")+" " + possibleConnections+" possible connection"+(possibleConnections<=1?"":"s")+".\n");
-		//log.statWrite("There "+(possibleConnections<=1?"is":"are")+" " + possibleConnections+" possible connection"+(possibleConnections<=1?"":"s")+".\n");
-		wC.output("There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n");
-		log.logWrite("There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n");
-		//log.statWrite("There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n");
+		
+		String output = "There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
+				+ (possibleConnections<=1?"":"s") + ".\n";
+		wC.output(output);
+		log.logWrite(output);
+		
+		output = "There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n";
+		wC.output(output);
+		log.logWrite(output);
+		
 		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
-
 	}
 
 
@@ -123,7 +152,7 @@ public class MainThread {
 			if (sensors[x].inRange(sensors[n].getPoint())) {
 				Neighbour newNeighbour = new Neighbour(sensors[x], sensors[n]);
 				neighbours.add(newNeighbour);
-				Debug.debug("Delay: "+sensors[x].getDelay());
+				//Debug.debug("Delay: "+sensors[x].getDelay());
 				primeNumbers.remove(new Integer(sensors[x].getDelay()));
 				numC++;
 				sensors[x].addNeighbour(newNeighbour, sensors[n]);
@@ -134,6 +163,7 @@ public class MainThread {
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
 
 		sensors[n].setDelay(primeNumbers.get(0));
+		Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
 
 	public void update() {

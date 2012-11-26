@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ public class Sensor {
 	private Point p;					//The position/location of the sensor.
 	private Color c; 					//The literal color of the sensor, it's sector/beam color.
 	private int radius;
+	private int neighboursToConnect = 0;
 	
 	ArrayList<ArrayList<Neighbour>> neighboursInASector;		//All it's neighbours, in sectors.
 
@@ -45,8 +47,6 @@ public class Sensor {
 		
 		current_sector = new Random().nextInt(sectors);
 		p = new Point(x, y);
-		//c = new Color(new Random().nextInt(255), new Random().nextInt(255),
-		//		new Random().nextInt(255), 50);
 	}
 
 	/**
@@ -55,6 +55,7 @@ public class Sensor {
 	 */
 	public void update() {
 		setNeighboursFacing(false);
+		removeConnectedNeighbours();
 		current_sector += current_sector >= sectors - 1 ? ((sectors - 1) * -1) : 1;
 		setNeighboursFacing(true);
 	}
@@ -65,17 +66,31 @@ public class Sensor {
 	 */
 	public void draw(Graphics gfx) {
 		int multi_deg = (360) / sectors;	//The angle of the sensor's beam, in degrees.
-
-		gfx.setColor(c);
-		gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * current_sector, multi_deg);
-
-		gfx.setColor(Color.BLACK);
-		gfx.fillOval(p.x-2, p.y-2, 4, 4);
-		gfx.setColor(new Color(0, 0, 0, 25));
 		
+		if (neighboursToConnect != 0) {
+			gfx.setColor(c);
+			gfx.fillArc(p.x - radius, p.y - radius, radius*2, radius*2, multi_deg * current_sector, multi_deg);
+		}
+
+		if (neighboursToConnect != 0) {
+			gfx.setColor(Color.BLACK);
+		}
+		else {
+			gfx.setColor(Color.green);
+		}
+		gfx.fillOval(p.x-2, p.y-2, 4, 4);
+		
+		gfx.setColor(new Color(0, 0, 0, 50));
 		gfx.drawOval(p.x - radius, p.y - radius, radius*2, radius*2);
-		gfx.setColor(Color.BLACK);
-		gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
+		
+		if (neighboursToConnect != 0) {
+			gfx.setColor(Color.BLACK);
+		}
+		else {
+			gfx.setColor(Color.green);
+		}
+		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
+		gfx.drawString("" + delay, p.x, p.y);
 	}
 
 	/**
@@ -153,6 +168,7 @@ public class Sensor {
 	public void addNeighbour(Neighbour n, Sensor peer){
 		int sectorForNeighbour = inSector(peer.getPoint());
 		neighboursInASector.get(sectorForNeighbour).add(n);
+		neighboursToConnect++;
 	}
 	
 	protected void setNeighboursFacing(boolean facing) {
@@ -160,6 +176,20 @@ public class Sensor {
 			n.setFacingForSensor(SensorId, facing);
 		}
 	}
+	
+	protected void removeConnectedNeighbours() {
+		List<Neighbour> curNeighbours = getNeighbours();
+		
+		Iterator<Neighbour> iter = curNeighbours.iterator();
+		while (iter.hasNext()) {
+			Neighbour curNeighbour = iter.next();
+			if (curNeighbour.isConnected()) {
+				iter.remove();
+				neighboursToConnect--;
+			}
+		}
+	}
+	
 	/**
 	 * Gets the delay of a sensor, this is the 'd' in the algorithms, and is a prime number.
 	 * This is also the 'colour' of the sensor/node, both graph theory wise and literally.
@@ -178,12 +208,12 @@ public class Sensor {
 		
 		//The 100 is just to make the colours pretty, could be some other number...
 		Random r = new Random(delay+100);
-		c = new Color(r.nextInt(255), r.nextInt(255),r.nextInt(255), 50);
+		c = new Color(r.nextInt(255), r.nextInt(255),r.nextInt(255), 100);
 	}
 	
 	
 	//This could change to a boolean, doesn't matter.
 	public int getRemainingNeighbours(){
-		return 1;
+		return neighboursToConnect;
 	}
 }
