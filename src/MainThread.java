@@ -58,7 +58,56 @@ public class MainThread {
 		int x_c = new Random().nextInt(SensorBoard.BOARD_WIDTH - 2*range) + range;
 		int y_c = new Random().nextInt(SensorBoard.BOARD_HEIGHT - 2*range) + range;
 		int k = (new Random(System.currentTimeMillis()).nextInt(10)) + 3;
-		for (int x = 0; x < sensors.length; x++) {
+		
+		Random random = new Random();
+		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
+		int xPlace = SensorBoard.BOARD_WIDTH/2;
+		int yPlace = SensorBoard.BOARD_HEIGHT/2;
+		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
+		int radiusRange = (int) (range * 0.9);
+		int newXDiff = (int)(radiusRange * 0.707);
+		int newYDiff = (int) (radiusRange * 0.707);
+		
+		validPlacements.add(new PlacementPoint(xPlace + newXDiff, yPlace + newYDiff, xPlace, yPlace));
+		validPlacements.add(new PlacementPoint(xPlace - newXDiff, yPlace + newYDiff, xPlace, yPlace));
+		validPlacements.add(new PlacementPoint(xPlace - newXDiff, yPlace - newYDiff, xPlace, yPlace));
+		validPlacements.add(new PlacementPoint(xPlace + newXDiff, yPlace - newYDiff, xPlace, yPlace));
+		
+		record_neighbours(0);
+		
+		int ranAlgo = new Random(System.currentTimeMillis()).nextInt(300);
+		if(ranAlgo >= 0 && ranAlgo <= 99){
+			runningAlgoThreads.add(new RSRMAlgorithm(sensors[0]));			
+		}else if (ranAlgo >= 100 && ranAlgo <= 199){
+			runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[0]));	
+		}else {
+			runningAlgoThreads.add(new ARAlgorithm(sensors[0]));
+		}
+		
+		for (int x = 1; x < sensors.length; x++) {
+			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
+			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
+			//Get placements
+				//find opposite point
+			int xDiff = choice.x - choice.originalX;
+			int yDiff = choice.y - choice.originalY;
+			validPlacements.add(new PlacementPoint(choice.originalX + (2 * xDiff), choice.originalY + (2 * yDiff), choice.x, choice.y));
+			validPlacements.add(new PlacementPoint(choice.originalX, choice.originalY + (2 * yDiff), choice.x, choice.y));
+			validPlacements.add(new PlacementPoint(choice.originalX + (2 * xDiff), choice.originalY, choice.x, choice.y));
+			
+			record_neighbours(x);
+			
+			ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
+			if(ranAlgo >= 0 && ranAlgo <= 99){
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));			
+			}else if (ranAlgo >= 100 && ranAlgo <= 199){
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
+			}else {
+				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
+			}
+		}
+		
+		/*for (int x = 0; x < sensors.length; x++) {
 			int value = ((new Random().nextBoolean() ? 1 : (-1)) * new Random().nextInt(range));
 			x_c += value;
 			//ensure it is in the proper range, pythagorean again
@@ -83,7 +132,8 @@ public class MainThread {
 			}else {
 				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
 			}
-		}
+		}*/
+		
 		firstTime = true;
 		resetTime = true;
 		wC.output("There "+(possibleConnections<=1?"is":"are")+" " + possibleConnections+" possible connection"+(possibleConnections<=1?"":"s")+".\n");
