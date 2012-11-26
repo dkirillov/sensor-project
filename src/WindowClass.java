@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 
 import javax.swing.JButton;
 
+//import MainThread.Algo;
+
 public class WindowClass extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 127373704609559805L;
@@ -27,6 +29,7 @@ public class WindowClass extends JFrame implements ActionListener{
 	MainThread mT;
 	SpeedDialog sd;
 	RangeDialog rd;
+	SectorDialog sectd;
 	OutputDialog od;
 	JButton play, newgame, clear;
 	JTextField numSensors;
@@ -35,7 +38,7 @@ public class WindowClass extends JFrame implements ActionListener{
 
 	public WindowClass() {
 		setLayout(null);
-		setSize(SensorBoard.BOARD_WIDTH+45, SensorBoard.BOARD_HEIGHT+190);
+		setSize(SensorBoard.BOARD_WIDTH+45, SensorBoard.BOARD_HEIGHT+195);
 		setMinimumSize(getSize());
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -58,10 +61,12 @@ public class WindowClass extends JFrame implements ActionListener{
 		mT = new MainThread(this);
 		sd = new SpeedDialog(mT);
 		rd = new RangeDialog(mT);
+		sectd = new SectorDialog(mT);
 
-		JPanel panel = new JPanel();
-		panel.add(sd);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(sd, BorderLayout.NORTH);
 		panel.add(rd);
+		panel.add(sectd, BorderLayout.SOUTH);
 		getContentPane().add(panel, BorderLayout.NORTH);
 		od = new OutputDialog(this);
 		mT.run();
@@ -85,19 +90,19 @@ public class WindowClass extends JFrame implements ActionListener{
 		h1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				mT.algorithm = Algo.ARA;
 			}		
 		});
 		h2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				mT.algorithm = Algo.RSRMA;
 			}		
 		});
 		h3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				mT.algorithm = Algo.RSRMAP;
 			}		
 		});
 		

@@ -17,6 +17,7 @@ public class MainThread {
 	int speed = 10;
 	int numSensors = 3;
 	int round = 0;
+	int k = 4;
 	int possibleConnections = 0;
 	int currentConnections = 0;
 	public int range = 50;
@@ -39,14 +40,21 @@ public class MainThread {
 			821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887,
 			907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991,
 			997);	
+	int width = 600;
+	int height = 440;
+	LogFile log;
+
+	Algo algorithm = Algo.ARA;
 
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		restart = true;
 		Debug.setDebug(true);
+		log = new LogFile();
 	}
 
 	private void initialize(){
+		log.close();
 		round = 0;
 		possibleConnections = 0;
 		currentConnections = 0;
@@ -105,15 +113,25 @@ public class MainThread {
 			}
 			
 			//record_neighbours(x);
-			
-			ranAlgo = new Random(System.currentTimeMillis()+x).nextInt(300);
-			if(ranAlgo >= 0 && ranAlgo <= 99){
-				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));			
-			}else if (ranAlgo >= 100 && ranAlgo <= 199){
-				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
-			}else {
+
+			String algo = "ARA";
+			switch (algorithm){
+			case ARA:
 				runningAlgoThreads.add(new ARAlgorithm(sensors[x]));
+				break;
+			case RSRMA:
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[x]));	
+				algo = "RSRMA";
+				break;
+			case RSRMAP:
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[x]));	
+				algo = "RSRMA\'";
+				break;	
 			}
+			log.open(algo, numSensors);
+
+			Debug.debug("ranAlgo: "+algorithm);
+
 		}
 		
 		for (int i = 0; i < sensors.length; i++) {
@@ -122,10 +140,20 @@ public class MainThread {
 		
 		firstTime = true;
 		resetTime = true;
-		wC.output("There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
-				+ (possibleConnections<=1?"":"s") + ".\n");
-		wC.output("There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n");
+		
+		String output = "There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
+				+ (possibleConnections<=1?"":"s") + ".\n";
+		wC.output(output);
+		log.logWrite(output);
+		
+		output = "There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n";
+		wC.output(output);
+		log.logWrite(output);
+		
+		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 	}
+
+
 
 	private void record_neighbours(int n){
 		ArrayList<Integer> primeNumbers = new ArrayList<Integer>(PRIME_NUMBERS);
@@ -143,7 +171,7 @@ public class MainThread {
 			}
 		}
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
-		
+
 		sensors[n].setDelay(primeNumbers.get(0));
 		Debug.debug("Delay: "+sensors[n].getDelay());
 	}
@@ -169,22 +197,29 @@ public class MainThread {
 		for (Neighbour n : neighbours) {
 			if (n.isConnected()) connections++;
 		}
+		log.statWrite(""+(((double)connections)/possibleConnections)+"\n");
 		if ((connections - currentConnections)>0){
 			wC.output(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
+			log.logWrite(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
 			wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n\n");
 		}
 		if (resetTime&&possibleConnections-currentConnections == 0){
 			endTime = System.currentTimeMillis();
 			wC.output("End time: "+endTime+"\n");
+			wC.output("Finished in " + round + " rounds\n");
+			log.logWrite("Finished in " + round + " rounds\n");
+			//log.statWrite("\nFinished in " + round + " rounds\n");
 			wC.output("Ran for: "+(endTime-startTime)+"ms\n");	
 			resetTime = false;
+			setKeepRunning(false);
+			log.close();
 		}
 		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 	}
 
 	public void run() {
-		
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
