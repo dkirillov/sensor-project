@@ -15,14 +15,18 @@ public class LogFile {
 		
 	}
 	
-	public void open(String algo, int sensors, int k){
+	public void open(int testNumber, String algo, int sensors, int k){
 		logged ++;
 		try{
 			// Create file 
 			String fs = System.getProperty("file.separator");
-			FileWriter fstream = new FileWriter("logfiles"+fs+"logk="+k+"n="+sensors+algo+".txt");
+			FileWriter fstream = new FileWriter("logfiles"+fs+"Log__S-"+sensors+"_T-"+testNumber+"_A-"+algo+"_K-"+k+".txt");
+			//new FileWriter("logfiles"+fs+"Log"+testNumber+"-sectors="+k+"-sensors="+sensors+algo+".txt");
+			//SensorCount - TestNumber - Algo - SectorCount
+			
 			logOut = new BufferedWriter(fstream);
-			fstream = new FileWriter("statfiles"+fs+"statk="+k+"n="+sensors+algo+".txt");
+			fstream = new FileWriter("statfiles"+fs+"Stat__S-"+sensors+"_T-"+testNumber+"_A-"+algo+"_K"+k+".txt");
+			//new FileWriter("statfiles"+fs+"statk="+k+"n="+sensors+algo+".txt");
 			statOut = new BufferedWriter(fstream);
 			open = true;
 		}catch (Exception e){//Catch exception if any

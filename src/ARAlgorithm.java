@@ -16,7 +16,7 @@ public class ARAlgorithm extends RotationAlgorithm {
 			outer_loop = d;
 		}
 		outer_loop--;
-		Debug.debug("Running ARAlgorithm.");
+		//Debug.debug("Running ARAlgorithm.");
 	
 	}
 }

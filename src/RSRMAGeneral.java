@@ -7,7 +7,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	}
 
 	public void update(){
-		Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
+		//Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
 		if (outer_loop == 0){
 			selectBit = (Math.random() < 0.5);
 		}
@@ -22,7 +22,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	}
 
 	public void mech0(int k, int d){
-		Debug.debug("Doing Mech0");
+		//Debug.debug("Doing Mech0");
 		if (outer_loop == 0){
 			outer_loop = d*k; // It's not k-1 simply because the way the loop is arranged, if it was k-1  it would be actually k-2.
 		}
@@ -34,9 +34,9 @@ public class RSRMAGeneral extends RotationAlgorithm{
 		sensor.update();
 	}
 	public void mech1(int k, int d){
-		Debug.debug("Doing Mech1");		
+		//Debug.debug("Doing Mech1");		
 		if (outer_loop == 0) {
-			outer_loop = k*(d-1);
+			outer_loop = k*d;
 		}
 		
 		//Send message to neighbor(s) in sector i;
@@ -46,7 +46,7 @@ public class RSRMAGeneral extends RotationAlgorithm{
 			//Rotate antenna one sector.
 			sensor.update();			
 		}
-		if (inner_loop == 0){inner_loop = d-1;}		
+		if (inner_loop == 0){inner_loop = d;}		
 		inner_loop--;		
 	}
 }

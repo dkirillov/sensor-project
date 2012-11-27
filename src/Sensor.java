@@ -38,6 +38,11 @@ public class Sensor {
 	public Sensor(int id, int x, int y, int radius,int k) {
 		SensorId = id;
 		this.radius = radius;
+		changeSectorCount(k);
+		p = new Point(x, y);
+	}
+
+	public void changeSectorCount(int k) {
 		sectors = k;//= (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
@@ -46,9 +51,8 @@ public class Sensor {
 		}
 		
 		current_sector = new Random().nextInt(sectors);
-		p = new Point(x, y);
 	}
-
+	
 	/**
 	 * Updates the sensor.
 	 * Switches the sector that it's on if the wait time is up.
@@ -169,6 +173,10 @@ public class Sensor {
 		int sectorForNeighbour = inSector(peer.getPoint());
 		neighboursInASector.get(sectorForNeighbour).add(n);
 		neighboursToConnect++;
+	}
+	
+	public void clearNeighbours() {
+		changeSectorCount(sectors);
 	}
 	
 	protected void setNeighboursFacing(boolean facing) {

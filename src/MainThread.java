@@ -53,12 +53,11 @@ public class MainThread {
 		log = new LogFile();
 	}
 
-	private void initialize(){
-		log.close();
+	public void initialize(int numSensors){
 		round = 0;
 		possibleConnections = 0;
 		currentConnections = 0;
-		numSensors = Integer.parseInt(wC.numSensors.getText());
+		this.numSensors = numSensors; //= Integer.parseInt(wC.numSensors.getText());
 		sensors = new Sensor[numSensors];
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
@@ -85,7 +84,7 @@ public class MainThread {
 			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
 		}
 		
-		Debug.debug("Created sensor " + 0);
+		//Debug.debug("Created sensor " + 0);
 		
 		for (int x = 1; x < sensors.length; x++) {
 			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
@@ -101,49 +100,75 @@ public class MainThread {
 				yValue = (int) (radiusRange * (Math.sin(radianValue)));
 				validPlacements.add(new PlacementPoint(choice.x + xValue, choice.y + yValue, radianValue));
 			}
-			Debug.debug("Created sensor " + x);
+			//Debug.debug("Created sensor " + x);
 		}
+		
+		initalizeWithOutGeneratingSensors(0);
+		
+		firstTime = true;
+		resetTime = true;
+	}
+
+	public void initalizeWithOutGeneratingSensors(int testNumber) {
+		log.close();
+		
+		for (Sensor curSensor : sensors) {
+			curSensor.clearNeighbours();
+		}
+		
+		neighbours.clear();
+		runningAlgoThreads.clear();
 		
 		for (int i = 0; i < sensors.length; i++) {
 			record_neighbours(i);
 		}
 		
+		String algo = null;
+		switch (algorithm){
+		default:
+		case ARA:
+			algo = "ARA";
+			break;
+		case RSRMA:	
+			algo = "RSRMA";
+			break;
+		case RSRMAP:
+			algo = "RSRMA\'";
+			break;	
+		}
+		
 		for (int i = 0; i < sensors.length; i++) {
-			String algo = "ARA";
+			
 			switch (algorithm){
 			case ARA:
 				runningAlgoThreads.add(new ARAlgorithm(sensors[i]));
 				break;
 			case RSRMA:
-				runningAlgoThreads.add(new RSRMAlgorithm(sensors[i]));	
-				algo = "RSRMA";
+				runningAlgoThreads.add(new RSRMAlgorithm(sensors[i]));
 				break;
 			case RSRMAP:
-				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[i]));	
-				algo = "RSRMA\'";
+				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[i]));
 				break;	
 			}
-			log.open(algo, numSensors, k);
-
-			Debug.debug("Created algorithm " + algo + " for sensor " + i);
+			
+			//Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
-		
-		firstTime = true;
-		resetTime = true;
+		log.open(testNumber, algo, numSensors, k);
 		
 		String output = "There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
 				+ (possibleConnections<=1?"":"s") + ".\n";
-		wC.output(output);
+		if (wC != null) wC.output(output);
 		log.logWrite(output);
 		
 		output = "There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n";
-		wC.output(output);
+		if (wC != null) wC.output(output);
 		log.logWrite(output);
 		
-		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		if (wC != null) wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		
+		firstTime = true;
+		resetTime = true;
 	}
-
-
 
 	private void record_neighbours(int n){
 		ArrayList<Integer> primeNumbers = new ArrayList<Integer>(PRIME_NUMBERS);
@@ -163,13 +188,13 @@ public class MainThread {
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
 
 		sensors[n].setDelay(primeNumbers.get(0));
-		Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
+		//Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
 
-	public void update() {
+	public void update(boolean shouldDraw) {
 		if(firstTime){
 			startTime = System.currentTimeMillis();
-			wC.output("Start time: "+startTime+"\n");
+			if (wC != null) wC.output("Start time: "+startTime+"\n");
 			firstTime = false;
 		}
 		round ++; //This is now a more accurate representation.
@@ -189,26 +214,29 @@ public class MainThread {
 		}
 		log.statWrite(""+(((double)connections)/possibleConnections)+"\n");
 		if ((connections - currentConnections)>0){
-			wC.output(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
-			log.logWrite(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
+			writeOutputs(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
-			wC.output(""+(possibleConnections-currentConnections)+" connections left to be made\n\n");
+			writeOutputs(""+(possibleConnections-currentConnections)+" connections left to be made\n");
 		}
 		if (resetTime&&possibleConnections-currentConnections == 0){
 			endTime = System.currentTimeMillis();
-			wC.output("End time: "+endTime+"\n");
-			wC.output("Finished in " + round + " rounds\n");
-			log.logWrite("Finished in " + round + " rounds\n");
-			//log.statWrite("\nFinished in " + round + " rounds\n");
-			wC.output("Ran for: "+(endTime-startTime)+"ms\n");	
+			writeOutputs("End time: "+endTime+"\n");
+			writeOutputs("Finished in " + round + " rounds\n");
+			writeOutputs("Ran for: "+(endTime-startTime)+"ms\n");	
 			resetTime = false;
 			setKeepRunning(false);
 			log.close();
 		}
-		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		if (shouldDraw && wC != null) wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 	}
 
-	public void run() {
+	protected void writeOutputs(String toWrite) {
+		if (wC != null) wC.output(toWrite);
+		else System.out.print(toWrite);
+		log.logWrite(toWrite);
+	}
+	
+	public void runAsThread() {
 
 		new Thread(new Runnable() {
 			@Override
@@ -217,7 +245,7 @@ public class MainThread {
 					while (isKeepRunning()) {
 						float start = System.currentTimeMillis();
 						//delay(speed);						
-						update();
+						update(true);
 						float end = System.currentTimeMillis();
 						if((end-start)<speed){
 							//Under 2000ms, sleep the difference.
@@ -227,7 +255,7 @@ public class MainThread {
 						}
 					}
 					if (restart){
-						initialize();
+						initialize(Integer.parseInt(wC.numSensors.getText()));
 						restart = false;
 					}
 				}
