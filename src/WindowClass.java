@@ -69,7 +69,7 @@ public class WindowClass extends JFrame implements ActionListener{
 		panel.add(sectd, BorderLayout.SOUTH);
 		getContentPane().add(panel, BorderLayout.NORTH);
 		od = new OutputDialog(this);
-		//mT.runAsThread();
+		mT.runAsThread();
 	}
 	
 	public void makeMenu(){
