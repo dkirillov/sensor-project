@@ -1,0 +1,5 @@
+There are 2 possible connections.
+There are 2 colours.
+1 connections made in round 13
+1 connections made in round 17
+Finished in 17 rounds

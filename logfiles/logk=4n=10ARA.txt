@@ -1,0 +1,12 @@
+There are 14 possible connections.
+There are 4 colours.
+1 connections made in round 7
+1 connections made in round 10
+4 connections made in round 11
+2 connections made in round 12
+2 connections made in round 14
+1 connections made in round 20
+1 connections made in round 22
+1 connections made in round 24
+1 connections made in round 35
+Finished in 35 rounds

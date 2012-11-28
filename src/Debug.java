@@ -11,7 +11,7 @@ import javax.swing.text.StyledDocument;
 public class Debug {
 	static String[] disable = {"bc","blockdetect"};
 	static HashMap<String, DebugFrame> debugFrames = new HashMap<String, DebugFrame>();
-	static public boolean DEBUG = false;
+	static public boolean DEBUG = true;
 	//static public boolean DEBUG = false;
 	static JTextPane console;
 	static boolean useConsole = false;

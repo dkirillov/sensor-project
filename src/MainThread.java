@@ -25,6 +25,8 @@ public class MainThread {
 	private long endTime;
 	private boolean firstTime;
 	private boolean resetTime;
+	boolean redraw = true;
+	boolean gui = true;
 	private int numberOfColours;
 	private final List<Integer> PRIME_NUMBERS = Arrays.asList(2, 3, 5, 7, 11, 13, 17,
 			19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
@@ -53,28 +55,31 @@ public class MainThread {
 		log = new LogFile();
 	}
 
-	private void initialize(){
+
+	public void initialize(){
 		log.close();
 		round = 0;
 		possibleConnections = 0;
 		currentConnections = 0;
-		numSensors = Integer.parseInt(wC.numSensors.getText());
+		if (wC!=null){
+			numSensors = Integer.parseInt(wC.numSensors.getText());
+		}
 		sensors = new Sensor[numSensors];
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
-		
+
 		Random random = new Random();
 		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
 		int xPlace = SensorBoard.BOARD_WIDTH/2;
 		int yPlace = SensorBoard.BOARD_HEIGHT/2;
 		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
-		
+
 		int radiusRange = (int) (range * 0.9);
 		double startingRadian = (2 * Math.PI) * (random.nextInt(361) / 360);
 		int numberOfPoints = random.nextInt(6) + 3;	// 3 to 8
 		double radianIncrement = (2 * Math.PI) / numberOfPoints;
-		
+
 		double radianValue;
 		int xValue;
 		int yValue;
@@ -84,17 +89,17 @@ public class MainThread {
 			yValue = (int) (radiusRange * (Math.sin(radianValue)));
 			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
 		}
-		
+
 		Debug.debug("Created sensor " + 0);
-		
+
 		for (int x = 1; x < sensors.length; x++) {
 			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
 			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
 			//Get placements
-				//find opposite point
+			//find opposite point
 			numberOfPoints = random.nextInt(4) + 2;	// 2 to 5
 			radianIncrement = Math.PI / (numberOfPoints + 1); //For n points, there are n + 1 spaces
-			
+
 			for (int i = 1; i < numberOfPoints + 1; i++) {
 				radianValue = (choice.radianFacing - (Math.PI / 2)) + (radianIncrement * i);
 				xValue = (int) (radiusRange * (Math.cos(radianValue)));
@@ -103,13 +108,13 @@ public class MainThread {
 			}
 			Debug.debug("Created sensor " + x);
 		}
-		
+
 		for (int i = 0; i < sensors.length; i++) {
 			record_neighbours(i);
 		}
-		
+		String algo = "ARA";
 		for (int i = 0; i < sensors.length; i++) {
-			String algo = "ARA";
+			
 			switch (algorithm){
 			case ARA:
 				runningAlgoThreads.add(new ARAlgorithm(sensors[i]));
@@ -123,24 +128,35 @@ public class MainThread {
 				algo = "RSRMA\'";
 				break;	
 			}
-			log.open(algo, numSensors,k);
 
 			Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
 		
+
 		firstTime = true;
 		resetTime = true;
-		
-		String output = "There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
-				+ (possibleConnections<=1?"":"s") + ".\n";
-		wC.output(output);
-		log.logWrite(output);
-		
-		output = "There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n";
-		wC.output(output);
-		log.logWrite(output);
-		
-		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+
+		/*
+		 * if we pass in a null windowclass, then clearly we don't want
+		 * to output
+		 */
+		if (wC!=null){
+			log.open(algo, numSensors,k);
+
+			String output = "There " + (possibleConnections<=1?"is":"are") + " " + possibleConnections + " possible connection"
+					+ (possibleConnections<=1?"":"s") + ".\n";
+
+			wC.output(output);
+			log.logWrite(output);
+
+
+			output = "There "+(numberOfColours<=1?"is":"are")+" " + numberOfColours+" colour"+(numberOfColours<=1?"":"s")+".\n";
+			wC.output(output);
+			log.logWrite(output);
+
+			if(redraw)
+				wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		}
 	}
 
 
@@ -161,7 +177,9 @@ public class MainThread {
 			}
 		}
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
-
+		while (primeNumbers.get(0)<k){
+			primeNumbers.remove(0);
+		}
 		sensors[n].setDelay(primeNumbers.get(0));
 		Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
@@ -203,9 +221,21 @@ public class MainThread {
 			wC.output("Ran for: "+(endTime-startTime)+"ms\n");	
 			resetTime = false;
 			setKeepRunning(false);
+
+			restart = true;
+			redraw = false;
 			log.close();
+			wC.play.setText("Start");
+			//Sensor sensor1 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
+			//Sensor sensor2 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
+			//System.out.println("Sensor1 sector: "+sensor1.currentSector());
+			//System.out.println("Sensor2 sector: "+sensor2.currentSector());
+
+
 		}
-		wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		if(gui){
+			wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		}
 	}
 
 	public void run() {
