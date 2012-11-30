@@ -1,5 +1,8 @@
 \section{Program Breakdown}
 
+\subsection{Introduction}
+The program is written in java, providing a GUI interface to rapidly enable a wide variety of testing conditions. 
+
 \subsection{MainThread}
 
 The MainThread class is what really makes this application tick. As the name
@@ -10,15 +13,6 @@ placement. Either a short description or something saying it's in another
 section>.  Two Sensors are identified as Neighbours if both are in range of each other, falling on some sector of each other. Neighbours are identified in the
 "record\_neighbours" method in the MainThread. This method is ran at most 
 O(n$^{2}$)
-<<<<<<< HEAD
-
-\begin{figure}
-\caption{UML Diagram}
-\includegraphics[height = 16cm]{pics/Main.jpg}\\[0.5cm]    
-\end{figure}
-
-=======
->>>>>>> c85ee15acf9bbaaa36fba9e8326e85f51dcf3bf0
 times. Each call to this method passes in the index of a Sensor which needs to 
 have it's Neighbours identified. The method then loops through all the Sensors up 
 until the index passed in, so all the Sensors previously initialized. At each 
@@ -48,4 +42,14 @@ After the update has happened on the Algorithms, the Neighbours are checked for
 connection, followed by output to both the GUI and log, and a call to re-draw the 
 sensors on the GUI. 
 
+\begin{figure}
+\caption{UML Diagram}
+\includegraphics[height = 16cm]{pics/Main.jpg}\\[0.5cm]    
+\end{figure}
+
 The current approach MainThread takes for "running" the sensors, is that there is a list of algorithms that are each responsible for "running" their Sensors. The algorithms themselves are all updating in the update method of the MainThread, and the MainThread is the only class responsible for spawning one thread that the repeatedly calls on update. The other approach would have been to allow each individual algorithm to spawn their own threads, which would then "run"/update the Sensors, while the MainThread handles checking Neighbour connects and calling on the GUI re-draw. During the development of this application, we have implemented this method. We've found that allowing each algorithm to have it's own separate thread would cause synchronization problems, would model a more practical simulation. However having just one thread in the MainThread and updating the algorithms in the update method that is repeatedly called on, the way that the runs application now, would model a more theoretical simulation, and thus this way was chosen to better demonstrate how the algorithms function and how the Sensors discover each other.
+
+\subsection{The Interface}
+
+\subsection{Known Issues}
+ 
