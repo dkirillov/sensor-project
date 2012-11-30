@@ -2,12 +2,13 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	private boolean selectBit;
 	public RSRMAGeneral(Sensor s) {
 		super(s);
-		outer_loop = 0;
-		inner_loop = 0;
+		outer_loop = 1;
+		inner_loop = 1;
 	}
 
 	public void update(){
 		//Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
+		outer_loop--;
 		if (outer_loop == 0){
 			selectBit = (Math.random() < 0.5);
 		}
@@ -18,7 +19,6 @@ public class RSRMAGeneral extends RotationAlgorithm{
 			// Mech0
 			mech0(k, d);
 		}
-		outer_loop--;
 	}
 
 	public void mech0(int k, int d){
@@ -42,11 +42,11 @@ public class RSRMAGeneral extends RotationAlgorithm{
 		//Send message to neighbor(s) in sector i;
 		//Listen for messages from neighbor(s) (if any) in sector i;
 		//Basically set our neighbours to facing. THIS SHOULD DELAY THE THING.
+		inner_loop--;
 		if(inner_loop == 0){
 			//Rotate antenna one sector.
-			sensor.update();			
-		}
-		if (inner_loop == 0){inner_loop = d;}		
-		inner_loop--;		
+			sensor.update();
+			inner_loop = d;
+		}				
 	}
 }
