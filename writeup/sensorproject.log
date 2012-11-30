@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  30 NOV 2012 08:47
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  30 NOV 2012 10:38
 entering extended mode
  %&-line parsing enabled.
 **sensorproject.tex
@@ -432,12 +432,12 @@ s/title.png (PNG copy)>] (./sensorproject.toc)
 <pics/Main.jpg, id=27, 2246.3925pt x 1908.12875pt>
 File: pics/Main.jpg Graphic file (type jpg)
  <use pics/Main.jpg>
-Overfull \hbox (35.43918pt too wide) in paragraph at lines 16--17
+Overfull \hbox (35.43918pt too wide) in paragraph at lines 17--18
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
 
@@ -482,9 +482,9 @@ ylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk></usr/share/texmf-
 texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fon
 ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/pub
 lic/amsfonts/cm/cmr8.pfb>
-Output written on sensorproject.pdf (7 pages, 623875 bytes).
+Output written on sensorproject.pdf (7 pages, 625170 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
+ 341 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
