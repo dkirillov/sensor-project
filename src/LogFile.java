@@ -36,6 +36,7 @@ public class LogFile {
 	
 	public void logWrite(String s){
 		try {
+			System.out.println("writing log: "+s);
 			logOut.write(s);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

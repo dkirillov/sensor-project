@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 public class MakeGraph {
 	int n = 40;
+	String k, tests;
 	
 	String top = "<html>\n"+
   "<head>\n"+
@@ -33,7 +34,8 @@ public class MakeGraph {
 
 		        "var options = {\n"+
 		          "title: 'Algorithm Performance for n = ";
-	String bottom2 = "',\n"+
+	String bottom2 = " and k = ";
+	String bottom3 = "',\n"+
 		          "hAxis: {title: 'Rounds', titleTextStyle: {color: 'red'}},\n"+
 		          "vAxis: {title: 'Percentage of Sensors Discovered', titleTextStyle: {color: 'red'}}\n"+
 
@@ -68,6 +70,15 @@ public class MakeGraph {
 		if (n == 0){
 			System.exit(0);
 		}
+		
+		k = (String)JOptionPane.showInputDialog(
+                null,
+                "k value?",
+                "Customized Dialog",
+                JOptionPane.PLAIN_MESSAGE,
+                null,null, null);
+		
+		
 		String middle = null;
 		try {
 			middle = makeMiddle();
@@ -77,7 +88,9 @@ public class MakeGraph {
 		}
 		try{
 			// Create file 
-			FileWriter fstream = new FileWriter("graph"+n+".html");
+			String fs = System.getProperty("file.separator");
+			String pre = "graphfiles"+fs;
+			FileWriter fstream = new FileWriter(pre+"graph"+n+"k"+k+".html");
 			graph = new BufferedWriter(fstream);
 			graph.write(top);
 			graph.write(middle);
@@ -85,6 +98,8 @@ public class MakeGraph {
 			//writing in the number of sensors in the title
 			graph.write(Integer.toString(n));
 			graph.write(bottom2);
+			graph.write(k);
+			graph.write(bottom3);
 		}catch (Exception e){//Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}finally{
@@ -114,10 +129,13 @@ public class MakeGraph {
 		FileReader RSRMAfile = null;
 		FileReader RSRMApfile = null;
 
+		//Stat__S-3_T-0_A-ARA_K4
 		try {
-			ARAfile = new FileReader("statARA"+n+".txt");
-			RSRMAfile = new FileReader("statRSRMA"+n+".txt");
-			RSRMApfile= new FileReader("statRSRMA'"+n+".txt");
+			String fs = System.getProperty("file.separator");
+			String pre = "average"+fs;
+			ARAfile = new FileReader(pre+"Stat__S-"+n+"_AVERAGE_A-ARA_K"+k+".txt");
+			RSRMAfile = new FileReader(pre+"Stat__S-"+n+"_AVERAGE_A-RSRMA_K"+k+".txt");
+			RSRMApfile= new FileReader(pre+"Stat__S-"+n+"_AVERAGE_A-RSRMA'_K"+k+".txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,11 +159,11 @@ public class MakeGraph {
 				str = ARA.readLine();
 				if (str == null){
 					moreARA = false;
-					str = "0";
+					str = "1";
 				}
 				
 			}else{
-				str = "0";
+				str = "1";
 			}
 			middle.append(str+",");
 			
@@ -154,10 +172,10 @@ public class MakeGraph {
 				str = RSRMA.readLine();
 				if (str == null){
 					moreRSRMA = false;
-					str = "0";
+					str = "1";
 				}
 			}else{
-				str = "0";
+				str = "1";
 			}
 			middle.append(str+",");
 			
@@ -166,10 +184,10 @@ public class MakeGraph {
 				str = RSRMAp.readLine();
 				if (str == null){
 					moreRSRMAp = false;
-					str = "0";
+					str = "1";
 				}
 			}else{
-				str = "0";
+				str = "1";
 			}
 			middle.append(str+"],\n");
 			if ((!moreARA)&&(!moreRSRMA)&&(!moreRSRMAp)){

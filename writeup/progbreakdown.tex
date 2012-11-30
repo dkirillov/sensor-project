@@ -49,7 +49,9 @@ sensors on the GUI.
 
 The current approach MainThread takes for "running" the sensors, is that there is a list of algorithms that are each responsible for "running" their Sensors. The algorithms themselves are all updating in the update method of the MainThread, and the MainThread is the only class responsible for spawning one thread that the repeatedly calls on update. The other approach would have been to allow each individual algorithm to spawn their own threads, which would then "run"/update the Sensors, while the MainThread handles checking Neighbour connects and calling on the GUI re-draw. During the development of this application, we have implemented this method. We've found that allowing each algorithm to have it's own separate thread would cause synchronization problems, would model a more practical simulation. However having just one thread in the MainThread and updating the algorithms in the update method that is repeatedly called on, the way that the runs application now, would model a more theoretical simulation, and thus this way was chosen to better demonstrate how the algorithms function and how the Sensors discover each other.
 
-\subsection{The Interface}
+\subsection{GUI Interface}
+The GUI has some configurable sections. In particular there are slider settings for running speed, the number of sectors and the range. We are technically running the tests in a unit square, so the range has no applicative meaning except in the sense of the visual output (ie it makes bigger circles on screen).
 
 \subsection{Known Issues}
+One issue is with our update loop. Because a sensor is moved and updates its connections in the same loop, it is possible to connect to a sensor that is scheduled to move later in the loop, where technically it shouldn't. In terms of performance it may mean a slightly better performance for every algorithm, but since every algorithm has the same potential advantage the overall comparison is not affected. This will occasionally manifest itself as the final sensors finishing out of alignment in the GUI. It does seem quite rare in practice however.
  
