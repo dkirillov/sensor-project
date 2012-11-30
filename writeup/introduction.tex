@@ -1,0 +1,11 @@
+\section{Introduction}
+In this document we examine the results of programmatically simulating algorithms for symmetry breaking for rotating directional sensors. We use the (D,D) model, whereby the sensors have identical transmission and reception beam width. Three algorithms are implemented.
+
+\subsection{Antennae Rotation Algorithm}
+In the ARA algorithm each sensor rotates one sector, then delays for $d_{u}$ steps while transmitting and listening for neighbours. In order to properly ensure that the sensors don't a)rotate with the same delay and b)rotate with delays that are multiples of one another, $d_{u}$ must be a prime number based on a colouring of the graph. 
+
+\subsection{Random Selection Rotation Mechanism Algorithm}
+In the RSRMA algorithm chooses between two algorithms, Mech0 and Mech1. Both take two arguments. Mech0 rotates with no sector delay, while Mech1 rotates using a sector delay. RSRMA calls these algorithms with the number of sectors as both arguments. So Mech0 rotates through its k sectors k times with no delay, while Mech1 rotates one sector then delays for k time while sending and listening for signals. At the end of each iteration it chooses Mech0 or Mech1 at random.
+
+\subsection{Random Selection Rotation Mechanism Algorithm Prime}
+RSRMA' operates much the same as RSRMA, except that instead of rotating through the k sectors k times in Mech0, or rotating through k sectors and delaying for k, it passes in a prime number (d) as the second argument. So it will rotate through the sectors d times in Mech0, or rotate with delay d in each sector in Mech1. At the end of each iteration it chooses Mech0 or Mech1 at random.

@@ -64,7 +64,7 @@ public abstract class SensorProjectMain {
 			
 			//run all current test
 			for (Algo algo : Algo.values()) {
-				if (algo.equals(Algo.RSRMAP)) continue;
+				//if (algo.equals(Algo.RSRMAP)) continue;
 				if (algo.equals(Algo.ARA)) continue;
 				System.out.println("----Algo " + algo + "----");
 				mT.algorithm = algo;

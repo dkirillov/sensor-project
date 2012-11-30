@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -33,6 +34,7 @@ public class WindowClass extends JFrame implements ActionListener{
 	OutputDialog od;
 	JButton play, newgame, clear;
 	JTextField numSensors;
+	JTextField numRounds;
 	JLabel message;
 	boolean restart = false;
 
@@ -87,6 +89,21 @@ public class WindowClass extends JFrame implements ActionListener{
 		menu.add(h2);
 		menu.add(h3);
 		mb.add(menu);
+		
+		menu = new JMenu("GUI");
+		JCheckBoxMenuItem item = new JCheckBoxMenuItem("GUI");
+		item.setSelected(true);
+		menu.add(item);
+
+		mb.add(menu);
+		
+		item.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mT.gui = ((JCheckBoxMenuItem)e.getSource()).isSelected();
+			}		
+		});
+		
 		h1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,10 +146,14 @@ public class WindowClass extends JFrame implements ActionListener{
 		JPanel centerpanel = new JPanel();
 		centerpanel.setLayout(new GridLayout(0,2));
 		numSensors = new JTextField("3");
+		numRounds = new JTextField("1");
 		JLabel label = new JLabel("# of sensors");
 		label.setHorizontalTextPosition(SwingConstants.RIGHT);
 		centerpanel.add(label);
 		centerpanel.add(numSensors);
+		/*centerpanel.add(new JLabel("# of rounds"));
+		centerpanel.add(numRounds);*/
+
 		panel.add(centerpanel, BorderLayout.CENTER);
 		message = new JLabel("Sensor Sim");
 		panel.add(message, BorderLayout.NORTH);
@@ -153,6 +174,7 @@ public class WindowClass extends JFrame implements ActionListener{
 		}else if (e.getActionCommand().equals("newgame")){
 			mT.setKeepRunning(false);
 			mT.restart = true;
+			mT.redraw = true;
 			play.setText("Start");
 		}else if (e.getActionCommand().equals("clear")){
 			od.setText("");

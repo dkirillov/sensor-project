@@ -49,6 +49,13 @@ public class Neighbour {
 		}
 		if (!_connected) {
 			_connected = _sensor1Facing && _sensor2Facing;
+			if(_connected){
+			/*System.out.println("*********** when connected **********");
+			System.out.printf("Sensor id: %d sector: %d\n",
+					_sensor1.SensorId, _sensor1.currentSector());
+			System.out.printf("Sensor id: %d sector: %d\n", 
+					_sensor2.SensorId, _sensor2.currentSector());*/
+			}
 		}
 	}
 	

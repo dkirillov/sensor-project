@@ -11,13 +11,13 @@ public class ARAlgorithm extends RotationAlgorithm {
 		// Listen for messages from neighbor(s) (if any);
 		
 		outer_loop--;
+		
 		if (outer_loop == 0){
 			// Rotate antenna beam one sector counter-clockwise;
 			sensor.update();
+			updated = true;
 			outer_loop = d;
-		}
-		
-		//Debug.debug("Running ARAlgorithm.");
-	
+		}		
+		//Debug.debug("Running ARAlgorithm.");	
 	}
 }

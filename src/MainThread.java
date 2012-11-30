@@ -25,6 +25,8 @@ public class MainThread {
 	private long endTime;
 	private boolean firstTime;
 	private boolean resetTime;
+	boolean redraw = true;
+	boolean gui = true;
 	private int numberOfColours;
 	private final List<Integer> PRIME_NUMBERS = Arrays.asList(2, 3, 5, 7, 11, 13, 17,
 			19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
@@ -62,18 +64,18 @@ public class MainThread {
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
-		
+
 		Random random = new Random();
 		Vector<PlacementPoint> validPlacements = new Vector<PlacementPoint>();
 		int xPlace = SensorBoard.BOARD_WIDTH/2;
 		int yPlace = SensorBoard.BOARD_HEIGHT/2;
 		sensors[0] = new Sensor(0, xPlace, yPlace, range, k);
-		
+
 		int radiusRange = (int) (range * 0.9);
 		double startingRadian = (2 * Math.PI) * (random.nextInt(361) / 360);
 		int numberOfPoints = random.nextInt(6) + 3;	// 3 to 8
 		double radianIncrement = (2 * Math.PI) / numberOfPoints;
-		
+
 		double radianValue;
 		int xValue;
 		int yValue;
@@ -83,17 +85,17 @@ public class MainThread {
 			yValue = (int) (radiusRange * (Math.sin(radianValue)));
 			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
 		}
-		
+	
 		//Debug.debug("Created sensor " + 0);
-		
+
 		for (int x = 1; x < sensors.length; x++) {
 			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
 			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
 			//Get placements
-				//find opposite point
+			//find opposite point
 			numberOfPoints = random.nextInt(4) + 2;	// 2 to 5
 			radianIncrement = Math.PI / (numberOfPoints + 1); //For n points, there are n + 1 spaces
-			
+
 			for (int i = 1; i < numberOfPoints + 1; i++) {
 				radianValue = (choice.radianFacing - (Math.PI / 2)) + (radianIncrement * i);
 				xValue = (int) (radiusRange * (Math.cos(radianValue)));
@@ -164,7 +166,7 @@ public class MainThread {
 		if (wC != null) wC.output(output);
 		log.logWrite(output);
 		
-		if (wC != null) wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		if (wC != null && redraw) wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
 		
 		firstTime = true;
 		resetTime = true;
@@ -172,6 +174,7 @@ public class MainThread {
 
 	private void record_neighbours(int n){
 		ArrayList<Integer> primeNumbers = new ArrayList<Integer>(PRIME_NUMBERS);
+		sensors[n].changeSectorCount(k);
 		int numC=1;
 		for (int x = 0; x < n; x++) {
 			if (sensors[x].inRange(sensors[n].getPoint())) {
@@ -186,7 +189,9 @@ public class MainThread {
 			}
 		}
 		numberOfColours = numberOfColours<numC?numC:numberOfColours;
-
+		while (primeNumbers.get(0)<k){
+			primeNumbers.remove(0);
+		}
 		sensors[n].setDelay(primeNumbers.get(0));
 		//Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
@@ -214,9 +219,9 @@ public class MainThread {
 		}
 		log.statWrite(""+(((double)connections)/possibleConnections)+"\n");
 		if ((connections - currentConnections)>0){
-			writeOutputs(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
+			//writeOutputs(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
-			writeOutputs(""+(possibleConnections-currentConnections)+" connections left to be made\n");
+			//writeOutputs(""+(possibleConnections-currentConnections)+" connections left to be made\n");
 		}
 		if (resetTime&&possibleConnections-currentConnections == 0){
 			endTime = System.currentTimeMillis();
@@ -225,9 +230,24 @@ public class MainThread {
 			writeOutputs("Ran for: "+(endTime-startTime)+"ms\n");	
 			resetTime = false;
 			setKeepRunning(false);
+
+			restart = true;
+			redraw = false;
 			log.close();
+			if (wC != null) wC.play.setText("Start");
+			//Sensor sensor1 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
+			//Sensor sensor2 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
+			//System.out.println("Sensor1 sector: "+sensor1.currentSector());
+			//System.out.println("Sensor2 sector: "+sensor2.currentSector());
+			/*for (int i = 0; i < sensors.length; i ++){
+				System.out.printf("Sensor %d delay: %d sector: %d\n", i, 
+						sensors[i].getDelay(), sensors[i].currentSector());
+			}*/
+
 		}
-		if (shouldDraw && wC != null) wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		if(shouldDraw && gui && wC != null){
+			wC.sB.draw(wC.sB.getGraphics(), sensors, neighbours);
+		}
 	}
 
 	protected void writeOutputs(String toWrite) {

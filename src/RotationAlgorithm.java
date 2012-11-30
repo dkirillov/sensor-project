@@ -5,6 +5,7 @@ public abstract class RotationAlgorithm{
 	protected Sensor sensor;
 	protected int inner_loop;
 	protected int outer_loop;
+	boolean updated;
 	public RotationAlgorithm(Sensor s){
 		sensor = s;
 	}

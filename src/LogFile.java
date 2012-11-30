@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,7 +9,6 @@ public class LogFile {
 	BufferedWriter logOut;
 	BufferedWriter statOut;
 	boolean open = false;
-	int logged = 0;
 	
 	
 	public LogFile(){
@@ -16,17 +16,16 @@ public class LogFile {
 	}
 	
 	public void open(int testNumber, String algo, int sensors, int k){
-		logged ++;
 		try{
 			// Create file 
-			String fs = System.getProperty("file.separator");
-			FileWriter fstream = new FileWriter("logfiles"+fs+"Log__S-"+sensors+"_T-"+testNumber+"_A-"+algo+"_K-"+k+".txt");
-			//new FileWriter("logfiles"+fs+"Log"+testNumber+"-sectors="+k+"-sensors="+sensors+algo+".txt");
-			//SensorCount - TestNumber - Algo - SectorCount
-			
+			File logdir = new File("logfiles");
+			File statdir = new File("statfiles");
+			logdir.mkdir();
+			statdir.mkdir();
+			String fs = System.getProperty("file.separator");			
+			FileWriter fstream = new FileWriter("logfiles"+fs+"Log__S-"+sensors+"_T-"+testNumber+"_A-"+algo+"_K-"+k+".txt");		
 			logOut = new BufferedWriter(fstream);
 			fstream = new FileWriter("statfiles"+fs+"Stat__S-"+sensors+"_T-"+testNumber+"_A-"+algo+"_K"+k+".txt");
-			//new FileWriter("statfiles"+fs+"statk="+k+"n="+sensors+algo+".txt");
 			statOut = new BufferedWriter(fstream);
 			open = true;
 		}catch (Exception e){//Catch exception if any
