@@ -60,6 +60,8 @@ public class Sensor {
 		setNeighboursFacing(true);
 	}
 	
+	
+	
 	/**
 	 * Draws the sensor.
 	 * @param gfx Graphics to draw with.
@@ -90,7 +92,7 @@ public class Sensor {
 			gfx.setColor(Color.green);
 		}
 		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
-		gfx.drawString("" + delay, p.x, p.y);
+		gfx.drawString("" + SensorId, p.x, p.y);
 	}
 
 	/**
@@ -112,11 +114,12 @@ public class Sensor {
 		
 		double d_x = (p2.x - p.x);
 		double d_y = (p2.y - p.y) * -1;
-		double degree = (Math.atan(d_x / d_y) * (180.0 / Math.PI));
+		double degree = (Math.atan2(d_y, d_x) * (180.0 / Math.PI));
+		//double degree = (Math.atan(d_x/d_y) * (180.0 / Math.PI));
 		degree = (degree+360)%360;
 		Debug.debug("degree: "+degree);
-/*
-		if(d_x>=0&&d_y>=0){
+
+	/*	if(d_x>=0&&d_y>=0){
 			degree = (90-degree);
 		}else if (d_x < 0 && d_y >= 0) {
 			degree += 90;

@@ -230,7 +230,10 @@ public class MainThread {
 			//Sensor sensor2 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
 			//System.out.println("Sensor1 sector: "+sensor1.currentSector());
 			//System.out.println("Sensor2 sector: "+sensor2.currentSector());
-
+			/*for (int i = 0; i < sensors.length; i ++){
+				System.out.printf("Sensor %d delay: %d sector: %d\n", i, 
+						sensors[i].getDelay(), sensors[i].currentSector());
+			}*/
 
 		}
 		if(gui){

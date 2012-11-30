@@ -1,3 +1,6 @@
-There are 2 possible connections.
+There are 3 possible connections.
 There are 3 colours.
-1 connections made in round 187
+1 connections made in round 52
+1 connections made in round 190
+1 connections made in round 1292
+Finished in 1292 rounds
