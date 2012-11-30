@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  30 NOV 2012 07:07
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  30 NOV 2012 10:38
 entering extended mode
  %&-line parsing enabled.
 **sensorproject.tex
@@ -428,20 +428,33 @@ s/title.png (PNG copy)>] (./sensorproject.toc)
 ]
 \openout2 = `progbreakdown.aux'.
 
- (./progbreakdown.tex) [3
+ (./progbreakdown.tex
+<pics/Main.jpg, id=27, 2246.3925pt x 1908.12875pt>
+File: pics/Main.jpg Graphic file (type jpg)
+ <use pics/Main.jpg>
+Overfull \hbox (35.43918pt too wide) in paragraph at lines 17--18
+[][] 
+ []
 
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+) [3
+
+
+] [4 <./pics/Main.jpg>]
 \openout2 = `compmethods.aux'.
 
- (./compmethods.tex) [4
+ (./compmethods.tex) [5
 
 
 ]
 \openout2 = `conclusions.aux'.
 
-
-(./conclusions.tex) [5
+ (./conclusions.tex)
+[6
 
 
 ]
@@ -449,13 +462,13 @@ Commutative Diagram: try the PostScript option for better results
 (./sensorproject.aux (./introduction.aux) (./progbreakdown.aux)
 (./compmethods.aux) (./conclusions.aux)) ) 
 Here is how much of TeX's memory you used:
- 6121 strings out of 495061
- 72470 string characters out of 1182620
+ 6129 strings out of 495061
+ 72591 string characters out of 1182620
  153986 words of memory out of 3000000
- 9203 multiletter control sequences out of 15000+50000
+ 9209 multiletter control sequences out of 15000+50000
  19781 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,6n,42p,1184b,244s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,6n,42p,1184b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/darrylhill/.texmf-var/fonts/p
 k/ljfour/jknappen/ec/ecbx1200.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfo
 ur/jknappen/ec/ecrm1095.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jkn
@@ -469,9 +482,9 @@ ylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk></usr/share/texmf-
 texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fon
 ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/pub
 lic/amsfonts/cm/cmr8.pfb>
-Output written on sensorproject.pdf (6 pages, 190230 bytes).
+Output written on sensorproject.pdf (7 pages, 625170 bytes).
 PDF statistics:
- 327 PDF objects out of 1000 (max. 8388607)
+ 341 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

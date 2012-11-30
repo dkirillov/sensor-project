@@ -10,6 +10,15 @@ placement. Either a short description or something saying it's in another
 section>.  Two Sensors are identified as Neighbours if both are in range of each other, falling on some sector of each other. Neighbours are identified in the
 "record\_neighbours" method in the MainThread. This method is ran at most 
 O(n$^{2}$)
+<<<<<<< HEAD
+
+\begin{figure}
+\caption{UML Diagram}
+\includegraphics[height = 16cm]{pics/Main.jpg}\\[0.5cm]    
+\end{figure}
+
+=======
+>>>>>>> c85ee15acf9bbaaa36fba9e8326e85f51dcf3bf0
 times. Each call to this method passes in the index of a Sensor which needs to 
 have it's Neighbours identified. The method then loops through all the Sensors up 
 until the index passed in, so all the Sensors previously initialized. At each 

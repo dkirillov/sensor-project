@@ -35,8 +35,10 @@ public class SensorTest extends TestCase {
 		Sensor sensor1 = new Sensor(1, 20, 20, 50, 12);
 		Sensor sensor2 = new Sensor(1, 30, 20, 50, 12);
 		
-		int sector = sensor1.inSector(sensor2.getPoint());
-		System.out.println("sector: "+sector);
+		int sector1 = sensor1.inSector(sensor2.getPoint());
+		int sector2 = sensor2.inSector(sensor1.getPoint());
+		System.out.println("sector1: "+sector1);
+		System.out.println("sector2: "+sector2);
 		for (int i = 3; i < 13; i ++){
 			System.out.printf("i=%d, Mod value: %d\n",i, 360%i);
 		}
