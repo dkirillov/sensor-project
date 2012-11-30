@@ -57,6 +57,8 @@ public class MakeAverage {
 		doit("ARA");
 		doit("RSRMA");
 		doit("RSRMA'");
+		
+		new MakeGraph(n, k);
 
 	}
 

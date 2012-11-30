@@ -54,9 +54,9 @@ public class MakeGraph {
 	
 	BufferedWriter graph;
 	
-	public MakeGraph(){
+	public MakeGraph(int n, String k){
 		
-		String s = (String)JOptionPane.showInputDialog(
+		/*String s = (String)JOptionPane.showInputDialog(
 		                    null,
 		                    "How many sensors?",
 		                    "Customized Dialog",
@@ -76,8 +76,8 @@ public class MakeGraph {
                 "k value?",
                 "Customized Dialog",
                 JOptionPane.PLAIN_MESSAGE,
-                null,null, null);
-		
+                null,null, null);*/
+		this.k = k;
 		
 		String middle = null;
 		try {
@@ -204,7 +204,7 @@ public class MakeGraph {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new MakeGraph();
+		//new MakeGraph();
 
 	}
 
