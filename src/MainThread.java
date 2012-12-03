@@ -18,7 +18,7 @@ public class MainThread {
 	private Sensor[] sensors;
 	protected Vector<Neighbour> neighbours;
 	private List<RotationAlgorithm> runningAlgoThreads;
-	int speed = 2000;
+	int speed = 100;
 	int numSensors = 3;
 	int round = 0;
 	int k = 4;

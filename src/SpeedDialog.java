@@ -48,7 +48,7 @@ public class SpeedDialog extends JPanel{
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1; constraints.weighty = 1;
 		constraints.insets = new Insets(5, 10, 0, 0);
-		JLabel label = new JLabel("Sensor speed ("+lower+" - "+ upper+  ")  :");
+		JLabel label = new JLabel("Sensor speed in ms ("+lower+" - "+ upper+  ")  :");
 		layout.setConstraints(label, constraints);
 		add(label);
 
@@ -58,7 +58,7 @@ public class SpeedDialog extends JPanel{
 		sensorSpeed.setMinorTickSpacing(100);
 		sensorSpeed.setPaintLabels(true);
 		sensorSpeed.setPaintTicks(true);
-		sensorSpeed.setSnapToTicks(true);	
+		sensorSpeed.setSnapToTicks(true);
 		constraints.gridx = 1; constraints.gridy = 1;
 		constraints.gridwidth = 2;
 		constraints.insets = new Insets(5, 5, 0, 10);
