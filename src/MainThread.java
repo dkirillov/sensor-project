@@ -14,7 +14,7 @@ public class MainThread {
 	//private RotationAlgorithm[] algoThreads;
 	private List<RotationAlgorithm> runningAlgoThreads;
 	private List<RotationAlgorithm> stoppedAlgoThreads;		//Do we even need this?
-	int speed = 10;
+	int speed = 2000;
 	int numSensors = 3;
 	int round = 0;
 	int k = 4;
@@ -51,7 +51,7 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		restart = true;
-		Debug.setDebug(true);
+		//Debug.setDebug(true);
 		log = new LogFile();
 	}
 
@@ -263,15 +263,15 @@ public class MainThread {
 			public void run() {
 				while (true){
 					while (isKeepRunning()) {
-						float start = System.currentTimeMillis();
+						long start = System.currentTimeMillis();
 						//delay(speed);						
 						update(true);
-						float end = System.currentTimeMillis();
+						long end = System.currentTimeMillis();
 						if((end-start)<speed){
 							//Under 2000ms, sleep the difference.
 							//This 2000ms should be changed to something on the slider...
-							Debug.debug("Sleeping: "+(speed-(end-start)));
-							delay((int)(speed-(end-start)));
+							Debug.debug("Sleeping: "+((speed)-(end-start)));
+							delay((int)((speed)-(end-start)));
 						}
 					}
 					if (restart){
