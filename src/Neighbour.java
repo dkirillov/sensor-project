@@ -1,13 +1,12 @@
-import java.awt.Point;
-
 /**
  * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
  */
+import java.awt.Point;
 
 /**
  * A class representing a neighbour relationship between two sensors.
  * Sensors are neighbours when they fall in range of each other.
- * The neighbour class is stored within a sensor and contains information about a neighbour of it.
+ * The neighbour class stores the two sensors that are neighbourly.
  * The two are connected when they have had their sectors face each other at least once.
  */
 public class Neighbour {
@@ -17,7 +16,7 @@ public class Neighbour {
 	protected boolean _sensor2Facing;
 	protected boolean _connected;			//True if the sensor and the neighbour have 'connected'. False otherwise.
 
-	/**\
+	/**
 	 * Constructor, initalizes everything
 	 * @param sensor1Id Id of the first sensor
 	 * @param sensor2Id Id of the second sensor
@@ -31,10 +30,10 @@ public class Neighbour {
 	}
 	
 	/**
-	 * For a given sensor Id, set if that sensor is facing for this neighbour
-	 * @param sensorId The sensor that is facing this neighbour
-	 * @param facing If the sensor is facing this neighbour
-	 * @throws IllegalArgumentException thrown if this neighbour is not related to the sensorId input
+	 * For a given sensor Id, set if that sensor is facing for this neighbour.
+	 * @param sensorId The sensor that is facing this neighbour.
+	 * @param facing If the sensor is facing this neighbour.
+	 * @throws IllegalArgumentException thrown if this neighbour is not related to the sensorId input.
 	 */
 	public void setFacingForSensor(int sensorId, boolean facing) 
 		throws IllegalArgumentException {
@@ -60,6 +59,14 @@ public class Neighbour {
 		return _connected;
 	}
 	
+	/**
+	 * Returns the position of the first sensor.
+	 * @return A Point representing the position of the first sensor.
+	 */
 	public Point getSensor1Pos() { return _sensor1.getPoint(); }
+	/**
+	 * Returns the position of the second sensor.
+	 * @return A Point representing the position of the second sensor.
+	 */
 	public Point getSensor2Pos() { return _sensor2.getPoint(); }
 }

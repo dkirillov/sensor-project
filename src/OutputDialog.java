@@ -1,11 +1,12 @@
+/**
+ * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
+ */
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- * A JFrame with a JTextArea in a scrollpane to 
- * provide a simple way to display data
- *
+ * A class that serves as an output dialog for the GUI.
  */
 public class OutputDialog extends JFrame {
 
@@ -15,9 +16,8 @@ public class OutputDialog extends JFrame {
 	JScrollPane scroll;
 	
 	/**
-	 * 
-	 * @param parent	the parent window that this dialog gets placed
-	 * beside
+	 * Initializes the output dialog.
+	 * @param parent	The parent of this dialog.
 	 */
 	public OutputDialog(JFrame parent){
 		super();
@@ -31,8 +31,8 @@ public class OutputDialog extends JFrame {
 	}
 	
 	/**
-	 * Set the text in the output window
-	 * @param text	the text to be outputted
+	 * Sets the text of the output dialog.
+	 * @param text	The text that will be set.
 	 */
 	public void setText(String text){
 		out.setText(text);
@@ -40,8 +40,8 @@ public class OutputDialog extends JFrame {
 	}
 	
 	/**
-	 * Append the text in the output window
-	 * @param text the text to be appended
+	 * Appends text to the output dialog.
+	 * @param text	The text that will be appended.
 	 */
 	public void append(String text){
 		out.append(text);

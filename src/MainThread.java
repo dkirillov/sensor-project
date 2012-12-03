@@ -1,9 +1,15 @@
+/**
+ * @author	Danil Kirillov, Darryl Hill, Wesley Lawrence.
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+/**
+ * The MainThread, responsible for the running of this application.
+ */
 public class MainThread {
 
 	private boolean keepRunning = false;
@@ -46,12 +52,22 @@ public class MainThread {
 
 	Algo algorithm = Algo.ARA;
 
+	/**
+	 * The constructor for the MainThread, 
+	 * takes in the WindowClass which will be used as a GUI
+	 * for this thread.  
+	 * @param wC	The GUI window for this thread.
+	 */
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		restart = true;
 		log = new LogFile();
 	}
 
+	/**
+	 * Initializes everything, based on the number of sensors passed in.
+	 * @param numSensors	The number of sensors the current configuration will have.
+	 */
 	public void initialize(int numSensors){
 		round = 0;
 		possibleConnections = 0;
@@ -104,6 +120,11 @@ public class MainThread {
 		resetTime = true;
 	}
 
+	/**
+	 * Continues the initialization process, by recording the neighbours, 
+	 * assigning sensors to each algorithm, and opens up log/stat file output. 
+	 * @param testNumber	The current test number that this is being initialized for.
+	 */
 	public void initalizeWithOutGeneratingSensors(int testNumber) {
 		log.close();
 		
@@ -162,6 +183,14 @@ public class MainThread {
 		resetTime = true;
 	}
 
+	/**
+	 * After a Sensor is placed, this method is called.
+	 * This method records the neighbours for the Sensor
+	 * that has just been placed. Goes through all the 
+	 * previous sensors and checks if the Sensor that has
+	 * just been placed is a neighbour for them.
+	 * @param n	The index of the last placed Sensor.
+	 */
 	private void record_neighbours(int n){
 		ArrayList<Integer> primeNumbers = new ArrayList<Integer>(PRIME_NUMBERS);
 		sensors[n].changeSectorCount(k);
@@ -184,6 +213,14 @@ public class MainThread {
 		sensors[n].setDelay(primeNumbers.get(0));
 	}
 
+	/**
+	 * This is the update for the MainThread.
+	 * Updates all the algorithms, and removes and that have been finished.
+	 * Checks all the neighbours to see if new connections are made.
+	 * Outputs to log/stat files.
+	 * And re-draws the sensors on the GUI if needed.
+	 * @param shouldDraw	Re-draws the sensors if true, otherwise doesn't.
+	 */
 	public void update(boolean shouldDraw) {
 		if(firstTime){
 			startTime = System.currentTimeMillis();
@@ -229,14 +266,22 @@ public class MainThread {
 		}
 	}
 
+	/**
+	 * Writes a message to the output window.
+	 * @param toWrite	The message to write.
+	 */
 	protected void writeOutputs(String toWrite) {
 		if (wC != null) wC.output(toWrite);
 		else System.out.print(toWrite);
 		log.logWrite(toWrite);
 	}
 	
+	/**
+	 * Runs this class as a thread.
+	 * Essentially, spawns a Java thread that will
+	 * keep calling update or re-initializing.
+	 */
 	public void runAsThread() {
-
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -260,23 +305,37 @@ public class MainThread {
 		}).start();
 	}
 
+	/**
+	 * Stops the thread.
+	 */
 	public void stop() {
 		setKeepRunning(false);
 	}
 
-
-	public void delay(int speed){
+	/**
+	 * Delays/Sleeps the thread.
+	 * @param miliseconds	The number of seconds to sleep.
+	 */
+	public void delay(int miliseconds){
 		try {
-			Thread.sleep(speed);
+			Thread.sleep(miliseconds);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Is the thread running?
+	 * @return Returns true if the thread is running, false if otherwise.
+	 */
 	public boolean isKeepRunning() {
 		return keepRunning;
 	}
 
+	/**
+	 * Sets the keepRunning variable that causes the thread to run or stop.
+	 * @param keepRunning	The new value for this variable.
+	 */
 	protected void setKeepRunning(boolean keepRunning) {
 		this.keepRunning = keepRunning;
 	}

@@ -1,5 +1,6 @@
-
-
+/**
+ * @author Danil Kirillov, Darryl Hill, Wesley Lawrence.
+ */
 import junit.framework.TestCase;
 
 /**
