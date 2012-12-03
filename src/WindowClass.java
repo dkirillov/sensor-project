@@ -38,6 +38,11 @@ public class WindowClass extends JFrame implements ActionListener{
 	JLabel message;
 	boolean restart = false;
 
+	/**
+	 * Constructor
+	 * 
+	 * Initializes the window
+	 */
 	public WindowClass() {
 		setLayout(null);
 		setSize(SensorBoard.BOARD_WIDTH+45, SensorBoard.BOARD_HEIGHT+195);
@@ -74,6 +79,9 @@ public class WindowClass extends JFrame implements ActionListener{
 		mT.runAsThread();
 	}
 	
+	/**
+	 * Constructs the menu to choose algorithms
+	 */
 	public void makeMenu(){
 		JMenuBar mb = new JMenuBar();
 		JMenu menu = new JMenu("Algorithm");
@@ -127,6 +135,10 @@ public class WindowClass extends JFrame implements ActionListener{
 		setJMenuBar(mb);
 	}
 	
+	/**
+	 * Creates the panel that hold the buttons
+	 * @return
+	 */
 	public JPanel buttonPanel(){
 		JPanel panel = new JPanel(new BorderLayout());
 		play = new JButton("Start");
@@ -151,6 +163,8 @@ public class WindowClass extends JFrame implements ActionListener{
 		label.setHorizontalTextPosition(SwingConstants.RIGHT);
 		centerpanel.add(label);
 		centerpanel.add(numSensors);
+		/*centerpanel.add(new JLabel("# of rounds"));
+		centerpanel.add(numRounds);*/
 
 		panel.add(centerpanel, BorderLayout.CENTER);
 		message = new JLabel("Sensor Sim");
@@ -158,6 +172,9 @@ public class WindowClass extends JFrame implements ActionListener{
 		return panel;
 	}
 	
+	/**
+	 * Handler for button presses
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("play")){
@@ -167,6 +184,8 @@ public class WindowClass extends JFrame implements ActionListener{
 				play.setText("Start");
 			}
 			mT.setKeepRunning(!mT.isKeepRunning());
+			//Debug.debug("GUI: playing = "+control.playing);
+			
 		}else if (e.getActionCommand().equals("newgame")){
 			mT.setKeepRunning(false);
 			mT.restart = true;
@@ -178,6 +197,10 @@ public class WindowClass extends JFrame implements ActionListener{
 
 	}
 	
+	/**
+	 * Appends a message to the output window
+	 * @param message	The message to append
+	 */
 	public void output(String message){
 		od.append(message);
 	}

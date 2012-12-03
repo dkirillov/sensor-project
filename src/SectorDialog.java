@@ -22,10 +22,15 @@ public class SectorDialog extends JPanel{
 	MainThread game;
 	JFrame frame;
 	
+	/**
+	 * Constructor
+	 * @param game	The MainThread that this control modifies
+	 */
 	public SectorDialog(final MainThread game){
 		//super(game.frame);
 		this.frame = game.wC;
 		this.game = game;
+		//setSize (x,y);
 		//JButton OK, cancel;
 		
 		GridBagLayout layout = new GridBagLayout();

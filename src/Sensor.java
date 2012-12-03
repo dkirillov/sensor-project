@@ -25,11 +25,12 @@ public class Sensor {
 	ArrayList<ArrayList<Neighbour>> neighboursInASector;		//All it's neighbours, in sectors.
 
 	/**
-	 * Constructor, initializes everything.
-	 * A random wait time and color are assigned.
-	 * The passed in x/y are used for it's position.
-	 * @param x
-	 * @param y
+	 * Constructor for a sensor
+	 * @param id		Sensor's ID
+	 * @param x			X Position
+	 * @param y			Y Position
+	 * @param radius	Radius of the sensor
+	 * @param k			Number of sectors
 	 */
 	public Sensor(int id, int x, int y, int radius,int k) {
 		SensorId = id;
@@ -38,8 +39,14 @@ public class Sensor {
 		p = new Point(x, y);
 	}
 
+	/**
+	 * Changes the number of sectors
+	 * 
+	 * WARING: Erases known neighbours
+	 * @param k	The new number of sectors
+	 */
 	public void changeSectorCount(int k) {
-		sectors = k;
+		sectors = k;//= (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
 		for (int i = 0; i < sectors; i++) {
@@ -50,8 +57,10 @@ public class Sensor {
 	}
 	
 	/**
-	 * Updates the sensor.
-	 * Switches the sector that it's on if the wait time is up.
+	 * Effectively rotate the sensor
+	 * 
+	 * Calls {@link #setNeighboursFacing(boolean)} with a false to stop facing. Clears connected neighbours, updates our sector
+	 * and calls {@link #setNeighboursFacing(boolean)} with a true to face the new neighbours.
 	 */
 	public void update() {
 		setNeighboursFacing(false);
@@ -91,11 +100,13 @@ public class Sensor {
 		else {
 			gfx.setColor(Color.green);
 		}
+		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 		gfx.drawString("" + SensorId, p.x, p.y);
 	}
 
 	/**
 	 * Checks if a point, probably a sensor, lays in range of this sensor.
+	 * 
 	 * @param p2 Point to check.
 	 * @return True of the point lays in range, false if otherwise.
 	 */
@@ -105,6 +116,7 @@ public class Sensor {
 
 	/**
 	 * Determines which sector the point lays in. Returns a number between 0 and it's max sectors minus one.
+	 * 
 	 * @param p2 The point to check.
 	 * @return Returns a number between 0 and it's max sectors minus one, or -1 if it's not in range.
 	 */
@@ -114,8 +126,20 @@ public class Sensor {
 		double d_x = (p2.x - p.x);
 		double d_y = (p2.y - p.y) * -1;
 		double degree = (Math.atan2(d_y, d_x) * (180.0 / Math.PI));
+		//double degree = (Math.atan(d_x/d_y) * (180.0 / Math.PI));
 		degree = (degree+360)%360;
+		//Debug.debug("degree: "+degree);
 
+	/*	if(d_x>=0&&d_y>=0){
+			degree = (90-degree);
+		}else if (d_x < 0 && d_y >= 0) {
+			degree += 90;
+		} else if (d_x < 0 && d_y < 0) {
+			degree = 180 + (90-degree);
+		} else if (d_x >= 0 && d_y < 0) {
+			degree += 270;
+		}
+*/
 		int s = (int) (degree / (360.0 / sectors));
 
 		return s;
@@ -163,16 +187,27 @@ public class Sensor {
 		neighboursToConnect++;
 	}
 	
+	/**
+	 * Calls {@link #changeSectorCount(int)} with the current 
+	 */
 	public void clearNeighbours() {
 		changeSectorCount(sectors);
 	}
 	
+	/**
+	 * Sets all the neighbours in our current sectors facing value as facing
+	 * 
+	 * @param facing	Whether or not we're facing
+	 */
 	protected void setNeighboursFacing(boolean facing) {
 		for (Neighbour n : getNeighbours()) {
 			n.setFacingForSensor(SensorId, facing);
 		}
 	}
 	
+	/**
+	 * Looks at all the connected neighbours in the current sector, and removes them
+	 */
 	protected void removeConnectedNeighbours() {
 		List<Neighbour> curNeighbours = getNeighbours();
 		
@@ -208,6 +243,10 @@ public class Sensor {
 	}
 	
 	
+	/**
+	 * Returning the number of neighbours left to connect, across all remaining sectors
+	 * @return
+	 */
 	public int getRemainingNeighbours(){
 		return neighboursToConnect;
 	}

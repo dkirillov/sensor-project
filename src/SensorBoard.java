@@ -14,17 +14,26 @@ public class SensorBoard extends JPanel {
 	public static final int BOARD_WIDTH = 550;
 	public static final int BOARD_HEIGHT = 550;
 
+	/**
+	 * Constructor
+	 */
 	public SensorBoard(){
 		setVisible(true);
 	}
 
+	/**
+	 * Draws the sensor board
+	 * 
+	 * Draws a white background, draws the connections as grey for not connected, red for connected and then draws the sensors
+	 */
 	public void draw(Graphics gfx, Sensor[] sensors, Vector<Neighbour> neighbours){
-		BufferedImage buffer = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
+		BufferedImage buffer = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT-5, BufferedImage.TYPE_INT_RGB);
 		Graphics graphics = buffer.getGraphics();
 		
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(1,1,BOARD_WIDTH,BOARD_HEIGHT);
 
+		//Just testing if all neighbours are discovered
 		graphics.setColor(Color.RED);
 		for (Neighbour n : neighbours) {
 			
