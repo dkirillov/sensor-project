@@ -1,20 +1,27 @@
+/**
+ * @author	Danil Kirillov, Darryl Hill, Wesley Lawrence.
+ */
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * A class in charge of outputting to a log file. 
+ */
 public class LogFile {
 
-	BufferedWriter logOut;
-	BufferedWriter statOut;
-	boolean open = false;
-	
-	
-	public LogFile(){
-		
-	}
-	
+	BufferedWriter logOut;		//Output to a log file.
+	BufferedWriter statOut;		//Output to a statistics file.
+	boolean open = false;		//If the output is currently opened.
+
+	/**
+	 * Opens the output files.
+	 * @param testNumber	The current test that it is on.
+	 * @param algo			The algorithm that the output is for.
+	 * @param sensors		The number of sensors for the current output.
+	 * @param k				The number of sectors per sensor.
+	 */
 	public void open(int testNumber, String algo, int sensors, int k){
 		try{
 			// Create file 
@@ -33,7 +40,10 @@ public class LogFile {
 		}
 		
 	}
-	
+	/**
+	 * Writes a string to the log file.
+	 * @param s	The string which will be written.
+	 */
 	public void logWrite(String s){
 		try {
 			logOut.write(s);
@@ -42,7 +52,10 @@ public class LogFile {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Writes the string to a statistics file.
+	 * @param s	The string which will be written.
+	 */
 	public void statWrite(String s) {
 		try {
 			statOut.write(s);
@@ -51,7 +64,9 @@ public class LogFile {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Closes the outputs.
+	 */
 	public void close(){
 		if (!open) return;
 		try {
