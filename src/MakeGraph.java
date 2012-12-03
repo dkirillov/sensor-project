@@ -192,9 +192,9 @@ public class MakeGraph {
 			}
 			middle.append(str+"],\n");
 			if ((!moreARA)&&(!moreRSRMA)&&(!moreRSRMAp)){
-				//break;
+				break;
 			}
-			if (count > 20000){
+			if (count > 4000){
 				break;
 			}
 		}

@@ -11,6 +11,8 @@ This data is then run through an averaging algorithm which reads in all the file
 
 \subsection{Comparision}
 
+It should be noted that the jagged graphs are a unfortunate side effect of running low numbers of sensors. Since the tests finish so quickly there are a lot of discrete values. Even trying to average over as many as 1000 tests did nothing to alleviate it.
+
 As you can see in figures \ref{fig:n40k3}, \ref{fig:n40k7}, and \ref{fig:n40k12}, the highest performer at low numbers of sensors is RSRMA. If you remember, it passes in the number of sectors as its second argument and chooses between Mech0 and Mech1. The primary method of symmetry breaking of this algorithm is the random selection of either Mech0 or Mech1. Interestingly, for all the effort put into developing algorithms guaranteed to break symmetry, apparently sometimes it pays to simply roll the dice. 
 
 You may also note that as the number of sectors decreases (ie the sector beam gets wider), ARA gets a noticable performance boost in comparison to the other two algorithms (though it never actually catches up).
@@ -115,9 +117,11 @@ Every test did finish, but higher sensor values produce denser graphs, and dense
 
 \newpage
 
-Some of the graphs are deceptive, since they show the performance over varying amounts of time.
+Some of the graphs are deceptive, since they show the performance over varying amounts of time. For graphs that compare varying k values this was deemed preferable, since if we fix
+the time at whatever k=12 finished at, the graphs for k=3 essentially appear to shoot straight up. So while in some ways it is a sloppy comparison, it seemed the lesser of two evils. 
+
 We did three additional graphs of k = 12 of varying density in figures \ref{fig:n100k12b}, 
-\ref{fig:n1000k12b}, and \ref{fig:n5000k12b}. We can see the performance difference in the three algorithms as the density increases. In particular, the performance of RSRMA does not suffer, while the performance of the algorithms dependant on a graph colouring and prime numbers suffers considerably in comparison.
+\ref{fig:n1000k12b}, and \ref{fig:n5000k12b}, where we fix the number of rounds to 20 000. We can see the performance difference in the three algorithms as the density increases. In particular, the performance of RSRMA does not suffer, while the performance of the algorithms dependant on a graph colouring and prime numbers suffers considerably in comparison.
 
 \begin{figure}[ht]
 \caption{Sensors = 100, Sectors = 12, 20 000 rounds}

@@ -1,19 +1,22 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces UML Diagram\relax }}{4}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sensors = 10, Sectors = 3\relax }}{6}
-\contentsline {figure}{\numberline {3}{\ignorespaces Sensors = 10, Sectors = 7\relax }}{7}
-\contentsline {figure}{\numberline {4}{\ignorespaces Sensors = 10, Sectors = 12\relax }}{7}
-\contentsline {figure}{\numberline {5}{\ignorespaces Sensors = 40, Sectors = 3\relax }}{8}
-\contentsline {figure}{\numberline {6}{\ignorespaces Sensors = 40, Sectors = 7\relax }}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Sensors = 40, Sectors = 12\relax }}{9}
-\contentsline {figure}{\numberline {8}{\ignorespaces Sensors = 100, Sectors = 3\relax }}{9}
-\contentsline {figure}{\numberline {9}{\ignorespaces Sensors = 100, Sectors = 7\relax }}{10}
-\contentsline {figure}{\numberline {10}{\ignorespaces Sensors = 100, Sectors = 12\relax }}{10}
-\contentsline {figure}{\numberline {11}{\ignorespaces Sensors = 1000, Sectors = 3\relax }}{11}
-\contentsline {figure}{\numberline {12}{\ignorespaces Sensors = 1000, Sectors = 7\relax }}{11}
-\contentsline {figure}{\numberline {13}{\ignorespaces Sensors = 1000, Sectors = 12\relax }}{12}
-\contentsline {figure}{\numberline {14}{\ignorespaces Sensors = 5000, Sectors = 3\relax }}{12}
-\contentsline {figure}{\numberline {15}{\ignorespaces Sensors = 5000, Sectors = 7\relax }}{13}
-\contentsline {figure}{\numberline {16}{\ignorespaces Sensors = 5000, Sectors = 12\relax }}{13}
-\contentsline {figure}{\numberline {17}{\ignorespaces Sensors = 100, Sectors = 12, 20 000 rounds\relax }}{14}
-\contentsline {figure}{\numberline {18}{\ignorespaces Sensors = 1000, Sectors = 12, 20 000 rounds\relax }}{14}
-\contentsline {figure}{\numberline {19}{\ignorespaces Sensors = 5000, Sectors = 12, 20 000 rounds\relax }}{15}
+\contentsline {figure}{\numberline {1}{\ignorespaces Sensor Placement Example 1\relax }}{4}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sensor Placement Example 2\relax }}{5}
+\contentsline {figure}{\numberline {3}{\ignorespaces UML Diagram\relax }}{6}
+\contentsline {figure}{\numberline {4}{\ignorespaces Rotation Algorithms UML\relax }}{7}
+\contentsline {figure}{\numberline {5}{\ignorespaces Sensors = 10, Sectors = 3\relax }}{11}
+\contentsline {figure}{\numberline {6}{\ignorespaces Sensors = 10, Sectors = 7\relax }}{11}
+\contentsline {figure}{\numberline {7}{\ignorespaces Sensors = 10, Sectors = 12\relax }}{12}
+\contentsline {figure}{\numberline {8}{\ignorespaces Sensors = 40, Sectors = 3\relax }}{12}
+\contentsline {figure}{\numberline {9}{\ignorespaces Sensors = 40, Sectors = 7\relax }}{13}
+\contentsline {figure}{\numberline {10}{\ignorespaces Sensors = 40, Sectors = 12\relax }}{13}
+\contentsline {figure}{\numberline {11}{\ignorespaces Sensors = 100, Sectors = 3\relax }}{14}
+\contentsline {figure}{\numberline {12}{\ignorespaces Sensors = 100, Sectors = 7\relax }}{14}
+\contentsline {figure}{\numberline {13}{\ignorespaces Sensors = 100, Sectors = 12\relax }}{15}
+\contentsline {figure}{\numberline {14}{\ignorespaces Sensors = 1000, Sectors = 3\relax }}{15}
+\contentsline {figure}{\numberline {15}{\ignorespaces Sensors = 1000, Sectors = 7\relax }}{16}
+\contentsline {figure}{\numberline {16}{\ignorespaces Sensors = 1000, Sectors = 12\relax }}{16}
+\contentsline {figure}{\numberline {17}{\ignorespaces Sensors = 5000, Sectors = 3\relax }}{17}
+\contentsline {figure}{\numberline {18}{\ignorespaces Sensors = 5000, Sectors = 7\relax }}{17}
+\contentsline {figure}{\numberline {19}{\ignorespaces Sensors = 5000, Sectors = 12\relax }}{18}
+\contentsline {figure}{\numberline {20}{\ignorespaces Sensors = 100, Sectors = 12, 20 000 rounds\relax }}{18}
+\contentsline {figure}{\numberline {21}{\ignorespaces Sensors = 1000, Sectors = 12, 20 000 rounds\relax }}{19}
+\contentsline {figure}{\numberline {22}{\ignorespaces Sensors = 5000, Sectors = 12, 20 000 rounds\relax }}{19}

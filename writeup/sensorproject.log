@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  3 DEC 2012 09:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  3 DEC 2012 12:04
 entering extended mode
  %&-line parsing enabled.
 **sensorproject.tex
@@ -139,76 +139,124 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks28
 \verbatim@line=\toks29
 \verbatim@in@stream=\read1
+)
+(/usr/share/texmf-texlive/tex/latex/floatrow/floatrow.sty
+Package: floatrow 2008/08/02 v0.3b floatrow: float package extension
+
+(/usr/share/texmf-texlive/tex/latex/caption/caption3.sty
+Package: caption3 2009/10/09 v3.1k caption3 kernel (AR)
+\captionmargin=\dimen117
+\captionmargin@=\dimen118
+\captionwidth=\dimen119
+\caption@indent=\dimen120
+\caption@parindent=\dimen121
+\caption@hangindent=\dimen122
+)
+\c@float@type=\count103
+\float@exts=\toks30
+\float@box=\box28
+\@floatcapt=\box29
+Package floatrow Info: Modified float package code loaded on input line 455.
+Package floatrow Info: Modified rotfloat package code loaded on input line 473.
+
+\FR@everyfloat=\toks31
+\flrow@foot=\insert233
+\FB@wd=\dimen123
+\FBo@wd=\dimen124
+\FBc@wd=\dimen125
+\FBo@ht=\skip50
+\FBc@ht=\skip51
+\FBf@ht=\skip52
+\FBo@max=\skip53
+\FBc@max=\skip54
+\FBf@max=\skip55
+\c@FBl@b=\count104
+\floatbox@depth=\count105
+\c@FRobj=\count106
+\c@FRsobj=\count107
+\Xhsize=\skip56
+\sXhsize=\skip57
+\Zhsize=\skip58
+\sZhsize=\skip59
+\flrow@rowbox=\box30
+\FR@Zunitlength=\dimen126
+\c@FBcnt=\count108
+\FPOScnt=\count109
+\LTleft=\skip60
+\LTright=\skip61
+\LTleft=\skip62
+\LTright=\skip63
+\flrow@types=\toks32
 ) (./diagrams.sty
 ==================================================================
 <Paul Taylor's commutative diagrams - version 3.94, April 2011>
 Package: diagrams 2011/04/19 v3.94 Paul Taylor's commutative diagrams
-\CD@uA=\count103
-\CD@vA=\count104
-\CD@wA=\count105
-\CD@xA=\count106
-\CD@OA=\dimen117
-\CD@PA=\dimen118
-\CD@RA=\dimen119
-\CD@SA=\dimen120
-\CD@yA=\count107
-\CD@zA=\count108
-\CD@QA=\dimen121
-\CD@DA=\box28
-\CD@LH=\count109
-\CD@TC=\count110
-\CD@XH=\dimen122
-\CD@zC=\dimen123
-\CD@@I=\dimen124
-\CD@LF=\dimen125
-\CD@oI=\dimen126
-\CD@DC=\dimen127
-\CD@eJ=\dimen128
-\PileSpacing=\dimen129
-\CD@nA=\dimen130
-\CD@YB=\dimen131
-\DiagramCellHeight=\dimen132
-\DiagramCellWidth=\dimen133
-\MapShortFall=\dimen134
-\CD@iA=\dimen135
-\rh+:>=\box29
-\rt+:<=\box30
-\dh+:>=\box31
-\dt+:<=\box32
-\rt+:>=\box33
-\rh+:<=\box34
-\dt+:>=\box35
-\dh+:<=\box36
-\CD@VE=\toks30
-\CD@SE=\toks31
-\CD@VA=\count111
-\CD@ME=\toks32
-\CD@XE=\toks33
-\CD@RE=\toks34
-\CD@TE=\toks35
-\CD@QE=\toks36
-\CD@WE=\toks37
-\CD@OE=\toks38
-\CD@PE=\toks39
-\CD@NE=\toks40
-\CD@UE=\toks41
-\CD@CA=\count112
-\CD@XB=\count113
-\CD@NB=\count114
-\CD@FA=\count115
-\CD@lA=\count116
-\CD@MB=\count117
-\CD@GB=\count118
-\CD@KG=\box37
-\CD@IG=\box38
-\DiagonalChoice=\count119
-\objectheight=\dimen136
-\objectwidth=\dimen137
-\CD@NA=\toks42
-\CD@xI=\toks43
-\CD@lH=\toks44
-\CD@hD=\toks45
-\CD@hH=\toks46
+\CD@uA=\count110
+\CD@vA=\count111
+\CD@wA=\count112
+\CD@xA=\count113
+\CD@OA=\dimen127
+\CD@PA=\dimen128
+\CD@RA=\dimen129
+\CD@SA=\dimen130
+\CD@yA=\count114
+\CD@zA=\count115
+\CD@QA=\dimen131
+\CD@DA=\box31
+\CD@LH=\count116
+\CD@TC=\count117
+\CD@XH=\dimen132
+\CD@zC=\dimen133
+\CD@@I=\dimen134
+\CD@LF=\dimen135
+\CD@oI=\dimen136
+\CD@DC=\dimen137
+\CD@eJ=\dimen138
+\PileSpacing=\dimen139
+\CD@nA=\dimen140
+\CD@YB=\dimen141
+\DiagramCellHeight=\dimen142
+\DiagramCellWidth=\dimen143
+\MapShortFall=\dimen144
+\CD@iA=\dimen145
+\rh+:>=\box32
+\rt+:<=\box33
+\dh+:>=\box34
+\dt+:<=\box35
+\rt+:>=\box36
+\rh+:<=\box37
+\dt+:>=\box38
+\dh+:<=\box39
+\CD@VE=\toks33
+\CD@SE=\toks34
+\CD@VA=\count118
+\CD@ME=\toks35
+\CD@XE=\toks36
+\CD@RE=\toks37
+\CD@TE=\toks38
+\CD@QE=\toks39
+\CD@WE=\toks40
+\CD@OE=\toks41
+\CD@PE=\toks42
+\CD@NE=\toks43
+\CD@UE=\toks44
+\CD@CA=\count119
+\CD@XB=\count120
+\CD@NB=\count121
+\CD@FA=\count122
+\CD@lA=\count123
+\CD@MB=\count124
+\CD@GB=\count125
+\CD@KG=\box40
+\CD@IG=\box41
+\DiagonalChoice=\count126
+\objectheight=\dimen146
+\objectwidth=\dimen147
+\CD@NA=\toks45
+\CD@xI=\toks46
+\CD@lH=\toks47
+\CD@hD=\toks48
+\CD@hH=\toks49
 LaTeX Font Info:    Try loading font information for U+msa on input line 1889.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
@@ -237,41 +285,33 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
-\Gread@gobject=\count120
+\Gread@gobject=\count127
 ))
-\Gin@req@height=\dimen138
-\Gin@req@width=\dimen139
+\Gin@req@height=\dimen148
+\Gin@req@width=\dimen149
 )
 (/usr/share/texmf-texlive/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
 (/usr/share/texmf-texlive/tex/latex/caption/caption.sty
 Package: caption 2009/10/09 v3.1k Customizing captions (AR)
-
-(/usr/share/texmf-texlive/tex/latex/caption/caption3.sty
-Package: caption3 2009/10/09 v3.1k caption3 kernel (AR)
-\captionmargin=\dimen140
-\captionmargin@=\dimen141
-\captionwidth=\dimen142
-\caption@indent=\dimen143
-\caption@parindent=\dimen144
-\caption@hangindent=\dimen145
+\c@ContinuedFloat=\count128
+Package caption Info: float package is loaded.
+Package caption Info: floatrow package is loaded.
 )
-\c@ContinuedFloat=\count121
-)
-\c@KVtest=\count122
-\sf@farskip=\skip50
-\sf@captopadj=\dimen146
-\sf@capskip=\skip51
-\sf@nearskip=\skip52
-\c@subfigure=\count123
-\c@subfigure@save=\count124
-\c@lofdepth=\count125
-\c@subtable=\count126
-\c@subtable@save=\count127
-\c@lotdepth=\count128
-\sf@top=\skip53
-\sf@bottom=\skip54
+\c@KVtest=\count129
+\sf@farskip=\skip64
+\sf@captopadj=\dimen150
+\sf@capskip=\skip65
+\sf@nearskip=\skip66
+\c@subfigure=\count130
+\c@subfigure@save=\count131
+\c@lofdepth=\count132
+\c@subtable=\count133
+\c@subtable@save=\count134
+\c@lotdepth=\count135
+\sf@top=\skip67
+\sf@bottom=\skip68
 )
 (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
@@ -286,7 +326,7 @@ Package: fmtcount 2009/10/02 v1.31
 (/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@padzeroesN=\count129
+\c@padzeroesN=\count136
 
 (/usr/share/texmf-texlive/tex/latex/fmtcount/fc-english.def
 File: fc-english 2007/05/26
@@ -295,49 +335,49 @@ File: fc-english 2007/05/26
 File: fc-USenglish 2007/06/14
 )
 No configuration file fmtcount.cfg found.
-\@DT@modctr=\count130
-\@ordinalctr=\count131
-\@orgargctr=\count132
-\@strctr=\count133
-\@tmpstrctr=\count134
-\@DT@loopN=\count135
-\@DT@X=\count136
+\@DT@modctr=\count137
+\@ordinalctr=\count138
+\@orgargctr=\count139
+\@strctr=\count140
+\@tmpstrctr=\count141
+\@DT@loopN=\count142
+\@DT@X=\count143
 ) (/usr/share/texmf-texlive/tex/latex/tools/longtable.sty
 Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
-\LTchunksize=\count137
-\LTcapwidth=\dimen147
-\LT@head=\box39
-\LT@firsthead=\box40
-\LT@foot=\box41
-\LT@lastfoot=\box42
-\LT@cols=\count138
-\LT@rows=\count139
-\c@LT@tables=\count140
-\c@LT@chunks=\count141
-\LT@p@ftn=\toks47
+\LTleft=\skip69
+\LTright=\skip70
+\LTpre=\skip71
+\LTpost=\skip72
+\LTchunksize=\count144
+\LTcapwidth=\dimen151
+\LT@head=\box42
+\LT@firsthead=\box43
+\LT@foot=\box44
+\LT@lastfoot=\box45
+\LT@cols=\count145
+\LT@rows=\count146
+\c@LT@tables=\count147
+\c@LT@chunks=\count148
+\LT@p@ftn=\toks50
 )
 (/usr/share/texmf-texlive/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
-) (./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./analysis.a
-ux) (./conclusions.aux))
+) (./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./exectution
+.aux) (./analysis.aux) (./conclusions.aux))
 \openout1 = `sensorproject.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 
 *geometry auto-detecting driver*
 *geometry detected driver: pdftex*
@@ -380,29 +420,48 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count142
-\scratchdimen=\dimen148
-\scratchbox=\box43
-\nofMPsegments=\count143
-\nofMParguments=\count144
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count145
-\MPscratchDim=\dimen149
-\MPnumerator=\count146
-\everyMPtoPDFconversion=\toks49
-)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption3 Info: subfig package 1.2 or 1.3 is loaded.
-LaTeX Info: Redefining \subref on input line 43.
+LaTeX Info: Redefining \subref on input line 44.
 Package caption Info: longtable package is loaded.
- (/usr/share/texmf-texlive/tex/latex/caption/ltcaption.sty
+(/usr/share/texmf-texlive/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2008/03/28 v1.2 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 
-<CarletonLogo.png, id=1, 702.625pt x 201.75375pt>
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texmf-texlive/tex/latex/floatrow/fr-subfig.sty
+Package: fr-subfig 2007/12/24 v0.1g (beta) floatrow: additions for subfig
+\FBsc@max=\skip73
+\FBso@max=\skip74
+)
+(/usr/share/texmf-texlive/tex/latex/floatrow/fr-longtable.sty
+Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
+
+\flrow@LT@lasthead=\box46
+\flrow@LT@prelastfoot=\box47
+\c@FBLTpage=\count149
+)
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count150
+\scratchdimen=\dimen152
+\scratchbox=\box48
+\nofMPsegments=\count151
+\nofMParguments=\count152
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count153
+\MPscratchDim=\dimen153
+\MPnumerator=\count154
+\everyMPtoPDFconversion=\toks52
+) <CarletonLogo.png, id=1, 702.625pt x 201.75375pt>
 File: CarletonLogo.png Graphic file (type png)
  <use CarletonLogo.png>
 <pics/title.png, id=3, 591.20876pt x 567.11874pt>
@@ -414,148 +473,157 @@ s/title.png (PNG copy)>] (./sensorproject.toc)
 \tf@toc=\write3
 \openout3 = `sensorproject.toc'.
 
- (./sensorproject.lof)
+ (./sensorproject.lof [1])
 \tf@lof=\write4
 \openout4 = `sensorproject.lof'.
 
- [1]
+ [2]
 \openout2 = `introduction.aux'.
 
 
-(./introduction.tex) [2
+(./introduction.tex) [3
 
 ]
 \openout2 = `progbreakdown.aux'.
 
  (./progbreakdown.tex
-<pics/Main.jpg, id=27, 2246.3925pt x 1908.12875pt>
+<pics/placement1.png, id=30, 91.84312pt x 91.09032pt>
+File: pics/placement1.png Graphic file (type png)
+
+<use pics/placement1.png>
+<pics/placement2.png, id=31, 125.71968pt x 121.20282pt>
+File: pics/placement2.png Graphic file (type png)
+
+<use pics/placement2.png> [4
+
+
+ <./pics/placement1.png>]
+<pics/Main.jpg, id=37, 1587.9325pt x 1908.12875pt>
 File: pics/Main.jpg Graphic file (type jpg)
- <use pics/Main.jpg>
-Overfull \hbox (35.43918pt too wide) in paragraph at lines 47--48
-[][] 
- []
+ <use pics/Main.jpg> [5 <./pics/placement2.png>] [6 <./pics/Main.jpg>]
+<pics/algo.jpg, id=46, 589.20125pt x 479.7925pt>
+File: pics/algo.jpg Graphic file (type jpg)
+ <use pics/algo.jpg> [7 <./pics/algo.jpg>]) [8]
+\openout2 = `exectution.aux'.
+
+ (./exectution.tex) [9
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--48
-
- []
-
-[3
-
-
-] [4 <./pics/Main.jpg>]) [5]
+]
 \openout2 = `analysis.aux'.
 
  (./analysis.tex
-<pics/graph10k3.png, id=38, 614.295pt x 287.6346pt>
+<pics/graph10k3.png, id=58, 614.295pt x 287.6346pt>
 File: pics/graph10k3.png Graphic file (type png)
  <use pics/graph10k3.png>
-<pics/graph10k7.png, id=39, 614.295pt x 283.2984pt>
+<pics/graph10k7.png, id=59, 614.295pt x 283.2984pt>
 File: pics/graph10k7.png Graphic file (type png)
  <use pics/graph10k7.png>
-<pics/graph10k12.png, id=40, 614.295pt x 293.4162pt>
+<pics/graph10k12.png, id=60, 614.295pt x 293.4162pt>
 File: pics/graph10k12.png Graphic file (type png)
  <use pics/graph10k12.png>
-[6
-
-
- <./pics/graph10k3.png>] <pics/graph40k3.png, id=46, 614.295pt x 291.9708pt>
+<pics/graph40k3.png, id=61, 614.295pt x 291.9708pt>
 File: pics/graph40k3.png Graphic file (type png)
-
-<use pics/graph40k3.png> <pics/graph40k7.png, id=47, 614.295pt x 293.4162pt>
+ <use pics/graph40k3.png>
+<pics/graph40k7.png, id=62, 614.295pt x 293.4162pt>
 File: pics/graph40k7.png Graphic file (type png)
-
-<use pics/graph40k7.png> <pics/graph40k12.png, id=48, 614.295pt x 281.853pt>
+ <use pics/graph40k7.png>
+<pics/graph40k12.png, id=63, 614.295pt x 281.853pt>
 File: pics/graph40k12.png Graphic file (type png)
-
-<use pics/graph40k12.png> [7 <./pics/graph10k7.png> <./pics/graph10k12.png>]
-<pics/graph100k3.png, id=54, 614.295pt x 290.5254pt>
+ <use pics/graph40k12.png>
+<pics/graph100k3.png, id=64, 614.295pt x 290.5254pt>
 File: pics/graph100k3.png Graphic file (type png)
  <use pics/graph100k3.png>
-<pics/graph100k7.png, id=55, 614.295pt x 296.307pt>
+<pics/graph100k7.png, id=65, 614.295pt x 296.307pt>
 File: pics/graph100k7.png Graphic file (type png)
  <use pics/graph100k7.png>
-<pics/graph100k12.png, id=56, 614.295pt x 287.6346pt>
+<pics/graph100k12.png, id=66, 614.295pt x 287.6346pt>
 File: pics/graph100k12.png Graphic file (type png)
 
-<use pics/graph100k12.png> <pics/graph1000k3.png, id=57, 614.295pt x 289.08pt>
+<use pics/graph100k12.png> <pics/graph1000k3.png, id=67, 614.295pt x 289.08pt>
 File: pics/graph1000k3.png Graphic file (type png)
 
 <use pics/graph1000k3.png>
-<pics/graph1000k7.png, id=58, 614.295pt x 290.5254pt>
+<pics/graph1000k7.png, id=68, 614.295pt x 290.5254pt>
 File: pics/graph1000k7.png Graphic file (type png)
 
 <use pics/graph1000k7.png>
-<pics/graph1000k12.png, id=59, 614.295pt x 278.9622pt>
+<pics/graph1000k12.png, id=69, 614.295pt x 278.9622pt>
 File: pics/graph1000k12.png Graphic file (type png)
 
 <use pics/graph1000k12.png>
-Overfull \hbox (0.76659pt too wide) in paragraph at lines 94--96
-[][] 
+Overfull \hbox (0.76659pt too wide) in paragraph at lines 96--96
+ [][] 
  []
 
-<pics/graph5000k3.png, id=60, 614.295pt x 290.5254pt>
+<pics/graph5000k3.png, id=70, 614.295pt x 290.5254pt>
 File: pics/graph5000k3.png Graphic file (type png)
 
 <use pics/graph5000k3.png>
-<pics/graph5000k7.png, id=61, 614.295pt x 284.7438pt>
+<pics/graph5000k7.png, id=71, 614.295pt x 284.7438pt>
 File: pics/graph5000k7.png Graphic file (type png)
 
 <use pics/graph5000k7.png>
-<pics/graph5000k12.png, id=62, 614.295pt x 309.3156pt>
+<pics/graph5000k12.png, id=72, 614.295pt x 309.3156pt>
 File: pics/graph5000k12.png Graphic file (type png)
 
-<use pics/graph5000k12.png> [8 <./pics/graph40k3.png> <./pics/graph40k7.png>]
-<pics/graph100k12b.png, id=68, 614.295pt x 281.853pt>
+<use pics/graph5000k12.png> [10
+
+
+]
+<pics/graph100k12b.png, id=76, 614.295pt x 281.853pt>
 File: pics/graph100k12b.png Graphic file (type png)
 
 <use pics/graph100k12b.png>
-<pics/graph1000k12b.png, id=69, 614.295pt x 293.4162pt>
+<pics/graph1000k12b.png, id=77, 614.295pt x 293.4162pt>
 File: pics/graph1000k12b.png Graphic file (type png)
 
 <use pics/graph1000k12b.png>
-<pics/graph5000k12b.png, id=70, 614.295pt x 296.307pt>
+<pics/graph5000k12b.png, id=78, 614.295pt x 296.307pt>
 File: pics/graph5000k12b.png Graphic file (type png)
 
-<use pics/graph5000k12b.png>) [9 <./pics/graph40k12.png> <./pics/graph100k3.png
->] [10 <./pics/graph100k7.png> <./pics/graph100k12.png>] [11 <./pics/graph1000k
-3.png> <./pics/graph1000k7.png>] [12 <./pics/graph1000k12.png> <./pics/graph500
-0k3.png>] [13 <./pics/graph5000k7.png> <./pics/graph5000k12.png>] [14 <./pics/g
-raph100k12b.png> <./pics/graph1000k12b.png>] [15 <./pics/graph5000k12b.png>]
+<use pics/graph5000k12b.png>) [11 <./pics/graph10k3.png> <./pics/graph10k7.png>
+] [12 <./pics/graph10k12.png> <./pics/graph40k3.png>] [13 <./pics/graph40k7.png
+> <./pics/graph40k12.png>] [14 <./pics/graph100k3.png> <./pics/graph100k7.png>]
+[15 <./pics/graph100k12.png> <./pics/graph1000k3.png>] [16 <./pics/graph1000k7.
+png> <./pics/graph1000k12.png>] [17 <./pics/graph5000k3.png> <./pics/graph5000k
+7.png>] [18 <./pics/graph5000k12.png> <./pics/graph100k12b.png>] [19 <./pics/gr
+aph1000k12b.png> <./pics/graph5000k12b.png>]
 \openout2 = `conclusions.aux'.
 
-
-(./conclusions.tex) [16
+ (./conclusions.tex) [20
 
 
 ]
 Commutative Diagram: try the PostScript option for better results
-(./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./analysis.aux
-) (./conclusions.aux)) ) 
+(./sensorproject.aux (./introduction.aux) (./progbreakdown.aux)
+(./exectution.aux) (./analysis.aux) (./conclusions.aux)) ) 
 Here is how much of TeX's memory you used:
- 6237 strings out of 495061
- 74823 string characters out of 1182620
- 155155 words of memory out of 3000000
- 9299 multiletter control sequences out of 15000+50000
- 19781 words of font info for 55 fonts, out of 3000000 for 9000
+ 6854 strings out of 495061
+ 84081 string characters out of 1182620
+ 171037 words of memory out of 3000000
+ 9890 multiletter control sequences out of 15000+50000
+ 20546 words of font info for 56 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,6n,42p,1184b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecbx1200.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecr
-m1095.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.
-600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk>
- </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </hom
-e/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/darr
-ylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1440.600pk> </home/darrylhill
-/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/darrylhill/.texm
-f-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </home/darrylhill/.texmf-var/
-fonts/pk/ljfour/jknappen/ec/eccc1200.600pk></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-r8.pfb>
-Output written on sensorproject.pdf (17 pages, 1083174 bytes).
+ 37i,6n,39p,1050b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/darrylhill/.t
+exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/darrylhill/.texmf-v
+ar/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/darrylhill/.texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/darrylhill/.texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecbx1095.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour
+/jknappen/ec/ecbx1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecrm1200.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec
+/ecrm1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1
+440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.60
+0pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> <
+/home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb>
+Output written on sensorproject.pdf (21 pages, 1155345 bytes).
 PDF statistics:
- 418 PDF objects out of 1000 (max. 8388607)
+ 501 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
