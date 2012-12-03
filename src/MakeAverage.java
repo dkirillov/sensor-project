@@ -106,6 +106,7 @@ public class MakeAverage {
 			}
 			total /= numtests;
 			ARAwriter.write(Double.toString(total)+"\n");
+			//System.out.println(total);
 			boolean check = false;
 			for (int i = 0; i < numtests; i ++){
 				if (moreARA[i])check = true;

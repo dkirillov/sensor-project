@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  30 NOV 2012 15:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  3 DEC 2012 08:28
 entering extended mode
  %&-line parsing enabled.
 **sensorproject.tex
@@ -322,8 +322,36 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 )
 (/usr/share/texmf-texlive/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
-) (./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./exectution
-.aux) (./analysis.aux) (./compmethods.aux) (./conclusions.aux))
+) (./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./analysis.a
+ux
+
+LaTeX Warning: Label `fig:n10k3' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k7' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k12' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k3' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k7' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k12' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k3' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k7' multiply defined.
+
+
+LaTeX Warning: Label `fig:n10k12' multiply defined.
+
+) (./conclusions.aux))
 \openout1 = `sensorproject.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -444,72 +472,121 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
 
 ] [4 <./pics/Main.jpg>]) [5]
-\openout2 = `exectution.aux'.
-
- (./exectution.tex) [6
-
-
-]
 \openout2 = `analysis.aux'.
 
  (./analysis.tex
-<pics/graph40k3.png, id=42, 614.295pt x 291.9708pt>
-File: pics/graph40k3.png Graphic file (type png)
- <use pics/graph40k3.png>
-<pics/graph40k7.png, id=43, 614.295pt x 293.4162pt>
-File: pics/graph40k7.png Graphic file (type png)
- <use pics/graph40k7.png>
-<pics/graph40k12.png, id=44, 614.295pt x 281.853pt>
-File: pics/graph40k12.png Graphic file (type png)
- <use pics/graph40k12.png>
-<pics/graph10k3.png, id=45, 614.295pt x 287.6346pt>
+<pics/graph10k3.png, id=38, 614.295pt x 287.6346pt>
 File: pics/graph10k3.png Graphic file (type png)
  <use pics/graph10k3.png>
-[7
-
-
- <./pics/graph40k3.png>] <pics/graph10k7.png, id=50, 614.295pt x 283.2984pt>
+<pics/graph10k7.png, id=39, 614.295pt x 283.2984pt>
 File: pics/graph10k7.png Graphic file (type png)
-
-<use pics/graph10k7.png> <pics/graph10k12.png, id=51, 614.295pt x 293.4162pt>
+ <use pics/graph10k7.png>
+<pics/graph10k12.png, id=40, 614.295pt x 293.4162pt>
 File: pics/graph10k12.png Graphic file (type png)
+ <use pics/graph10k12.png>
+[6
 
-<use pics/graph10k12.png>) [8 <./pics/graph40k7.png> <./pics/graph40k12.png>]
-[9 <./pics/graph10k3.png> <./pics/graph10k7.png>] [10 <./pics/graph10k12.png>]
+
+ <./pics/graph10k3.png>] <pics/graph40k3.png, id=46, 614.295pt x 291.9708pt>
+File: pics/graph40k3.png Graphic file (type png)
+
+<use pics/graph40k3.png> <pics/graph40k7.png, id=47, 614.295pt x 293.4162pt>
+File: pics/graph40k7.png Graphic file (type png)
+
+<use pics/graph40k7.png> <pics/graph40k12.png, id=48, 614.295pt x 281.853pt>
+File: pics/graph40k12.png Graphic file (type png)
+
+<use pics/graph40k12.png> [7 <./pics/graph10k7.png> <./pics/graph10k12.png>]
+<pics/graph100k3.png, id=54, 614.295pt x 290.5254pt>
+File: pics/graph100k3.png Graphic file (type png)
+ <use pics/graph100k3.png>
+<pics/graph100k7.png, id=55, 614.295pt x 296.307pt>
+File: pics/graph100k7.png Graphic file (type png)
+ <use pics/graph100k7.png>
+<pics/graph100k12.png, id=56, 614.295pt x 287.6346pt>
+File: pics/graph100k12.png Graphic file (type png)
+
+<use pics/graph100k12.png> <pics/graph1000k3.png, id=57, 614.295pt x 289.08pt>
+File: pics/graph1000k3.png Graphic file (type png)
+
+<use pics/graph1000k3.png>
+<pics/graph1000k7.png, id=58, 614.295pt x 290.5254pt>
+File: pics/graph1000k7.png Graphic file (type png)
+
+<use pics/graph1000k7.png>
+<pics/graph1000k12.png, id=59, 614.295pt x 278.9622pt>
+File: pics/graph1000k12.png Graphic file (type png)
+
+<use pics/graph1000k12.png>
+Overfull \hbox (0.76659pt too wide) in paragraph at lines 94--96
+[][] 
+ []
+
+<pics/graph5000k3.png, id=60, 614.295pt x 290.5254pt>
+File: pics/graph5000k3.png Graphic file (type png)
+
+<use pics/graph5000k3.png>
+<pics/graph5000k7.png, id=61, 614.295pt x 284.7438pt>
+File: pics/graph5000k7.png Graphic file (type png)
+
+<use pics/graph5000k7.png>
+<pics/graph5000k12.png, id=62, 614.295pt x 309.3156pt>
+File: pics/graph5000k12.png Graphic file (type png)
+
+<use pics/graph5000k12.png> [8 <./pics/graph40k3.png> <./pics/graph40k7.png>]
+<pics/graph100k12b.png, id=68, 614.295pt x 281.853pt>
+File: pics/graph100k12b.png Graphic file (type png)
+
+<use pics/graph100k12b.png>
+<pics/graph1000k12b.png, id=69, 614.295pt x 293.4162pt>
+File: pics/graph1000k12b.png Graphic file (type png)
+
+<use pics/graph1000k12b.png>
+<pics/graph5000k12b.png, id=70, 614.295pt x 296.307pt>
+File: pics/graph5000k12b.png Graphic file (type png)
+
+<use pics/graph5000k12b.png>) [9 <./pics/graph40k12.png> <./pics/graph100k3.png
+>] [10 <./pics/graph100k7.png> <./pics/graph100k12.png>] [11 <./pics/graph1000k
+3.png> <./pics/graph1000k7.png>] [12 <./pics/graph1000k12.png> <./pics/graph500
+0k3.png>] [13 <./pics/graph5000k7.png> <./pics/graph5000k12.png>] [14 <./pics/g
+raph100k12b.png> <./pics/graph1000k12b.png>] [15 <./pics/graph5000k12b.png>]
 \openout2 = `conclusions.aux'.
 
 
-(./conclusions.tex) [11
+(./conclusions.tex) [16
 
 
 ]
 Commutative Diagram: try the PostScript option for better results
-(./sensorproject.aux (./introduction.aux) (./progbreakdown.aux)
-(./exectution.aux) (./analysis.aux) (./conclusions.aux)) ) 
+(./sensorproject.aux (./introduction.aux) (./progbreakdown.aux) (./analysis.aux
+) (./conclusions.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6177 strings out of 495061
- 73439 string characters out of 1182620
- 155886 words of memory out of 3000000
- 9241 multiletter control sequences out of 15000+50000
+ 6228 strings out of 495061
+ 74706 string characters out of 1182620
+ 155113 words of memory out of 3000000
+ 9290 multiletter control sequences out of 15000+50000
  19781 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  44i,6n,42p,1184b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/darrylhill/.t
-exmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/darrylhill/.texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/darrylhill/.texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/darrylhill/.texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecbx1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour
-/jknappen/ec/ecrm1200.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecrm1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec
-/ecti1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
-728.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.60
-0pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk></
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on sensorproject.pdf (12 pages, 788989 bytes).
+ </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </h
+ome/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/da
+rrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/darrylhi
+ll/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/darrylhill/.te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/darrylhill/.texmf-va
+r/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/darrylhill/.texmf-var/font
+s/pk/ljfour/jknappen/ec/ecti1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/l
+jfour/jknappen/ec/ecbx1728.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/
+jknappen/ec/eccc1440.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknapp
+en/ec/eccc1200.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+Output written on sensorproject.pdf (17 pages, 1083189 bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
+ 418 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

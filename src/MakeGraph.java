@@ -78,6 +78,7 @@ public class MakeGraph {
                 JOptionPane.PLAIN_MESSAGE,
                 null,null, null);*/
 		this.k = k;
+		this.n = n;
 		
 		String middle = null;
 		try {
@@ -191,6 +192,9 @@ public class MakeGraph {
 			}
 			middle.append(str+"],\n");
 			if ((!moreARA)&&(!moreRSRMA)&&(!moreRSRMAp)){
+				//break;
+			}
+			if (count > 20000){
 				break;
 			}
 		}

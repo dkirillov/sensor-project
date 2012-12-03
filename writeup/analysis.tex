@@ -13,45 +13,126 @@ This data is then run through an averaging algorithm which reads in all the file
 
 As you can see in figures \ref{fig:n40k3}, \ref{fig:n40k7}, and \ref{fig:n40k12}, the highest performer at low numbers of sensors is RSRMA. If you remember, it passes in the number of sectors as its second argument and chooses between Mech0 and Mech1. The primary method of symmetry breaking of this algorithm is the random selection of either Mech0 or Mech1. Interestingly, for all the effort put into developing algorithms guaranteed to break symmetry, apparently sometimes it pays to simply roll the dice. 
 
-You may also note that as the number of sectors decreases (ie the sector beam gets wider), ARA gets a noticable performance boost in comparison to the other two algorithms. 
-
-
-\begin{figure}[ht]
-\caption{}
-\includegraphics[height = 8cm]{pics/graph40k3.png}\\[0.5cm]    
-\label{fig:n40k3}
-\end{figure}
+You may also note that as the number of sectors decreases (ie the sector beam gets wider), ARA gets a noticable performance boost in comparison to the other two algorithms (though it never actually catches up).
 
 \begin{figure}[ht]
-\caption{}
-\includegraphics[height = 8cm]{pics/graph40k7.png}\\[0.5cm]   
-\label{fig:n40k7} 
-\end{figure}
-
-\begin{figure}[ht]
-\caption{}
-\includegraphics[height = 8cm]{pics/graph40k12.png}\\[0.5cm] 
-\label{fig:n40k12}   
-\end{figure}
-
-At extremely low numbers of sensors, such as 10 (\ref{fig:n10k3}, \ref{fig:n10k7}, and \ref{fig:n10k12}) RSRMA and RSRMA' are difficult to distinguish. RSRMA starts out a bit quicker but by the end they are neck and neck. ARA is again the poor performer, but gets a boost at low k values.
-
-\begin{figure}[ht]
-\caption{}
+\caption{Sensors = 10, Sectors = 3}
 \includegraphics[height = 8cm]{pics/graph10k3.png}\\[0.5cm]    
 \label{fig:n10k3}
 \end{figure}
 
 \begin{figure}[ht]
-\caption{}
+\caption{Sensors = 10, Sectors = 7}
 \includegraphics[height = 8cm]{pics/graph10k7.png}\\[0.5cm]   
 \label{fig:n10k7} 
 \end{figure}
 
 \begin{figure}[ht]
-\caption{}
+\caption{Sensors = 10, Sectors = 12}
 \includegraphics[height = 8cm]{pics/graph10k12.png}\\[0.5cm] 
 \label{fig:n10k12}   
 \end{figure}
 
+At extremely low numbers of sensors, such as 10 (figures \ref{fig:n10k3}, \ref{fig:n10k7}, and \ref{fig:n10k12}) RSRMA and RSRMA' are difficult to distinguish. RSRMA starts out a bit quicker but by the end they are neck and neck. ARA is again the poor performer, but gets a boost at low k values.
 
+\begin{figure}[ht]
+\caption{Sensors = 40, Sectors = 3}
+\includegraphics[height = 8cm]{pics/graph40k3.png}\\[0.5cm]    
+\label{fig:n40k3}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 40, Sectors = 7}
+\includegraphics[height = 8cm]{pics/graph40k7.png}\\[0.5cm]   
+\label{fig:n40k7} 
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 40, Sectors = 12}
+\includegraphics[height = 8cm]{pics/graph40k12.png}\\[0.5cm] 
+\label{fig:n40k12}   
+\end{figure}
+
+At 5000 sensors it takes upwards of 90000 rounds to finish. But at 90000 rounds the graphs are not as informative, so we limited rounds to 20000. 
+
+Every test did finish, but higher sensor values produce denser graphs, and denser graphs produce higher prime numbers, which means a longer overall time to finish. So the higher the sensor count, the more dense the graph, and the performance of the algorithms that are dependant on prime numbers really suffers. RSRMA finishes 5000 sensors in roughly the same time as 1000 sensors, so clearly randomized algorithms hold an advantage in dense graphs.
+
+
+\begin{figure}[ht]
+\caption{Sensors = 100, Sectors = 3}
+\includegraphics[height = 8cm]{pics/graph100k3.png}\\[0.5cm]    
+\label{fig:n10k3}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 100, Sectors = 7}
+\includegraphics[height = 8cm]{pics/graph100k7.png}\\[0.5cm]   
+\label{fig:n10k7} 
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 100, Sectors = 12}
+\includegraphics[height = 8cm]{pics/graph100k12.png}\\[0.5cm] 
+\label{fig:n10k12}   
+\end{figure}
+
+
+\begin{figure}[ht]
+\caption{Sensors = 1000, Sectors = 3}
+\includegraphics[height = 8cm]{pics/graph1000k3.png}\\[0.5cm]    
+\label{fig:n10k3}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 1000, Sectors = 7}
+\includegraphics[height = 8cm]{pics/graph1000k7.png}\\[0.5cm]   
+\label{fig:n10k7} 
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 1000, Sectors = 12}
+\includegraphics[height = 8cm]{pics/graph1000k12.png}\\[0.5cm] 
+\label{fig:n10k12}   
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 5000, Sectors = 3}
+\includegraphics[height = 8cm]{pics/graph5000k3.png}\\[0.5cm]    
+\label{fig:n10k3}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 5000, Sectors = 7}
+\includegraphics[height = 8cm]{pics/graph5000k7.png}\\[0.5cm]   
+\label{fig:n10k7} 
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 5000, Sectors = 12}
+\includegraphics[height = 8cm]{pics/graph5000k12.png}\\[0.5cm] 
+\label{fig:n10k12}   
+\end{figure}
+
+\newpage
+
+Some of the graphs are deceptive, since they show the performance over varying amounts of time.
+We did three additional graphs of k = 12 of varying density in figures \ref{fig:n100k12b}, 
+\ref{fig:n1000k12b}, and \ref{fig:n5000k12b}. We can see the performance difference in the three algorithms as the density increases. In particular, the performance of RSRMA does not suffer, while the performance of the algorithms dependant on a graph colouring and prime numbers suffers considerably in comparison.
+
+\begin{figure}[ht]
+\caption{Sensors = 100, Sectors = 12, 20 000 rounds}
+\includegraphics[height = 8cm]{pics/graph100k12b.png}\\[0.5cm]    
+\label{fig:n100k12b}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 1000, Sectors = 12, 20 000 rounds}
+\includegraphics[height = 8cm]{pics/graph1000k12b.png}\\[0.5cm]   
+\label{fig:n1000k12b} 
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Sensors = 5000, Sectors = 12, 20 000 rounds}
+\includegraphics[height = 8cm]{pics/graph5000k12b.png}\\[0.5cm] 
+\label{fig:n5000k12b}   
+\end{figure}

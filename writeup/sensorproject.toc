@@ -7,8 +7,7 @@
 \contentsline {subsection}{\numberline {2.2}MainThread}{3}
 \contentsline {subsection}{\numberline {2.3}GUI Interface}{5}
 \contentsline {subsection}{\numberline {2.4}Known Issues}{5}
-\contentsline {section}{\numberline {3}Execution}{6}
-\contentsline {section}{\numberline {4}Analysis}{7}
-\contentsline {subsection}{\numberline {4.1}Comparison Methods}{7}
-\contentsline {subsection}{\numberline {4.2}Comparision}{7}
-\contentsline {section}{\numberline {5}Conclusions}{11}
+\contentsline {section}{\numberline {3}Analysis}{6}
+\contentsline {subsection}{\numberline {3.1}Comparison Methods}{6}
+\contentsline {subsection}{\numberline {3.2}Comparision}{6}
+\contentsline {section}{\numberline {4}Conclusions}{16}
