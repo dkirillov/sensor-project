@@ -3,7 +3,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * A class to write out logfiles and statfiles simultaneously 
+ * with program execution
+ * @author darrylhill
+ *
+ */
 public class LogFile {
 
 	BufferedWriter logOut;
