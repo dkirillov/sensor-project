@@ -1,7 +1,17 @@
 \section{Program Breakdown}
 
 \subsection{Introduction}
-The program is written in java, providing a GUI interface to rapidly enable a wide variety of testing conditions. 
+The program is written in Java for simplicity for and portability. It can be broken 
+down into three main parts. The MainThread is responsible for creating the simulation and 
+updating the algorithms. The RotationAlgorithms (and subclasses) are responsible for updating 
+each sensor when they themselves are updated by the the MainThread. Lastly, the GUI allows 
+users to configure parameters used by the MainThread to create and run the simuations.
+
+\begin{figure}
+\centering
+\caption{UML Diagram}
+\includegraphics[height = 20cm]{pics/Main.jpg}\\[0.5cm]    
+\end{figure}
 
 \subsection{MainThread}
 
@@ -13,7 +23,7 @@ number of sectors, and range is determined by parameters from the GUI, modified 
 sliders. Creating sensors can be further broken down into three steps;  deciding their 
 placement, identifying the neighbours, and assigning each sensor to an algorithm. 
 	
-\subsection{Sensor Placement}
+\subsubsection{Sensor Placement}
 
 Sensor placement is not to a random position, as this can cause two problems. Sensors can be 
 to far away to connect, or so close that they sit almost on top of each other. This was solved 
@@ -46,11 +56,11 @@ sensors, overlaps begin to occur quite frequently.
 \floatfoot{One of the placements was chosen to place a sensor, and is now black. A 180 degree semi-circle, facing away from the sensor that spawned the sensor we just placed (in this case, the original sensor). Between 2 and 5 sensor may be chosen as placements, this time 5. They are place equally distributed along the half circle, as seen with the new green circles. The next sensor can be any green circle, until all sensor are generated.}  
 \end{figure}
 
-\subsection{Neighbour Identification}
+\subsubsection{Neighbour Identification}
 
 Two sensors are identified as neighbours if both are in range of each other, falling on some 
 sector of each other. Neighbours are identified in the 'record\_neighbours' method in the 
-MainThread. This method takes at most O(n2) times, since it runs on n sensors, checking at 
+MainThread. This method takes at most $O(n^2)$ times, since it runs on n sensors, checking at 
 most, n other sensors. Each call to this method passes in the index of a sensor which needs to 
 have it's neighbours identified. The method then loops through all the sensors up until the 
 index passed in (all the sensors previously initialized). At each iteration of this loop, it 
@@ -60,7 +70,7 @@ number is determined from the 168 possible prime numbers for the sensor at the p
 index, such that no neighbourly sensors have the same prime number, thus effectively colouring 
 the graph of sensors both graph theory-wise and literally the sensor's beam colour. 
 
-\subsection{Assigning Algorithms}
+\subsubsection{Assigning Algorithms}
 
 After the neighbours are determined, each sensor is assigned to an algorithm, this taking O(n) 
 time, as it goes through each sensor and assigns it to an algorithm. The type of algorithm 
@@ -82,14 +92,8 @@ each other, once a sensor has discovered all of it's neighbourly sensors there i
 it to keep searching/being updated. After the update has happened on the algorithms, the 
 neighbours are checked for connection, followed by output to both the GUI and log, and a call 
 to re-draw the sensors on the GUI. 
-	
-\begin{figure}
-\centering
-\caption{UML Diagram}
-\includegraphics[height = 20cm]{pics/Main.jpg}\\[0.5cm]    
-\end{figure}
 
-\subsection{Running the Simulation}
+\subsubsection{Running the Simulation}
 
 The current approach MainThread takes for "running" the sensors, is that there is a list of 
 algorithms that are each responsible for "running" their sensors. The algorithms themselves 
@@ -149,7 +153,7 @@ respectively.
 
 
 \subsection{GUI Interface}
-The GUI has some configurable sections. In particular there are slider settings for running speed, the number of sectors and the range. We are technically running the tests in a unit square, so the range has no applicative meaning except in the sense of the visual output (ie it makes bigger circles on screen), but it will also have an impact on graph density (ie higher range values, as a fraction of the unit square, will mean more connections and a denser graph). The selection of the colouring of the sensor beams is based on the "colouring" of the graph, so that sensors that have the same colouring (ie prime number delay) will be dislayed with the same colour onscreen.
+The GUI provides the ability to configure the tests being run. In particular there are slider settings for delay in milliseconds, the number of sectors and the range. We are technically running the tests in a unit square, so the range has no applicative meaning except in the sense of the visual output (ie it makes bigger circles on screen), but it will also have an impact on graph density (ie higher range values, as a fraction of the unit square, will mean more connections and a denser graph). The selection of the colouring of the sensor beams is based on the "colouring" of the graph, so that sensors that have the same colouring (ie prime number delay) will be dislayed with the same colour onscreen.
 
 In addition there is a plain output window that shows the same text that is being output to the logfile, including the number of connections made and the number of connections left to be made. This allows you to monitor the state of the algorithm as it is running.
 
