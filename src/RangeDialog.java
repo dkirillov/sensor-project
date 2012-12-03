@@ -22,6 +22,10 @@ public class RangeDialog extends JPanel{
 	MainThread game;
 	JFrame frame;
 	
+	/**
+	 * Constructor
+	 * @param game	The MainThread to use
+	 */
 	public RangeDialog(final MainThread game){
 		//super(game.frame);
 		this.frame = game.wC;

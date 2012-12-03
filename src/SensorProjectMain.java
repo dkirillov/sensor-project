@@ -1,6 +1,14 @@
 
 public abstract class SensorProjectMain {
 
+	/**
+	 * The entry into our program
+	 * 
+	 * If no arguments are passed, the GUI is started up. If arguments are passed, we initialize testing based on arguments
+	 * -t for number of tests and -s for the number of sensors to test with
+	 * 
+	 * @param args Command line arguments
+	 */
 	public static void main(String args[]) {
 		
 		if (args.length == 0) {
@@ -43,6 +51,11 @@ public abstract class SensorProjectMain {
 		}
 	}
 	
+	/**
+	 * Helper function to manage running multiple tests
+	 * @param sensorCount	The number of sensors to test with
+	 * @param testCount		The number of tests to run
+	 */
 	public static void runTests(int sensorCount, int testCount) {
 		
 		//Create mainthread
@@ -68,19 +81,28 @@ public abstract class SensorProjectMain {
 				//if (algo.equals(Algo.ARA)) continue;
 				System.out.println("----Algo " + algo + "----");
 				mT.algorithm = algo;
-				for (int k = 3; k < 13; k++) {
-					System.out.println("----K " + k + "----");
-					mT.k = k;
-					mT.round = 0;
-					mT.possibleConnections = 0;
-					mT.currentConnections = 0;
-					mT.setKeepRunning(true);
-					mT.initalizeWithOutGeneratingSensors(i);
-					while (mT.isKeepRunning()) {
-						mT.update(true);
-					}
-				}
+				runTestsOnKValue(mT, 3, i);
+				runTestsOnKValue(mT, 7, i);
+				runTestsOnKValue(mT, 12, i);
 			}
 		}
+	}
+	/**
+	 * Helper function for running tests given k values
+	 * @param mT			The {@link MainThread} to run the test on
+	 * @param sectorAmount	The number of sectors
+	 * @param testNum		The current test number
+	 */
+	public static void runTestsOnKValue(MainThread mT, int sectorAmount, int testNum){
+			System.out.println("----K " + sectorAmount + "----");
+			mT.k = sectorAmount;
+			mT.round = 0;
+			mT.possibleConnections = 0;
+			mT.currentConnections = 0;
+			mT.setKeepRunning(true);
+			mT.initalizeWithOutGeneratingSensors(testNum);
+			while (mT.isKeepRunning()) {
+				mT.update(true);
+			}
 	}
 }

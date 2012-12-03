@@ -22,6 +22,12 @@ public class SpeedDialog extends JPanel{
 	MainThread game;
 	JFrame frame;
 	
+	/**
+	 * Constructor
+	 * 
+	 * Initializes the speed control GUI element
+	 * @param game
+	 */
 	public SpeedDialog(final MainThread game){
 		//super(game.frame);
 		this.frame = game.wC;
