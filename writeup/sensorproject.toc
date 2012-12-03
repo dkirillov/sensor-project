@@ -5,13 +5,13 @@
 \contentsline {section}{\numberline {2}Program Breakdown}{4}
 \contentsline {subsection}{\numberline {2.1}Introduction}{4}
 \contentsline {subsection}{\numberline {2.2}MainThread}{4}
-\contentsline {subsection}{\numberline {2.3}Sensor Placement}{4}
-\contentsline {subsection}{\numberline {2.4}Neighbour Identification}{5}
-\contentsline {subsection}{\numberline {2.5}Assigning Algorithms}{5}
-\contentsline {subsection}{\numberline {2.6}Running the Simulation}{7}
-\contentsline {subsection}{\numberline {2.7}Rotation Algorithms}{7}
-\contentsline {subsection}{\numberline {2.8}GUI Interface}{8}
-\contentsline {subsection}{\numberline {2.9}Known Issues}{8}
+\contentsline {subsubsection}{\numberline {2.2.1}Sensor Placement}{4}
+\contentsline {subsubsection}{\numberline {2.2.2}Neighbour Identification}{4}
+\contentsline {subsubsection}{\numberline {2.2.3}Assigning Algorithms}{6}
+\contentsline {subsubsection}{\numberline {2.2.4}Running the Simulation}{7}
+\contentsline {subsection}{\numberline {2.3}Rotation Algorithms}{7}
+\contentsline {subsection}{\numberline {2.4}GUI Interface}{8}
+\contentsline {subsection}{\numberline {2.5}Known Issues}{8}
 \contentsline {section}{\numberline {3}Execution}{9}
 \contentsline {subsection}{\numberline {3.1}Normal}{9}
 \contentsline {subsection}{\numberline {3.2}No GUI}{9}

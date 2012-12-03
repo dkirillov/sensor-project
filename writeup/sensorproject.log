@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  3 DEC 2012 12:04
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.24)  3 DEC 2012 13:17
 entering extended mode
  %&-line parsing enabled.
 **sensorproject.tex
@@ -487,23 +487,24 @@ s/title.png (PNG copy)>] (./sensorproject.toc)
 \openout2 = `progbreakdown.aux'.
 
  (./progbreakdown.tex
-<pics/placement1.png, id=30, 91.84312pt x 91.09032pt>
+<pics/Main.jpg, id=30, 1587.9325pt x 1908.12875pt>
+File: pics/Main.jpg Graphic file (type jpg)
+ <use pics/Main.jpg>
+<pics/placement1.png, id=31, 91.84312pt x 91.09032pt>
 File: pics/placement1.png Graphic file (type png)
 
 <use pics/placement1.png>
-<pics/placement2.png, id=31, 125.71968pt x 121.20282pt>
+<pics/placement2.png, id=32, 125.71968pt x 121.20282pt>
 File: pics/placement2.png Graphic file (type png)
 
 <use pics/placement2.png> [4
 
 
- <./pics/placement1.png>]
-<pics/Main.jpg, id=37, 1587.9325pt x 1908.12875pt>
-File: pics/Main.jpg Graphic file (type jpg)
- <use pics/Main.jpg> [5 <./pics/placement2.png>] [6 <./pics/Main.jpg>]
-<pics/algo.jpg, id=46, 589.20125pt x 479.7925pt>
+] [5 <./pics/Main.jpg>] [6 <./pics/placement1.png> <./pics/placement2.png>] <pi
+cs/algo.jpg, id=48, 589.20125pt x 479.7925pt>
 File: pics/algo.jpg Graphic file (type jpg)
- <use pics/algo.jpg> [7 <./pics/algo.jpg>]) [8]
+
+<use pics/algo.jpg> [7 <./pics/algo.jpg>]) [8]
 \openout2 = `exectution.aux'.
 
  (./exectution.tex) [9
@@ -512,43 +513,48 @@ File: pics/algo.jpg Graphic file (type jpg)
 ]
 \openout2 = `analysis.aux'.
 
- (./analysis.tex
-<pics/graph10k3.png, id=58, 614.295pt x 287.6346pt>
+
+(./analysis.tex <pics/graph10k3.png, id=59, 614.295pt x 287.6346pt>
 File: pics/graph10k3.png Graphic file (type png)
- <use pics/graph10k3.png>
-<pics/graph10k7.png, id=59, 614.295pt x 283.2984pt>
+
+<use pics/graph10k3.png> <pics/graph10k7.png, id=60, 614.295pt x 283.2984pt>
 File: pics/graph10k7.png Graphic file (type png)
- <use pics/graph10k7.png>
-<pics/graph10k12.png, id=60, 614.295pt x 293.4162pt>
+
+<use pics/graph10k7.png> <pics/graph10k12.png, id=61, 614.295pt x 293.4162pt>
 File: pics/graph10k12.png Graphic file (type png)
- <use pics/graph10k12.png>
-<pics/graph40k3.png, id=61, 614.295pt x 291.9708pt>
+
+<use pics/graph10k12.png> [10
+
+
+ <./pics/graph10k3.png>]
+<pics/graph40k3.png, id=66, 614.295pt x 291.9708pt>
 File: pics/graph40k3.png Graphic file (type png)
  <use pics/graph40k3.png>
-<pics/graph40k7.png, id=62, 614.295pt x 293.4162pt>
+<pics/graph40k7.png, id=67, 614.295pt x 293.4162pt>
 File: pics/graph40k7.png Graphic file (type png)
  <use pics/graph40k7.png>
-<pics/graph40k12.png, id=63, 614.295pt x 281.853pt>
+<pics/graph40k12.png, id=68, 614.295pt x 281.853pt>
 File: pics/graph40k12.png Graphic file (type png)
  <use pics/graph40k12.png>
-<pics/graph100k3.png, id=64, 614.295pt x 290.5254pt>
+[11 <./pics/graph10k7.png> <./pics/graph10k12.png>]
+<pics/graph100k3.png, id=74, 614.295pt x 290.5254pt>
 File: pics/graph100k3.png Graphic file (type png)
  <use pics/graph100k3.png>
-<pics/graph100k7.png, id=65, 614.295pt x 296.307pt>
+<pics/graph100k7.png, id=75, 614.295pt x 296.307pt>
 File: pics/graph100k7.png Graphic file (type png)
  <use pics/graph100k7.png>
-<pics/graph100k12.png, id=66, 614.295pt x 287.6346pt>
+<pics/graph100k12.png, id=76, 614.295pt x 287.6346pt>
 File: pics/graph100k12.png Graphic file (type png)
 
-<use pics/graph100k12.png> <pics/graph1000k3.png, id=67, 614.295pt x 289.08pt>
+<use pics/graph100k12.png> <pics/graph1000k3.png, id=77, 614.295pt x 289.08pt>
 File: pics/graph1000k3.png Graphic file (type png)
 
 <use pics/graph1000k3.png>
-<pics/graph1000k7.png, id=68, 614.295pt x 290.5254pt>
+<pics/graph1000k7.png, id=78, 614.295pt x 290.5254pt>
 File: pics/graph1000k7.png Graphic file (type png)
 
 <use pics/graph1000k7.png>
-<pics/graph1000k12.png, id=69, 614.295pt x 278.9622pt>
+<pics/graph1000k12.png, id=79, 614.295pt x 278.9622pt>
 File: pics/graph1000k12.png Graphic file (type png)
 
 <use pics/graph1000k12.png>
@@ -556,42 +562,38 @@ Overfull \hbox (0.76659pt too wide) in paragraph at lines 96--96
  [][] 
  []
 
-<pics/graph5000k3.png, id=70, 614.295pt x 290.5254pt>
+<pics/graph5000k3.png, id=80, 614.295pt x 290.5254pt>
 File: pics/graph5000k3.png Graphic file (type png)
 
 <use pics/graph5000k3.png>
-<pics/graph5000k7.png, id=71, 614.295pt x 284.7438pt>
+<pics/graph5000k7.png, id=81, 614.295pt x 284.7438pt>
 File: pics/graph5000k7.png Graphic file (type png)
 
 <use pics/graph5000k7.png>
-<pics/graph5000k12.png, id=72, 614.295pt x 309.3156pt>
+<pics/graph5000k12.png, id=82, 614.295pt x 309.3156pt>
 File: pics/graph5000k12.png Graphic file (type png)
 
-<use pics/graph5000k12.png> [10
-
-
-]
-<pics/graph100k12b.png, id=76, 614.295pt x 281.853pt>
+<use pics/graph5000k12.png> [12 <./pics/graph40k3.png> <./pics/graph40k7.png>]
+<pics/graph100k12b.png, id=89, 614.295pt x 281.853pt>
 File: pics/graph100k12b.png Graphic file (type png)
 
 <use pics/graph100k12b.png>
-<pics/graph1000k12b.png, id=77, 614.295pt x 293.4162pt>
+<pics/graph1000k12b.png, id=90, 614.295pt x 293.4162pt>
 File: pics/graph1000k12b.png Graphic file (type png)
 
 <use pics/graph1000k12b.png>
-<pics/graph5000k12b.png, id=78, 614.295pt x 296.307pt>
+<pics/graph5000k12b.png, id=91, 614.295pt x 296.307pt>
 File: pics/graph5000k12b.png Graphic file (type png)
 
-<use pics/graph5000k12b.png>) [11 <./pics/graph10k3.png> <./pics/graph10k7.png>
-] [12 <./pics/graph10k12.png> <./pics/graph40k3.png>] [13 <./pics/graph40k7.png
-> <./pics/graph40k12.png>] [14 <./pics/graph100k3.png> <./pics/graph100k7.png>]
-[15 <./pics/graph100k12.png> <./pics/graph1000k3.png>] [16 <./pics/graph1000k7.
-png> <./pics/graph1000k12.png>] [17 <./pics/graph5000k3.png> <./pics/graph5000k
-7.png>] [18 <./pics/graph5000k12.png> <./pics/graph100k12b.png>] [19 <./pics/gr
-aph1000k12b.png> <./pics/graph5000k12b.png>]
+<use pics/graph5000k12b.png>) [13 <./pics/graph40k12.png> <./pics/graph100k3.pn
+g>] [14 <./pics/graph100k7.png> <./pics/graph100k12.png>] [15 <./pics/graph1000
+k3.png> <./pics/graph1000k7.png>] [16 <./pics/graph1000k12.png> <./pics/graph50
+00k3.png>] [17 <./pics/graph5000k7.png> <./pics/graph5000k12.png>] [18 <./pics/
+graph100k12b.png> <./pics/graph1000k12b.png>] [19 <./pics/graph5000k12b.png>]
 \openout2 = `conclusions.aux'.
 
- (./conclusions.tex) [20
+
+(./conclusions.tex) [20
 
 
 ]
@@ -601,11 +603,11 @@ Commutative Diagram: try the PostScript option for better results
 Here is how much of TeX's memory you used:
  6854 strings out of 495061
  84081 string characters out of 1182620
- 171037 words of memory out of 3000000
+ 168037 words of memory out of 3000000
  9890 multiletter control sequences out of 15000+50000
  20546 words of font info for 56 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 37i,6n,39p,1050b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,6n,39p,1049b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/darrylhill/.t
 exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/darrylhill/.texmf-v
 ar/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/darrylhill/.texmf-var/fon
@@ -620,10 +622,11 @@ pen/ec/ecrm1200.600pk> </home/darrylhill/.texmf-var/fonts/pk/ljfour/jknappen/ec
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb>
-Output written on sensorproject.pdf (21 pages, 1155345 bytes).
+c/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb>
+Output written on sensorproject.pdf (21 pages, 1164867 bytes).
 PDF statistics:
- 501 PDF objects out of 1000 (max. 8388607)
+ 506 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
