@@ -101,7 +101,7 @@ public class Sensor {
 			gfx.setColor(Color.green);
 		}
 		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
-		gfx.drawString("" + SensorId, p.x, p.y);
+		//gfx.drawString("" + SensorId, p.x, p.y);
 	}
 
 	/**
