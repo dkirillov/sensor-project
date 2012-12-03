@@ -25,7 +25,6 @@ public class SensorBoard extends JPanel {
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(1,1,BOARD_WIDTH,BOARD_HEIGHT);
 
-		//Just testing if all neighbours are discovered
 		graphics.setColor(Color.RED);
 		for (Neighbour n : neighbours) {
 			

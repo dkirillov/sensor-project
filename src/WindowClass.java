@@ -151,8 +151,6 @@ public class WindowClass extends JFrame implements ActionListener{
 		label.setHorizontalTextPosition(SwingConstants.RIGHT);
 		centerpanel.add(label);
 		centerpanel.add(numSensors);
-		/*centerpanel.add(new JLabel("# of rounds"));
-		centerpanel.add(numRounds);*/
 
 		panel.add(centerpanel, BorderLayout.CENTER);
 		message = new JLabel("Sensor Sim");
@@ -169,8 +167,6 @@ public class WindowClass extends JFrame implements ActionListener{
 				play.setText("Start");
 			}
 			mT.setKeepRunning(!mT.isKeepRunning());
-			//Debug.debug("GUI: playing = "+control.playing);
-			
 		}else if (e.getActionCommand().equals("newgame")){
 			mT.setKeepRunning(false);
 			mT.restart = true;
