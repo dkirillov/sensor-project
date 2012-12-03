@@ -13,7 +13,6 @@ public class MainThread {
 	protected Vector<Neighbour> neighbours;
 	//private RotationAlgorithm[] algoThreads;
 	private List<RotationAlgorithm> runningAlgoThreads;
-	private List<RotationAlgorithm> stoppedAlgoThreads;		//Do we even need this?
 	int speed = 2000;
 	int numSensors = 3;
 	int round = 0;
@@ -62,7 +61,6 @@ public class MainThread {
 		this.numSensors = numSensors; //= Integer.parseInt(wC.numSensors.getText());
 		sensors = new Sensor[numSensors];
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
-		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
 
 		Random random = new Random();
@@ -208,7 +206,6 @@ public class MainThread {
 		for (int x = 0; x < size; x++) {
 			runningAlgoThreads.get(x).update();
 			if(!runningAlgoThreads.get(x).hasRemainingNeighbours()){
-				stoppedAlgoThreads.add(runningAlgoThreads.get(x));
 				runningAlgoThreads.remove(x);
 				size--;
 				x--;
