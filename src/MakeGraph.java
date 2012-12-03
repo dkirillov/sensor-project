@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
 
 /**
  * Used in conjunction with the MakeAverage class to generate graphs.

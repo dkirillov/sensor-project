@@ -1,6 +1,3 @@
-
-import java.awt.Point;
-
 import junit.framework.TestCase;
 
 /**
@@ -43,7 +40,7 @@ public class SensorTest extends TestCase {
 			System.out.printf("i=%d, Mod value: %d\n",i, 360%i);
 		}
 		System.out.printf("360 / 11 = %d\n",360/11);;
-		Point p2 = null;
+		//Point p2 = null;
 		// This class does not have a public, no argument constructor,
 		// so the inSector() method can not be tested
 		//assertTrue(false);
