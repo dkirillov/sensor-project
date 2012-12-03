@@ -18,7 +18,7 @@ public class SpeedDialog extends JPanel{
 	JTextField sSpeed;
 	int speed;
 	int lower = 0;
-	int upper = 100;
+	int upper = 2000;
 	MainThread game;
 	JFrame frame;
 	
@@ -34,7 +34,7 @@ public class SpeedDialog extends JPanel{
 		setLayout(layout);
 		setLocation(frame.getX()+frame.getWidth(),frame.getY());
 		
-		speed = upper -game.speed;
+		speed = game.speed;
 		
 		//x label
 		constraints.gridx = 0; constraints.gridy = 0;
@@ -42,12 +42,17 @@ public class SpeedDialog extends JPanel{
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1; constraints.weighty = 1;
 		constraints.insets = new Insets(5, 10, 0, 0);
-		JLabel label = new JLabel("Sensor speed ("+lower+" - "+ upper+  ")  :");
+		JLabel label = new JLabel("Delay in miliseconds ("+lower+" - "+ upper+  ")  :");
 		layout.setConstraints(label, constraints);
 		add(label);
 
 		//x position
 		sensorSpeed = new JSlider(JSlider.HORIZONTAL, lower, upper,speed);
+		sensorSpeed.setMajorTickSpacing(1000);
+		sensorSpeed.setMinorTickSpacing(100);
+		sensorSpeed.setPaintLabels(true);
+		sensorSpeed.setPaintTicks(true);
+		sensorSpeed.setSnapToTicks(true);
 		constraints.gridx = 1; constraints.gridy = 1;
 		constraints.gridwidth = 2;
 		constraints.insets = new Insets(5, 5, 0, 10);
@@ -72,7 +77,7 @@ public class SpeedDialog extends JPanel{
 				sSpeed.setText(String.valueOf(source.getValue()));
 				if (!source.getValueIsAdjusting()){
 					speed = source.getValue();
-					game.speed = upper-speed;
+					game.speed = speed;
 				}
 			}
 		});

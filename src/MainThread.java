@@ -11,10 +11,8 @@ public class MainThread {
 	WindowClass wC;
 	private Sensor[] sensors;
 	protected Vector<Neighbour> neighbours;
-	//private RotationAlgorithm[] algoThreads;
 	private List<RotationAlgorithm> runningAlgoThreads;
-	private List<RotationAlgorithm> stoppedAlgoThreads;		//Do we even need this?
-	int speed = 10;
+	int speed = 2000;
 	int numSensors = 3;
 	int round = 0;
 	int k = 4;
@@ -51,7 +49,6 @@ public class MainThread {
 	public MainThread(WindowClass wC) {
 		this.wC = wC;
 		restart = true;
-		Debug.setDebug(true);
 		log = new LogFile();
 	}
 
@@ -59,10 +56,9 @@ public class MainThread {
 		round = 0;
 		possibleConnections = 0;
 		currentConnections = 0;
-		this.numSensors = numSensors; //= Integer.parseInt(wC.numSensors.getText());
+		this.numSensors = numSensors;
 		sensors = new Sensor[numSensors];
 		runningAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
-		stoppedAlgoThreads = new ArrayList<RotationAlgorithm>(numSensors);
 		neighbours = new Vector<Neighbour>();
 
 		Random random = new Random();
@@ -86,8 +82,6 @@ public class MainThread {
 			validPlacements.add(new PlacementPoint(xPlace + xValue, yPlace + yValue, radianValue));
 		}
 	
-		//Debug.debug("Created sensor " + 0);
-
 		for (int x = 1; x < sensors.length; x++) {
 			PlacementPoint choice = validPlacements.remove(random.nextInt(validPlacements.size()));
 			sensors[x] = new Sensor(x, choice.x, choice.y, range, k);
@@ -102,7 +96,6 @@ public class MainThread {
 				yValue = (int) (radiusRange * (Math.sin(radianValue)));
 				validPlacements.add(new PlacementPoint(choice.x + xValue, choice.y + yValue, radianValue));
 			}
-			//Debug.debug("Created sensor " + x);
 		}
 		
 		initalizeWithOutGeneratingSensors(0);
@@ -139,8 +132,7 @@ public class MainThread {
 			break;	
 		}
 		
-		for (int i = 0; i < sensors.length; i++) {
-			
+		for (int i = 0; i < sensors.length; i++) {			
 			switch (algorithm){
 			case ARA:
 				runningAlgoThreads.add(new ARAlgorithm(sensors[i]));
@@ -152,8 +144,6 @@ public class MainThread {
 				runningAlgoThreads.add(new RSRMAlgorithmPrime(sensors[i]));
 				break;	
 			}
-			
-			//Debug.debug("Created algorithm " + algo + " for sensor " + i);
 		}
 		log.open(testNumber, algo, numSensors, k);
 		
@@ -180,7 +170,6 @@ public class MainThread {
 			if (sensors[x].inRange(sensors[n].getPoint())) {
 				Neighbour newNeighbour = new Neighbour(sensors[x], sensors[n]);
 				neighbours.add(newNeighbour);
-				//Debug.debug("Delay: "+sensors[x].getDelay());
 				primeNumbers.remove(new Integer(sensors[x].getDelay()));
 				numC++;
 				sensors[x].addNeighbour(newNeighbour, sensors[n]);
@@ -193,7 +182,6 @@ public class MainThread {
 			primeNumbers.remove(0);
 		}
 		sensors[n].setDelay(primeNumbers.get(0));
-		//Debug.debug("Record Neighbours for sensor " + n + " |> Delay: "+sensors[n].getDelay());
 	}
 
 	public void update(boolean shouldDraw) {
@@ -202,13 +190,12 @@ public class MainThread {
 			if (wC != null) wC.output("Start time: "+startTime+"\n");
 			firstTime = false;
 		}
-		round ++; //This is now a more accurate representation.
+		round++; 
 		int connections = 0;
 		int size = runningAlgoThreads.size();
 		for (int x = 0; x < size; x++) {
 			runningAlgoThreads.get(x).update();
 			if(!runningAlgoThreads.get(x).hasRemainingNeighbours()){
-				stoppedAlgoThreads.add(runningAlgoThreads.get(x));
 				runningAlgoThreads.remove(x);
 				size--;
 				x--;
@@ -219,9 +206,9 @@ public class MainThread {
 		}
 		log.statWrite(""+(((double)connections)/possibleConnections)+"\n");
 		if ((connections - currentConnections)>0){
-			//writeOutputs(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
+			writeOutputs(""+(connections - currentConnections)+ " connections made in round "+round+"\n");
 			currentConnections = connections;
-			//writeOutputs(""+(possibleConnections-currentConnections)+" connections left to be made\n");
+			writeOutputs(""+(possibleConnections-currentConnections)+" connections left to be made\n");
 		}
 		if (resetTime&&possibleConnections-currentConnections == 0){
 			endTime = System.currentTimeMillis();
@@ -235,14 +222,6 @@ public class MainThread {
 			redraw = false;
 			log.close();
 			if (wC != null) wC.play.setText("Start");
-			//Sensor sensor1 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
-			//Sensor sensor2 = stoppedAlgoThreads.remove(stoppedAlgoThreads.size()).sensor;
-			//System.out.println("Sensor1 sector: "+sensor1.currentSector());
-			//System.out.println("Sensor2 sector: "+sensor2.currentSector());
-			/*for (int i = 0; i < sensors.length; i ++){
-				System.out.printf("Sensor %d delay: %d sector: %d\n", i, 
-						sensors[i].getDelay(), sensors[i].currentSector());
-			}*/
 
 		}
 		if(shouldDraw && gui && wC != null){
@@ -263,15 +242,12 @@ public class MainThread {
 			public void run() {
 				while (true){
 					while (isKeepRunning()) {
-						float start = System.currentTimeMillis();
-						//delay(speed);						
+						long start = System.currentTimeMillis();
 						update(true);
-						float end = System.currentTimeMillis();
+						long end = System.currentTimeMillis();
 						if((end-start)<speed){
-							//Under 2000ms, sleep the difference.
-							//This 2000ms should be changed to something on the slider...
-							Debug.debug("Sleeping: "+(speed-(end-start)));
-							delay((int)(speed-(end-start)));
+							Debug.debug("Sleeping: "+((speed)-(end-start)));
+							delay((int)((speed)-(end-start)));
 						}
 					}
 					if (restart){

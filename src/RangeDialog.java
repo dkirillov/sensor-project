@@ -26,7 +26,6 @@ public class RangeDialog extends JPanel{
 		//super(game.frame);
 		this.frame = game.wC;
 		this.game = game;
-		//setSize (x,y);
 		//JButton OK, cancel;
 		
 		GridBagLayout layout = new GridBagLayout();

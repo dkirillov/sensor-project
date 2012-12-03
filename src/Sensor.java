@@ -28,10 +28,6 @@ public class Sensor {
 	 * Constructor, initializes everything.
 	 * A random wait time and color are assigned.
 	 * The passed in x/y are used for it's position.
-	 * 
-	 * ****A RANDOM NUMBER OF SECTORS ARE ASSIGNED**** between 3 and 12, inclusive.
-	 * The sensor starts on a random sector.
-	 * 
 	 * @param x
 	 * @param y
 	 */
@@ -43,7 +39,7 @@ public class Sensor {
 	}
 
 	public void changeSectorCount(int k) {
-		sectors = k;//= (new Random(System.currentTimeMillis()+id).nextInt(10)) + 3;
+		sectors = k;
 		
 		neighboursInASector = new ArrayList<ArrayList<Neighbour>>();
 		for (int i = 0; i < sectors; i++) {
@@ -95,7 +91,6 @@ public class Sensor {
 		else {
 			gfx.setColor(Color.green);
 		}
-		//gfx.drawString(current_sector + "/" + sectors, p.x, p.y);
 		gfx.drawString("" + SensorId, p.x, p.y);
 	}
 
@@ -119,20 +114,8 @@ public class Sensor {
 		double d_x = (p2.x - p.x);
 		double d_y = (p2.y - p.y) * -1;
 		double degree = (Math.atan2(d_y, d_x) * (180.0 / Math.PI));
-		//double degree = (Math.atan(d_x/d_y) * (180.0 / Math.PI));
 		degree = (degree+360)%360;
-		//Debug.debug("degree: "+degree);
 
-	/*	if(d_x>=0&&d_y>=0){
-			degree = (90-degree);
-		}else if (d_x < 0 && d_y >= 0) {
-			degree += 90;
-		} else if (d_x < 0 && d_y < 0) {
-			degree = 180 + (90-degree);
-		} else if (d_x >= 0 && d_y < 0) {
-			degree += 270;
-		}
-*/
 		int s = (int) (degree / (360.0 / sectors));
 
 		return s;
@@ -225,7 +208,6 @@ public class Sensor {
 	}
 	
 	
-	//This could change to a boolean, doesn't matter.
 	public int getRemainingNeighbours(){
 		return neighboursToConnect;
 	}

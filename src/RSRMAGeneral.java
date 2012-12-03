@@ -7,7 +7,6 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	}
 
 	public void update(){
-		//Debug.debug("Running RSRMA. d:" + d + " k: " + k + (d == k ? "" : " -=Prime=-")+" outer_loop: "+outer_loop+" inner_loop: "+inner_loop);
 		outer_loop--;
 		if (outer_loop == 0){
 			selectBit = (Math.random() < 0.5);
@@ -22,7 +21,6 @@ public class RSRMAGeneral extends RotationAlgorithm{
 	}
 
 	public void mech0(int k, int d){
-		//Debug.debug("Doing Mech0");
 		if (outer_loop == 0){
 			outer_loop = d*(k-1); // It's not k-1 simply because the way the loop is arranged, if it was k-1  it would be actually k-2.
 		}
@@ -34,7 +32,6 @@ public class RSRMAGeneral extends RotationAlgorithm{
 		sensor.update();
 	}
 	public void mech1(int k, int d){
-		//Debug.debug("Doing Mech1");		
 		if (outer_loop == 0) {
 			outer_loop = k*d;
 		}
