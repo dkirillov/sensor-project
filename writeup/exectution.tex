@@ -1,0 +1,28 @@
+\section{Execution}
+
+\subsection{Normal}
+The normal state of the program is to run with the gui interface. This allows you to run tests in a singular fashion, monitoring both the written and visual output for performance and any other notable statistics. While it is being run there are logfiles and statfiles being generated. The logfiles are for human consumption, that is the events are written out in explicit english, while the statfiles are numbers formatted specifically for generating graphs.
+
+\subsection{No GUI}
+If the program is run with command line arguments, $-t < \# of tests> -s <\# of sensors>$, you 
+can run batches of tests without the gui at all. It will produce a batch of sensors which it 
+will then run for all three algorithms and every k value (number of sectors) from 3 to 12. 
+This allows for a fair comparison of algorithm performance. For each test number of new batch 
+of sensors is generated, and the entire process is repeated, generating log and statfiles. So, 
+for example, if you ran a batch of 10 tests, each test would run the full number of k values 
+(10) for each algorithm ($\times 3$), and repeated across 10 tests ($\times 10$). So in all 300 
+tests would be run generating the appropriate log and stat files (which are later amalgamated 
+into graphs).
+
+\subsection{Testing}
+This is admittedly one of our weaker areas, in the sense of having well planned test cases 
+that are their own programs. There are JUnit tests for the graph colouring (it generates a 
+batch of sensors and ensures that no two neighbours share a colour. While not a rigorous proof 
+of correctness, run repeatedly for dense graphs it is statistically highly unlikely to produce 
+a false result) and also a JUnit test to ensure proper matching of sensor sectors. 
+
+There is also a Debug class, whose main purpose is to provide a class that will print out 
+debug statements, but with the ability to disable it from within the class itself, rather than 
+at each individual print statement (very similar to qDebug(), if you are familiar with it). So 
+a lot of testing revolved around the less formal use of the print statements (which are not as 
+easy to document).

@@ -1,1 +1,8 @@
 \section{Conclusions}
+
+In overall algorithm performance, RSRMA is the clear winner. Not relying in global knowledge means it is versatile; it can be implemented anywhere, no just where there is global network knoweledge, and the overall simplicity of the algorithm provides another significant advantage. Moreover, its performance remains consistent even in dense graph situations, and/or with high k values. It is a solid performer in all areas and, relative to the other two algorithms implemented here, has no drawbacks.
+
+ARA is purely deterministic. With a low number of sectors and a sparse graph it is a servicable algorithm. However, relying purely on prime numbers to break symmetry limits its usefulness in comparison to the other algorithms. In the situation of a high sector count (ie narrow sensor beam width) and/or a dense graph, we are forced to use higher and higher prime numbers to break symmetry, and the performance suffers. 
+
+RSRMA' tries to combine the two approaches. It too suffers in dense graph situations or with high k values, due to high prime number cycles. In a combination of sparse graphs and low k values, where the prime numbers remain low, it is comparable to RSRMA. However, as the density and k value increase, the performance falls away. The randomized element means it does not suffer as much as ARA, and the determistic element guarantees completion. However in practice it is consistently outperformed by the purely random algorithm in high density and high k value scenarios.
+
