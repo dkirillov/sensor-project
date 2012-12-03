@@ -9,9 +9,17 @@ import javax.swing.JOptionPane;
 
 
 
-
+/**
+ * Reads in a collection of stat files, averages them
+ * and writes them back out.
+ *
+ */
 public class MakeAverage {
 	
+	/**
+	 * Runs the program. 
+	 * @param args
+	 */
 	public static void main(String args[]){
 		try {
 			new MakeAverage();
@@ -25,6 +33,10 @@ public class MakeAverage {
 	String k, tests;
 	int numtests = 0;
 	
+	/**
+	 * Reads the input parameters using JOptionPanes.
+	 * @throws IOException	
+	 */
 	public MakeAverage() throws IOException{
 		String s = (String)JOptionPane.showInputDialog(
 				null,
@@ -62,6 +74,15 @@ public class MakeAverage {
 
 	}
 
+	/**
+	 * run the execution code. This reads in every test file
+	 * in parallel for a given algorithm, averages them, and
+	 * outputs to a new file. Have yet to encounter a limit
+	 * on the number of files that can be open concurrently.
+	 * 
+	 * @param algo	The name of the algorithm, part of the filename
+	 * @throws IOException
+	 */
 	public void doit(String algo) throws IOException{
 		
 		numtests = Integer.parseInt(tests);

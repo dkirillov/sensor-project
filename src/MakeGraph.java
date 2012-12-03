@@ -59,30 +59,13 @@ public class MakeGraph {
 	
 	BufferedWriter graph;
 	
+	/**
+	 * 
+	 * @param n		The number of sensors
+	 * @param k		The number of sectors
+	 */
 	public MakeGraph(int n, String k){
 
-		
-		/*String s = (String)JOptionPane.showInputDialog(
-		                    null,
-		                    "How many sensors?",
-		                    "Customized Dialog",
-		                    JOptionPane.PLAIN_MESSAGE,
-		                    null,null, null);
-				
-		if ((s == "")||(s==null)){
-			System.exit(0);
-		}
-		n = Integer.parseInt(s);
-		if (n == 0){
-			System.exit(0);
-		}
-		
-		k = (String)JOptionPane.showInputDialog(
-                null,
-                "k value?",
-                "Customized Dialog",
-                JOptionPane.PLAIN_MESSAGE,
-                null,null, null);*/
 		this.k = k;
 		this.n = n;
 		
@@ -121,6 +104,13 @@ public class MakeGraph {
 		
 	}
 	
+	/**
+	 * Generate the middle portion of the html file
+	 * that contains all the data. 
+	 * @return	The string of the data ready to be written
+	 * to the html file
+	 * @throws IOException	it sure does
+	 */
 	public String makeMiddle() throws IOException{
 		StringBuffer middle = new StringBuffer();
 		/*
@@ -144,7 +134,6 @@ public class MakeGraph {
 			RSRMAfile = new FileReader(pre+"Stat__S-"+n+"_AVERAGE_A-RSRMA_K"+k+".txt");
 			RSRMApfile= new FileReader(pre+"Stat__S-"+n+"_AVERAGE_A-RSRMA'_K"+k+".txt");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BufferedReader ARA = new BufferedReader(ARAfile);
@@ -207,15 +196,6 @@ public class MakeGraph {
 		//delete the last comma
 		middle.deleteCharAt(middle.length()-2);
 		return middle.toString();
-	}
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		//new MakeGraph();
-
 	}
 
 }
